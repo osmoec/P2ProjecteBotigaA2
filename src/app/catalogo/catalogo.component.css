@@ -1,0 +1,441 @@
+/* config de header y footer */
+nav{
+  text-align: center;
+  padding: 1%;
+  width: 100%;
+  background-color: #474747;
+}
+
+.compra{
+  width: 15px;
+  height: 15px;
+}
+
+li{
+  display: inline;
+}
+h1{
+  display: inline;
+  text-align: center;
+  width: 89%;
+}
+
+#cestaboto{
+  width: 5%;
+  display: block;
+}
+
+.menuP{
+  width: 50%;
+}
+
+img{
+  width: 10%;
+}
+
+
+header{
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  height: 19%;
+  background-color: black;
+  color: red;
+}
+
+.imgheader{
+  width: 80px;
+  height: 80px;
+}
+
+p#titolheader{
+  font-family: system-ui;
+}
+
+main{
+  display: flex;
+  justify-content: space-between;
+  height: 80%;
+}
+
+article{
+  width: 80%;
+  color: white;
+  background-color: #383838;
+  text-align: center;
+  padding: 2%;
+}
+
+.article-titol-div{
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.article-titol{
+  font-size: 50px;
+}
+
+#cotxe-benvinguda{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 600px;
+  height: 400px;
+}
+
+aside{
+  background-color: greenyellow;
+  text-align: center;
+  padding: 1%;
+  width: 23%;
+}
+
+aside img{
+  width: 70px;
+  height: 120px;
+}
+
+.bg-ofertes div{
+  width: 100%;
+  background-color: #a2e15f;
+}
+
+footer{
+  background-color: black;
+  color: red;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 19%;
+}
+
+.enllaços-footer a{
+  color: lightslategrey;
+  margin: 1%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 1%;
+}
+
+.enllaços-footer a:hover{
+  color: lightslategrey;
+}
+
+pre{
+  text-align: justify;
+  white-space: break-spaces;
+}
+
+
+.centrar{
+  align-content: center;
+}
+
+.xarxes{
+  width: 50px;
+  height: 50px;
+}
+
+.xarxestext{
+  font-size: 0.1em;
+}
+
+.titolcont{
+  font-size: xxx-large;
+  text-align: center;
+}
+
+/* config restante */
+body article {
+  font-family: Arial, sans-serif;
+  background-color: #383838;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* con esto puedes modificar el tamaño del catalogo */
+  gap: 30px;
+  padding: 10px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.product-item {
+  background-color: #2e2e2e;
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.product-item img {
+  width: 100%;
+  height: 50%;
+
+  border-bottom: 3px solid #ff0000;
+}
+
+.product-info {
+  flex: 4em; /* 40% */
+  padding: 10px;
+}
+
+.product-item h3 {
+  color: #fff;
+  margin: 5px 0;
+  font-size: 1.4em;
+  font-family: Constantia, "Times new Roman", serif;
+}
+
+.product-item p {
+  color: #ff0000;
+  font-size: 2em;
+  font-weight: bold;
+  font-family: Audio, "Times new Roman", serif;
+  margin: 10px 0;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.quantity-input {
+  width: 60px;
+  padding: 5px;
+}
+
+.btn article {
+  background-color: #ffc107;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover article {
+  background-color: #e0a800;
+}
+
+.centrar {
+  align-content: center;
+}
+
+.xarxes {
+  width: 50px;
+  height: 50px;
+}
+
+.xarxestext {
+  font-size: 0.1em;
+}
+
+.titolcont {
+  font-size: xxx-large;
+  text-align: center;
+}
+
+.footercomplert{
+  width: 100%;
+}
+
+.prefooter {
+  background-color: #474747;
+  display: flex;
+  flex-direction: row;
+}
+
+/* config para el responsive */
+@media (max-width: 1430px) { /* esto sirve para verlo desde un dispositivo mobil */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* con esto puedes modificar el tamaño del catalogo */
+    gap: 30px;
+    padding: 10px;
+    max-width: 1200px;
+    margin: auto;
+  }
+}
+
+@media (max-width: 990px) { /* esto sirve para verlo desde un dispositivo mobil */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); /* con esto puedes modificar el tamaño del catalogo */
+    gap: 30px;
+    padding: 10px;
+    max-width: 1200px;
+    margin: auto;
+  }
+}
+
+
+@media screen and (min-width: 1024px){
+
+  .menuP{
+    width: 60%;
+  }
+
+  .footercomplert{
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+  .prefooter {
+    background-color: #474747;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .menuresponsive {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .iconescompra{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .headerdis{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+    margin-top: 5px;
+  }
+
+  .d-flex {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn{
+    width: 100%;
+  }
+
+  .buttonmen{
+    width: 100%;
+  }
+
+  .menuP{
+    width: 100%;
+  }
+
+  #cestaboto{
+    width: 100%;
+  }
+
+  footer{
+    font-size: 0.4em;
+  }
+
+  footer h2, footer h3{
+    font-size: 1.7em;
+  }
+
+  footer .xarcesordre{
+    gap: 5px;
+  }
+
+  footer .btn{
+    padding: 10%;
+    width: 100%;
+    font-size: 100%;
+  }
+
+  .xarcesordre{
+    width: 35%;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .footer1{
+    font-size: 1.2em;
+    width: 22%;
+  }
+
+  .footer2{
+    width: 22%;
+  }
+
+  .footer2 .btn{
+    width: 50%;
+  }
+
+  .footer3{
+    width: 22%;
+  }
+
+  .xarxesdiv{
+    width: 33%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+
+  .xarxesdiv button{
+    margin: 0;
+  }
+
+  .xarxes{
+    height: 15px;
+    width: 15px;
+  }
+
+  .xarxescontenidor{
+    gap: 20px;
+    width: 100%;
+  }
+
+  #btnsobrenosaltres a{
+    width: 5%;
+    margin-bottom: 20px;
+  }
+
+  .footercomplert{
+    width: 100%;
+  }
+
+  aside h2{
+    font-size: 1.2em;
+  }
+
+
+}

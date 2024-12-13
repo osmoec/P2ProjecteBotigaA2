@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {IndiceComponent} from './indice/indice.component';
-
+import {CatalogoComponent} from './catalogo/catalogo.component';
 
 @Component({
   selector: 'app-root',
