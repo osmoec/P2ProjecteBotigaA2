@@ -1,0 +1,116 @@
+{
+    "coche1": {
+        "name": "Mustang Dodge Challenger",
+        "price": 176000,
+        "tags": ["car", "gasoline", "semi-luxury"],
+        "img": "images/Mustang%Dodge%Challenger%v1.png"
+    },
+    "coche2": {
+        "name": "Bugatti La Vult Noir",
+        "price": 18000000,
+        "tags": ["car", "gasoline", "luxury"],
+        "img": "images/Bugatti%La%Vult%Noir%v1.png"
+    },
+    "coche3": {
+        "name": "Lamborghini Aventador",
+        "price": 458000,
+        "tags": ["car", "gasoline", "luxury"],
+        "img": "images/Lamborghini%Aventador%v1.png"
+    },
+    "coche4": {
+        "name": "Mazda Miata",
+        "price": 30000,
+        "tags": ["car", "gasoline", "semi-luxury"],
+        "img": "images/Mazda%Miata%v1.png"
+    },
+    "coche5": {
+        "name": "Kawasaki Ninja H2R",
+        "price": 55000,
+        "tags": ["motorcycle", "gasoline", "semi-luxury"],
+        "img": "images/Kawasaki%Ninja%H2R%v1.png"
+    },
+    "coche6": {
+        "name": "Ferrari Roma",
+        "price": 254000,
+        "tags": ["car", "gasoline", "luxury"],
+        "img": "images/Ferrari%Roma%v1.png"
+    },
+    "coche7": {
+        "name": "Lamborghini Urus",
+        "price": 240000,
+        "tags": ["car", "diesel", "luxury"],
+        "img": "images/Lamborghini%Urus%v1.png"
+    },
+    "coche8": {
+        "name": "Aston Martin DB12",
+        "price": 338000,
+        "tags": ["car", "diesel", "luxury"],
+        "img": "images/Aston%Martin%DB12%v1.png"
+    },
+    "coche9": {
+        "name": "Maserati MC20",
+        "price": 276000,
+        "tags": ["car", "gasoline", "luxury"],
+        "img": "images/Maserati%MC20%v1.png"
+    },
+    "coche10": {
+        "name": "Audi R8",
+        "price": 210000,
+        "tags": ["car", "gasoline", "luxury"],
+        "img": "images/Audi%R8%v1.png"
+    },
+    "coche11": {
+        "name": "Ford Mustang GT500",
+        "price": 149000,
+        "tags": ["car", "gasoline", "semi-luxury"],
+        "img": "images/Ford%Mustang%GT500%v1.png"
+    },
+    "coche12": {
+        "name": "Chevrolet Camaro ZL1",
+        "price": 94000,
+        "tags": ["car", "gasoline", "semi-luxury"],
+        "img": "images/Chevrolet%Camaro%ZL1%v1.png"
+    },
+    "coche13": {
+        "name": "Bugatti Chiron",
+        "price": 2500000,
+        "tags": ["car", "gasoline", "luxury"],
+        "img": "images/Bugatti%Chiron%v1.png"
+    },
+    "coche14": {
+        "name": "Lexus LFA",
+        "price": 415000,
+        "tags": ["car", "gasoline", "luxury"],
+        "img": "images/Lexus%LFA%v1.png"
+    },
+    "coche15": {
+        "name": "Ferrari F40",
+        "price": 800000,
+        "tags": ["car", "gasoline", "luxury"],
+        "img": "images/Ferrari%F40%v1.png"
+    },
+    "coche16": {
+        "name": "McLaren Senna",
+        "price": 1650000,
+        "tags": ["car", "gasoline", "luxury"],
+        "img": "images/McLaren%Senna%v1.png"
+    },
+    "coche17": {
+        "name": "Ferrari SF90",
+        "price": 510000,
+        "tags": ["car", "diesel", "luxury"],
+        "img": "images/Ferrari%SF90%v1.png"
+    },
+    "coche18": {
+        "name": "Toyota Supra MK4",
+        "price": 121000,
+        "tags": ["car", "gasoline", "semi-luxury"],
+        "img": "images/Toyota%Supra%MK4%v1.png"
+    },
+    "coche19": {
+        "name": "Chevrolet Corvette ZR1",
+        "price": 270000,
+        "tags": ["car", "diesel", "luxury"],
+        "img": "images/Chevrolet%Corvette%ZR1%v1.png"
+    }
+}
