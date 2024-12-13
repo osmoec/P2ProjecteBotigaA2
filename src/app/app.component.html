@@ -1,44 +1,93 @@
-//estrcutura con primero un if para ver si entrar en el modelo 1 que es el estandar con header footer o uno modificado que solo tiene un header modificado i una pantalla de carga, i despues a la general un estudio de casos que a partir de selecionar en el header a traves del servicio se podra ir canviando de contenido
-@if (){
-  // app-header
-  @switch (){
-    @case (1){
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>P2ProjecteBotigaA2</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
 
-    }
-    @case (2){
+<!-- Aqui encontramos el header de la web-->
+<header class="mt-0">
+  <div class="headerdis">
+    <div class="mt-2 me-2">
+      <img class="img-fluid imgheader" src="multimedia/logo.png" alt="Logo">
+    </div>
+    <div>
+      <blockquote class="blockquote">
+        <p id="titolheader" class="fs-1">Cotxes Bobby</p>
+      </blockquote>
+      <p class="blockquote-footer">
+        Potencia en cada corba, la emoció en cada kilometre
+      </p>
+    </div>
+  </div>
+</header>
 
-    }
-    @case (3){
+<!-- Este es el nav-->
+<nav class="navbar navbar-expand-lg justify-content-center">
+  <div class="container-fluid menuresponsive">
+    <div class="d-flex  menuP">
+      <div class="me-2 buttonmen"><a type="button" class="btn btn-outline-danger" routerLink="/home">Home</a></div>
+      <div class="me-2 buttonmen"><a type="button" class="btn btn-outline-danger" routerLink="/catalogo">Catalec</a></div>
+      <div class="me-2 buttonmen"><a type="button" class="btn btn-outline-danger" routerLink="/sobrenosotros">Sobre nosaltres</a></div>
+      <div class="me-2 buttonmen"><a type="button" class="btn btn-outline-danger" routerLink="/contacto">Contacte</a></div>
+      <div class="me-2 buttonmen"><a type="button" class="btn btn-outline-danger" routerLink="/condiciones">Condicions</a></div>
+    </div>
+    <div id="cestaboto" class="d-flex flex-row justify-content-md-end justify-content-between">
+      <a routerLink="/login" class="btn btn-primary me-2" type="button"><img class="compra" src="multimedia/compte.png"></a>
+      <a routerLink="/cesta" class="btn btn-primary" type="button"><img class="compra" src="multimedia/compra.png"></a>
+    </div>
+  </div>
 
-    }
-    @case (4){
+</nav>
 
-    }
-    @case (5){
+<router-outlet/>
 
-    }
-    @case (6){
+<!-- Aqui encontramos el footer -->
+<footer>
+  <div class="footercomplert d-flex flex-column">
+    <div class="prefooter">
+      <div class="footer1 mt-3">
+        <h3>Vols treballar amb noslatres?</h3>
+        <p>Escriu un correu a: contratacions&#64;bobbycotxes.com</p>
+      </div>
 
-    }
-    @case (7){
+      <div class="xarcesordre mt-3">
+        <h2>Xarxes socials</h2>
+        <div class="xarxescontenidor d-flex flex-row justify-content-center">
+          <div class="xarxesdiv"><button type="button" class="btn btn-outline-success" data-bs-toggle="popover" data-bs-placement="top" title="Whatsapp" data-bs-content="612 345 678 "><img class="xarxes" src="multimedia/xarxessocials/whatsapp.png"></button></div>
+          <div class="xarxesdiv"><button type="button" class="btn btn-outline-danger" data-bs-toggle="popover" data-bs-placement="bottom" title="Instagram" data-bs-content="@bobbycotxesofficial"><img class="xarxes" src="multimedia/xarxessocials/instagram.png"></button></div>
+          <div class="xarxesdiv"> <button type="button" class="btn btn-outline-primary buttoF" data-bs-toggle="popover" data-bs-placement="top" title="Facebook" data-bs-content="Bobby Cotxes Official"><img class="xarxes" src="multimedia/xarxessocials/facebook.png"></button></div>
+        </div>
+      </div>
 
-    }
-    @case (8){
+      <div class="footer2 mt-3">
+        <h3>Vols saber més sobre nosaltres? clica aqui</h3>
+        <a type="button"  id="btnsobrenosaltres" class="btn btn-outline-danger" href="sobre.nosaltres.html">Sobre nosaltres</a>
+      </div>
 
-    }
-    @case (9){
+      <div class="footer3 mt-3 mb-3">
+        <div>
+          <h3>Enllaços d'interes juridic</h3>
+        </div>
+        <div class="enllaços-footer">
+          <div><a href="https://portaljuridic.gencat.cat/eli/es/lo/2018/12/05/3">Llei de Protecció de Dades</a></div>
+          <div><a href="https://www.boe.es/biblioteca_juridica/codigos/codigo.php?id=150&modo=2&nota=0&tab=2">Codi civil</a></div>
+          <div><a href="https://portaljuridic.gencat.cat/eli/es/l/2002/07/11/34">Llei de Serveis de la Societat de la Informació i del Comerç Electrònic</a></div>
+          <div><a href="https://consum.gencat.cat/ca/lagencia/codi-de-consum-de-catalunya/sintesi-dels-drets-de-les-persones-consumidores-i-usuaries/els-drets-basics-de-les-persones-consumidores/">Drets del Consumidor</a></div>
+        </div>
+      </div>
+    </div>
 
-    }
-    @default {
+    <div class="mt-3">
+      <p>Copyright © 2024 Bobby Cotxes</p>
+    </div>
 
-    }
+  </div>
+</footer>
 
-  }
-  //app footer
-
-}
-@else if (){
-  // app header-m per carrega
-  // app carrega
-}
-<router-outlet />
+</body>
+</html>
