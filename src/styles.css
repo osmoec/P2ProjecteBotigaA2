@@ -1,42 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+
+/*Este es el color de fondo*/
 body{
   background-color: #4e4e4e;
 }
-/* You can add global styles to this file, and also import other style files */
-nav{
-  text-align: center;
-  padding: 1%;
-  width: 100%;
-  background-color: #474747;
-}
 
-.compra{
-  width: 15px;
-  height: 15px;
-}
-
-li{
-  display: inline;
-}
-h1{
-  display: inline;
-  text-align: center;
-  width: 89%;
-
-}
-#cestaboto{
-  width: 5%;
-  display: block;
-}
-
-.menuP{
-  width: 50%;
-}
-
-img{
-  width: 30%;
-}
-
-
+/*Estilos header*/
 header{
   margin-top: 5px;
   display: flex;
@@ -53,35 +22,19 @@ header{
   height: 80px;
 }
 
-p#titolheader{
+#titolheader{
   font-family: system-ui;
 }
 
-article{
-  width: 100%;
-  color: white;
-  background-color: #383838;
+/*Estilos nav*/
+nav{
   text-align: center;
-  padding: 2%;
-
+  padding: 1%;
+  width: 100%;
+  background-color: #474747;
 }
 
-.article-titol-div{
-  margin-top: 5px;
-  margin-bottom: 10px;
-}
-
-.article-titol{
-  font-size: 50px;
-}
-
-#cotxe-benvinguda{
-  margin-top: 5px;
-  margin-bottom: 5px;
-  width: 600px;
-  height: 400px;
-}
-
+/*Estilos Footer*/
 footer{
   background-color: black;
   color: red;
@@ -109,31 +62,77 @@ footer{
   color: lightslategrey;
 }
 
-pre{
-  text-align: justify;
-  white-space: break-spaces;
-}
-
-
-.centrar{
-  align-content: center;
-}
-
 .xarxes{
   width: 50px;
   height: 50px;
 }
 
-.xarxestext{
-  font-size: 0.1em;
+.prefooter {
+  background-color: #474747;
+  display: flex;
+  flex-direction: row;
 }
 
-.titolcont{
-  font-size: xxx-large;
+.enllaços-footer a {
+  color: lightslategrey;
+  margin: 1%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 1%;
+}
+
+.enllaços-footer a:hover {
+  color: lightslategrey;
+}
+.xarxes {
+  width: 50px;
+  height: 50px;
+}
+
+.footercomplert{
+  width: 100%;
+}
+
+
+/*Estilos iconos inicio sesion, registro y cesta */
+.iconosAzul{
+  width: 15px;
+  height: 15px;
+}
+
+/*Estilos tablas*/
+li{
+  display: inline;
+}
+
+/*Estilos textos*/
+h1{
+  display: inline;
   text-align: center;
+  width: 89%;
+}
+
+/*Estilos imagenes*/
+img{
+  width: 30%;
 }
 
 
+/*Estilos article*/
+article{
+  width: 100%;
+  color: white;
+  background-color: #383838;
+  text-align: center;
+  padding: 2%;
+}
+.article-titol-div{
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+/*Estilos forms*/
 #formulari-contenidor {
   display: flex;
   flex-direction: column;
@@ -150,39 +149,48 @@ form {
   justify-content: center;
   width: 400px;
 }
-
-#ubi{
-  width: 70%;
-}
-
-input[type="email"], input[type="password"], button[type="submit"] {
+input[type="email"],
+input[type="password"],
+input[type="text"],
+button[type="submit"],
+input[name="adreça"],
+input[type="email"]{
   width: 100%;
   text-align: center;
-
 }
 
 button[type="submit"]{
   width: 40%;
 }
 
-.prefooter {
-  background-color: #474747;
-  display: flex;
-  flex-direction: row;
+
+/*--------------------------------------------------------------*/
+
+
+#cotxe-benvinguda{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 600px;
+  height: 400px;
+}
+
+pre{
+  text-align: justify;
+  white-space: break-spaces;
+}
+
+.centrar{
+  align-content: center;
 }
 
 
-.enllaços-footer a {
-  color: lightslategrey;
-  margin: 1%;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  gap: 1%;
+.titolcont{
+  font-size: xxx-large;
+  text-align: center;
 }
 
-.enllaços-footer a:hover {
-  color: lightslategrey;
+#ubi{
+  width: 70%;
 }
 
 pre {
@@ -190,27 +198,13 @@ pre {
   white-space: break-spaces;
 }
 
-
 .centrar {
   align-content: center;
-}
-
-.xarxes {
-  width: 50px;
-  height: 50px;
-}
-
-.xarxestext {
-  font-size: 0.1em;
 }
 
 .titolcont {
   font-size: xxx-large;
   text-align: center;
-}
-
-.footercomplert{
-  width: 100%;
 }
 
 .imgsn{
@@ -221,7 +215,6 @@ pre {
   display: flex;
   gap: 2px;
   justify-content: center;
-
 }
 
 @media screen and (min-width: 1024px){
