@@ -5,7 +5,6 @@ import {LoginComponent} from './login/login.component';
 import {CestaComponent} from './cesta/cesta.component';
 import {CondicionesComponent} from './condiciones/condiciones.component';
 import {IndiceComponent} from './indice/indice.component';
-import {PagamentComponent} from './pagament/pagament.component';
 import {SignInComponent} from './sign-in/sign-in.component';
 import {CatalogoComponent} from './catalogo/catalogo.component';
 import {SobrenosotrosComponent} from './sobrenosotros/sobrenosotros.component';
@@ -16,7 +15,6 @@ export const routes: Routes = [
   {path: 'cesta', component: CestaComponent},
   {path: 'condiciones', component: CondicionesComponent},
   {path: 'home', component: IndiceComponent},
-  {path: 'pagament', component: PagamentComponent},
   {path: 'signin', component: SignInComponent},
   {path: 'catalogo', component: CatalogoComponent},
   {path: 'sobrenosotros', component: SobrenosotrosComponent}];
