@@ -1,0 +1,397 @@
+nav{
+  text-align: center;
+  padding: 1%;
+  width: 100%;
+  background-color: #474747;
+}
+
+.compra{
+  width: 15px;
+  height: 15px;
+}
+
+li{
+  display: inline;
+}
+h1{
+  display: inline;
+  text-align: center;
+  width: 89%;
+
+}
+#cestaboto{
+  width: 5%;
+  display: block;
+}
+
+.menuP{
+  width: 50%;
+}
+
+img{
+  width: 10%;
+}
+
+header{
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  height: 19%;
+  background-color: black;
+  color: red;
+}
+
+.imgheader{
+  width: 80px;
+  height: 80px;
+}
+
+p#titolheader{
+  font-family: system-ui;
+}
+
+article{
+  width: 100%;
+  color: white;
+  background-color: #383838;
+  text-align: center;
+  padding: 2%;
+
+}
+
+.article-titol-div{
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.article-titol{
+  font-size: 50px;
+}
+
+#cotxe-benvinguda{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 600px;
+  height: 400px;
+}
+
+footer{
+  background-color: black;
+  color: red;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 19%;
+}
+
+.prefooter{
+  background-color: #474747;
+}
+
+.enllaços-footer a{
+  color: lightslategrey;
+  margin: 1%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 1%;
+}
+
+.enllaços-footer a:hover{
+  color: lightslategrey;
+}
+
+pre{
+  text-align: justify;
+  white-space: break-spaces;
+}
+
+
+.centrar{
+  align-content: center;
+}
+
+.xarxes{
+  width: 50px;
+  height: 50px;
+}
+
+.xarxestext{
+  font-size: 0.1em;
+}
+
+.titolcont{
+  font-size: xxx-large;
+  text-align: center;
+}
+
+
+#formulari-contenidor {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+form {
+  box-shadow: 10px 10px #1c1c1c;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 575px;
+}
+
+#divocorreu{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 40%;
+}
+
+#divtelefon{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 70%;
+}
+
+input[type="email"], input[type="password"], input[type="text"] {
+  width: 100%;
+  text-align: center;
+
+}
+
+input[name="adreça"]{
+  width: 100%;
+  text-align: center;
+}
+
+input[type="email"]{
+  width: 100%;
+  text-align: center;
+}
+
+button[type="submit"],button[type="reset"]{
+  width: 100%;
+}
+
+
+.prefooter {
+  background-color: #474747;
+  display: flex;
+  flex-direction: row;
+}
+
+
+.enllaços-footer a {
+  color: lightslategrey;
+  margin: 1%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 1%;
+}
+
+.enllaços-footer a:hover {
+  color: lightslategrey;
+}
+
+pre {
+  text-align: justify;
+  white-space: break-spaces;
+}
+
+
+.centrar {
+  align-content: center;
+}
+
+.xarxes {
+  width: 50px;
+  height: 50px;
+}
+
+.xarxestext {
+  font-size: 0.1em;
+}
+
+.titolcont {
+  font-size: xxx-large;
+  text-align: center;
+}
+
+.footercomplert{
+  width: 100%;
+}
+
+.imgsn{
+  margin-bottom: 2%;
+}
+
+.enviartrucar{
+  display: flex;
+  gap: 2px;
+  justify-content: center;
+
+}
+
+@media screen and (min-width: 1024px){
+
+  .menuP{
+    width: 60%;
+  }
+
+  .footercomplert{
+    width: 100%;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+
+  .prefooter {
+    background-color: #474747;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .menuresponsive {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .iconescompra{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .headerdis{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+    margin-top: 5px;
+  }
+
+  .d-flex {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn{
+    width: 100%;
+  }
+
+  .buttonmen{
+    width: 100%;
+  }
+
+  .menuP{
+    width: 100%;
+  }
+
+  #cestaboto{
+    width: 100%;
+  }
+
+  footer{
+    font-size: 0.4em;
+  }
+
+  footer h2, footer h3{
+    font-size: 1.7em;
+  }
+
+  footer .xarcesordre{
+    gap: 5px;
+  }
+
+  footer .btn{
+    padding: 10%;
+    width: 100%;
+    font-size: 100%;
+  }
+
+  .xarcesordre{
+    width: 35%;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .footer1{
+    font-size: 1.2em;
+    width: 22%;
+  }
+
+  .footer2{
+    width: 22%;
+  }
+
+  .footer2 .btn{
+    width: 50%;
+  }
+
+  .footer3{
+    width: 22%;
+  }
+
+  .xarxesdiv{
+    width: 33%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+
+  .xarxesdiv button{
+    margin: 0;
+  }
+
+  .xarxes{
+    height: 15px;
+    width: 15px;
+  }
+
+  .xarxescontenidor{
+    gap: 20px;
+    width: 100%;
+  }
+
+  .footercomplert{
+    width: 100%;
+  }
+
+  aside h2{
+    font-size: 1.2em;
+  }
+
+  .imgsn {
+    width: 300px;
+    margin-bottom: 2%;
+  }
+
+  article p .btn{
+    width: 10%;
+  }
+
+  form{
+    width: 85%;
+  }
+
+  #btnsobrenosaltres{
+    margin-bottom: 20px;
+  }
+
+}
