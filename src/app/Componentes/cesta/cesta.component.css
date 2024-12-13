@@ -1,4 +1,4 @@
-.metode{
+.iconoMetodePagament{
   width: 25px;
   height: 25px;
 }
@@ -12,24 +12,6 @@ img{
   width: 20%;
 }
 
-article{
-  width: 100%;
-  color: white;
-  background-color: #383838;
-  text-align: center;
-  padding: 2%;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding-top: 1%;
-}
-
-.article-titol-div{
-  font-size: 45px;
-  margin-top: 5px;
-  margin-bottom: 15px;
-}
-
 .producte{
   background-color: #e10000;
   width: 100%;
@@ -39,11 +21,6 @@ article{
 }
 
 form {
-  box-shadow: 10px 10px #1c1c1c;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   width: 100%;
 }
 
@@ -55,36 +32,24 @@ p{
   text-align: center;
 }
 
+input[type="month"],
+input[name="numero-targeta"],
+input[name="nom-titular"],
+form input[type="number"] {
+  text-align: center;
+  margin: auto;
+}
+
 input[type="month"]{
-  text-align: center;
   width: 72%;
-  margin: auto;
 }
 
-input[name="numero-targeta"]{
-  text-align: center;
-  width: 90%;
-  margin: auto;
-}
-
+input[name="numero-targeta"],
 input[name="nom-titular"]{
-  text-align: center;
   width: 90%;
-  margin: auto;
 }
 
-form input[type="number"]{
-  text-align: center;
-  width: 100%;
-  margin: auto;
-}
-
-button[type="submit"]{
-  width: 40%;
-  height: 100%;
-
-}
-
+form input[type="number"],
 article input[type="number"]{
   width: 100%;
 }
