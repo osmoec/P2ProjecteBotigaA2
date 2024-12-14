@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ServicioPrincipalService} from '../../Servicios/servicio-principal.service';
 
 @Component({
   selector: 'app-catalogo',
@@ -8,5 +9,12 @@ import { Component } from '@angular/core';
   styleUrl: './catalogo.component.css'
 })
 export class CatalogoComponent {
+
+  // @ts-ignore
+  coches: any
+
+  constructor(private prinserv: ServicioPrincipalService) {
+    this.coches = this.prinserv.coches
+  }
 
 }
