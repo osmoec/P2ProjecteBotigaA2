@@ -1,0 +1,28 @@
+
+form {
+  width: 575px;
+}
+
+#divocorreu{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 40%;
+}
+
+#divtelefon{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 70%;
+}
+
+button[type="submit"],button[type="reset"]{
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  form{
+    width: 85%;
+  }
+}
