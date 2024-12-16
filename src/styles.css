@@ -49,8 +49,10 @@ footer{
 .prefooter{
   background-color: #474747;
 }
-.prefooter div {
+.divPrefooter {
   margin: auto;
+  padding: 10px;
+
 }
 
 .enllaços-footer a{
@@ -334,6 +336,7 @@ pre {
     justify-content: center;
     align-items: center;
     margin: 0;
+    padding: 0;
   }
 
   .xarxesdiv button{
