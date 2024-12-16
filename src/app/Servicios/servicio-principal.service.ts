@@ -25,9 +25,9 @@ export class ServicioPrincipalService implements OnInit{
       tags: ["car", "gasoline", "luxury"],
       offertext: "Amb el seu disseny ultra-luxós i aerodinàmic, és un dels cotxes mes cars del món.",
       imgC: [
-        "/images/"+encodeURIComponent("Bugatti La Vult Noir v1.png"),
-        "/images/"+encodeURIComponent("Bugatti La Vult Noir v2.png"),
-        "/images/"+encodeURIComponent("Bugatti La Vult Noir v3.png")
+        "/images/"+encodeURIComponent("Bugatti LaVultNoir v1.png"),
+        "/images/"+encodeURIComponent("Bugatti LaVultNoir v2.png"),
+        "/images/"+encodeURIComponent("Bugatti LaVultNoir v3.png")
       ]
     },
     {
