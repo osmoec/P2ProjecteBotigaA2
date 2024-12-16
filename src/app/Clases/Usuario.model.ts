@@ -1,10 +1,11 @@
 export class Usuario {
+
   nombre : string;
   apellido : string;
   correo : string;
   usuario : string;
   DNI : string;
-  cumpleaños : string;
+  cumpleaños : Date;
   telefono : string;
   contrasena : string;
   direccion : string;
@@ -15,7 +16,7 @@ export class Usuario {
   fechaTarjeta : string | undefined;
   CVVTarjeta : string | undefined;
 
-  constructor(nombre : string, apellido : string, correo : string, usuario : string, DNI : string, cumpleaños : string, telefono : string, contraseña : string, direccion : string) {
+  constructor(nombre : string, apellido : string, correo : string, usuario : string, DNI : string, cumpleaños : Date, telefono : string, contraseña : string, direccion : string) {
     this.nombre = nombre
     this.apellido = apellido
     this.correo = correo
