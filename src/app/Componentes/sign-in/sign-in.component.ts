@@ -3,11 +3,12 @@ import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Usuario } from '../../Clases/Usuario.model';
 import { ServeiUsuarisService } from '../../Servicios/servei-usuaris.service';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-sign-in',
   standalone: true,
-  imports: [RouterLink, FormsModule],
+  imports: [RouterLink, FormsModule, NgIf],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.css'
 })
@@ -22,6 +23,7 @@ export class SignInComponent {
   contrasena: string = '';
   confContrasena: string = '';
   adreca: string = '';
+  usuari_ja_registrat = '';
 
   constructor(private router: Router, private serveiUsuaris: ServeiUsuarisService) {}
 
@@ -29,7 +31,11 @@ export class SignInComponent {
     if (!this.nom) { alert('Por favor, Complete su nombre'); return false; }
     if (!this.cognom) { alert('Por favor, Complete su apellido'); return false; }
     if (!this.usuari) { alert('Por favor, Complete su nombre de usuario'); return false; }
-    if (!this.DNI) { alert('Por favor, Complete su DNI'); return false; }
+    if (!this.DNI) {alert('Por favor, Complete su DNI');return false;}
+    if (this.DNI.length !== 9 || isNaN(Number(this.DNI.slice(0, 8))) || this.DNI[8] !== this.DNI[8].toUpperCase()) {
+      alert('El DNI debe ser 8 numeros seguidos de una letra mayuscula');
+      return false;
+    }
     if (!this.aniversari) { alert('Por favor, Complete su fecha de nacimiento'); return false; }
     if (!this.telefon || this.telefon.length != 9) { alert('Por favor, Complete el numero de telefono con formato XXXXXXXXX'); return false; }
     if (!this.contrasena) { alert('Por favor, Complete la contraseña'); return false; }
@@ -44,6 +50,12 @@ export class SignInComponent {
         this.nom, this.cognom, this.correu, this.usuari, this.DNI,
         this.aniversari, this.telefon, this.contrasena, this.adreca
       );
+      for (let user of this.serveiUsuaris.getUsuarios()) {
+        if (user.usuario === this.usuari || user.correo === this.correu) {
+          this.usuari_ja_registrat = "Aquest usuari ja esta registrat.";
+          return;
+        }
+      }
       this.serveiUsuaris.addUsuario(nouUsuari);
 
       alert('Registre completat amb èxit!');
