@@ -49,6 +49,9 @@ footer{
 .prefooter{
   background-color: #474747;
 }
+.prefooter div {
+  margin: auto;
+}
 
 .enllaços-footer a{
   color: lightslategrey;
