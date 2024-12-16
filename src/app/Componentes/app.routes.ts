@@ -10,6 +10,7 @@ import {CatalogoComponent} from './catalogo/catalogo.component';
 import {SobrenosotrosComponent} from './sobrenosotros/sobrenosotros.component';
 
 export const routes: Routes = [
+  {path: '', component: IndiceComponent},
   {path: 'contacto', component: ContactoComponent},
   {path: 'login', component: LoginComponent},
   {path: 'cesta', component: CestaComponent},
