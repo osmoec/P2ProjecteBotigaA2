@@ -26,20 +26,33 @@ export class CatalogoComponent {
   coches: any
   cochesT: any
   // @ts-ignore
-  cochesA: any = this.coches
+  cochesA: any
 
   constructor(private prinserv: ServicioPrincipalService) {
     this.coches = this.prinserv.coches
+    this.cochesA = this.coches
   }
 
-  buscar(tagD:string) {
+  filtrarPorTag(tagD:string) {
     // @ts-ignore
-    this.cochesT = this.coches.filter(cocheB => cocheB.tags.includes(tagD));
+    this.cochesT = this.coches.filter(cocheB => cocheB.tags.includes(tagD))
 
-    console.log(this.cochesT);
+    console.log(this.cochesT)
 
     this.cochesA = this.cochesT
 
+  }
+
+  sinFiltrar(){
+    this.cochesA = this.coches
+  }
+
+  buscarSimilar(textbus: string){
+    textbus.toLowerCase()
+    // @ts-ignore
+    this.cochesT = this.coches.filter(textsimilar => textsimilar.name.toLowerCase().includes(textbus))
+
+    this.cochesA = this.cochesT
   }
 
   protected readonly first = first;

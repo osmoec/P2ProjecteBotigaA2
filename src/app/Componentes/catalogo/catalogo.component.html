@@ -1,13 +1,15 @@
 <main>
   <article>
 
-    <button (click)="buscar('car')">car</button>
-    <button (click)="buscar('motorcycle')">bike</button>
-    <button (click)="buscar('diesel')">diesel</button>
-    <button (click)="buscar('gasoline')">gasoline</button>
-    <button (click)="buscar('luxury')">luxury</button>
-    <button (click)="buscar('semi-luxury')">semi-luxury</button>
+    <button (click)="sinFiltrar()">todo</button>
+    <button (click)="filtrarPorTag('car')">car</button>
+    <button (click)="filtrarPorTag('motorcycle')">bike</button>
+    <button (click)="filtrarPorTag('diesel')">diesel</button>
+    <button (click)="filtrarPorTag('gasoline')">gasoline</button>
+    <button (click)="filtrarPorTag('luxury')">luxury</button>
+    <button (click)="filtrarPorTag('semi-luxury')">semi-luxury</button>
     <textarea [(ngModel)]="textbuscar"></textarea>
+    <button (click)="buscarSimilar(textbuscar)">buscar</button>
 
     <div id="contingutCotxes">
     <div class="container">
