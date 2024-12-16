@@ -1,0 +1,14 @@
+{
+  "usr1": {
+    "id": "1",
+    "name": "Joan",
+    "surname": "Martinez",
+    "gmail": "joan666@gmail.com",
+    "user": "joanUser",
+    "DNI": "12345678A",
+    "birthdate": "1995-03-15",
+    "phone": "600123456",
+    "passwd": "joan123",
+    "adress": "Carrer Falsa 123"
+  }
+}

@@ -1,12 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-header',
-  standalone: true,
-  imports: [],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  standalone: true,
+  imports: [NgIf],
+  styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  logat = false;
+  usuariLogat = '';
 
+  ngOnInit() {
+    this.logat = localStorage.getItem('logat') === 'true';
+    this.usuariLogat = localStorage.getItem('usuari') || '';
+  }
+
+  logout() {
+    localStorage.removeItem('logat');
+    localStorage.removeItem('usuari');
+    this.logat = false;
+    this.usuariLogat = '';
+    window.location.reload();
+  }
 }
+
