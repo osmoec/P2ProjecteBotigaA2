@@ -1,10 +1,19 @@
 import { Component } from '@angular/core';
 import {ServicioPrincipalService} from '../../Servicios/servicio-principal.service';
+import {NgbCarousel, NgbSlide} from '@ng-bootstrap/ng-bootstrap';
+import {first} from 'rxjs';
+import {Carousel} from 'primeng/carousel';
+import {PrimeTemplate} from 'primeng/api';
 
 @Component({
   selector: 'app-catalogo',
   standalone: true,
-  imports: [],
+  imports: [
+    NgbCarousel,
+    NgbSlide,
+    Carousel,
+    PrimeTemplate
+  ],
   templateUrl: './catalogo.component.html',
   styleUrl: './catalogo.component.css'
 })
@@ -17,4 +26,5 @@ export class CatalogoComponent {
     this.coches = this.prinserv.coches
   }
 
+  protected readonly first = first;
 }
