@@ -1,12 +1,18 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-cesta',
   standalone: true,
-  imports: [],
+  imports: [
+    FormsModule
+  ],
   templateUrl: './cesta.component.html',
   styleUrl: './cesta.component.css'
 })
-export class CestaComponent {
+export class CestaComponent implements OnInit {
+  ngOnInit(): void {
+  }
+
 
 }

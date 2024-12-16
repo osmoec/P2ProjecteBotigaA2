@@ -1,9 +1,19 @@
 <main>
   <article>
+
+    <button (click)="buscar('car')">car</button>
+    <button (click)="buscar('motorcycle')">bike</button>
+    <button (click)="buscar('diesel')">diesel</button>
+    <button (click)="buscar('gasoline')">gasoline</button>
+    <button (click)="buscar('luxury')">luxury</button>
+    <button (click)="buscar('semi-luxury')">semi-luxury</button>
+    <textarea [(ngModel)]="textbuscar"></textarea>
+
+    <div id="contingutCotxes">
     <div class="container">
       <div class="content">
         <div class="product-grid">
-          @for (coche of coches; track coche.id){
+          @for (coche of cochesA; track coche.id){
             <div class="product-item">
               <div class="carousel-wrapper">
                   <p-carousel [value]="coche.imgC" [numVisible]="1" [numScroll]="1" [circular]="true">
@@ -26,6 +36,7 @@
           }
         </div>
       </div>
+    </div>
     </div>
   </article>
 
