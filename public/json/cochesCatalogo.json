@@ -1,116 +1,100 @@
-{
-    "coche1": {
-        "name": "Mustang Dodge Challenger",
-        "price": 176000,
-        "tags": ["car", "gasoline", "semi-luxury"],
-        "img": "images/Mustang%Dodge%Challenger%v1.png"
-    },
-    "coche2": {
-        "name": "Bugatti La Vult Noir",
-        "price": 18000000,
-        "tags": ["car", "gasoline", "luxury"],
-        "img": "images/Bugatti%La%Vult%Noir%v1.png"
-    },
-    "coche3": {
-        "name": "Lamborghini Aventador",
-        "price": 458000,
-        "tags": ["car", "gasoline", "luxury"],
-        "img": "images/Lamborghini%Aventador%v1.png"
-    },
-    "coche4": {
-        "name": "Mazda Miata",
-        "price": 30000,
-        "tags": ["car", "gasoline", "semi-luxury"],
-        "img": "images/Mazda%Miata%v1.png"
-    },
-    "coche5": {
-        "name": "Kawasaki Ninja H2R",
-        "price": 55000,
-        "tags": ["motorcycle", "gasoline", "semi-luxury"],
-        "img": "images/Kawasaki%Ninja%H2R%v1.png"
-    },
-    "coche6": {
-        "name": "Ferrari Roma",
-        "price": 254000,
-        "tags": ["car", "gasoline", "luxury"],
-        "img": "images/Ferrari%Roma%v1.png"
-    },
-    "coche7": {
-        "name": "Lamborghini Urus",
-        "price": 240000,
-        "tags": ["car", "diesel", "luxury"],
-        "img": "images/Lamborghini%Urus%v1.png"
-    },
-    "coche8": {
-        "name": "Aston Martin DB12",
-        "price": 338000,
-        "tags": ["car", "diesel", "luxury"],
-        "img": "images/Aston%Martin%DB12%v1.png"
-    },
-    "coche9": {
-        "name": "Maserati MC20",
-        "price": 276000,
-        "tags": ["car", "gasoline", "luxury"],
-        "img": "images/Maserati%MC20%v1.png"
-    },
-    "coche10": {
-        "name": "Audi R8",
-        "price": 210000,
-        "tags": ["car", "gasoline", "luxury"],
-        "img": "images/Audi%R8%v1.png"
-    },
-    "coche11": {
-        "name": "Ford Mustang GT500",
-        "price": 149000,
-        "tags": ["car", "gasoline", "semi-luxury"],
-        "img": "images/Ford%Mustang%GT500%v1.png"
-    },
-    "coche12": {
-        "name": "Chevrolet Camaro ZL1",
-        "price": 94000,
-        "tags": ["car", "gasoline", "semi-luxury"],
-        "img": "images/Chevrolet%Camaro%ZL1%v1.png"
-    },
-    "coche13": {
-        "name": "Bugatti Chiron",
-        "price": 2500000,
-        "tags": ["car", "gasoline", "luxury"],
-        "img": "images/Bugatti%Chiron%v1.png"
-    },
-    "coche14": {
-        "name": "Lexus LFA",
-        "price": 415000,
-        "tags": ["car", "gasoline", "luxury"],
-        "img": "images/Lexus%LFA%v1.png"
-    },
-    "coche15": {
-        "name": "Ferrari F40",
-        "price": 800000,
-        "tags": ["car", "gasoline", "luxury"],
-        "img": "images/Ferrari%F40%v1.png"
-    },
-    "coche16": {
-        "name": "McLaren Senna",
-        "price": 1650000,
-        "tags": ["car", "gasoline", "luxury"],
-        "img": "images/McLaren%Senna%v1.png"
-    },
-    "coche17": {
-        "name": "Ferrari SF90",
-        "price": 510000,
-        "tags": ["car", "diesel", "luxury"],
-        "img": "images/Ferrari%SF90%v1.png"
-    },
-    "coche18": {
-        "name": "Toyota Supra MK4",
-        "price": 121000,
-        "tags": ["car", "gasoline", "semi-luxury"],
-        "img": "images/Toyota%Supra%MK4%v1.png"
-    },
-    "coche19": {
-        "name": "Chevrolet Corvette ZR1",
-        "price": 270000,
-        "tags": ["car", "diesel", "luxury"],
-        "img": "images/Chevrolet%Corvette%ZR1%v1.png"
-    }
-}
+
+[
+  {
+    "id": 1,
+    "name": "Mustang Dodge Challenger",
+    "price": 176000,
+    "tags": ["car", "gasoline", "semi-luxury"],
+    "offertext": "Icona dels 'muscle cars', aquest destaca pel seu disseny cuadrat i potent.",
+    "imgC": [
+      "/images/Mustang%20Dodge%20Challenger%20v1.png",
+      "/images/Mustang%20Dodge%20Challenger%20v2.png",
+      "/images/Mustang%20Dodge%20Challenger%20v3.png"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Bugatti La Vult Noir",
+    "price": 18000000,
+    "tags": ["car", "gasoline", "luxury"],
+    "offertext": "Amb el seu disseny ultra-luxós i aerodinàmic, és un dels cotxes mes cars del món.",
+    "imgC": [
+      "/images/Bugatti%20LaVultNoir%20v1.png",
+      "/images/Bugatti%20LaVultNoir%20v2.png",
+      "/images/Bugatti%20LaVultNoir%20v3.png"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Lamborghini Aventador",
+    "price": 458000,
+    "tags": ["car", "gasoline", "luxury"],
+    "offertext": "Aquest super-esportiu és conegut pel seu disseny agressiu i angular.",
+    "imgC": [
+      "/images/Lamborghini%20Aventador%20v1.png",
+      "/images/Lamborghini%20Aventador%20v2.png",
+      "/images/Lamborghini%20Aventador%20v3.png"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Mazda Miata",
+    "price": 30000,
+    "tags": ["car", "gasoline", "semi-luxury"],
+    "offertext": "Malgrat no ser dels més ràpids, continua tenint una estètica esportiva però amigable.",
+    "imgC": [
+      "/images/Mazda%20Miata%20v1.png",
+      "/images/Mazda%20Miata%20v2.png",
+      "/images/Mazda%20Miata%20v3.png"
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Kawasaki Ninja H2R",
+    "price": 55000,
+    "tags": ["motorcycle", "gasoline", "semi-luxury"],
+    "offertext": "Es famós per ser una de les motos més rapides i potents del mercat, principalment dissenyada per a circuits.",
+    "imgC": [
+      "/images/Kawasaki%20Ninja%20H2R%20v1.png",
+      "/images/Kawasaki%20Ninja%20H2R%20v2.png",
+      "/images/Kawasaki%20Ninja%20H2R%20v3.png"
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Ferrari Roma",
+    "price": 254000,
+    "tags": ["car", "gasoline", "luxury"],
+    "offertext": "Esportiu modern amb un disseny elegant i sofisticat que fa recordar als models classics de la marca italiana.",
+    "imgC": [
+      "/images/Ferrari%20Roma%20v1.png",
+      "/images/Ferrari%20Roma%20v2.png",
+      "/images/Ferrari%20Roma%20v3.png"
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Lamborghini Urus",
+    "price": 240000,
+    "tags": ["car", "diesel", "luxury"],
+    "offertext": "Combina la velocitat i el disseny agressiu característic de la marca amb la versatilitat d'un tot-terreny.",
+    "imgC": [
+      "/images/Lamborghini%20Urus%20v1.png",
+      "/images/Lamborghini%20Urus%20v2.png",
+      "/images/Lamborghini%20Urus%20v3.png"
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Aston Martin DB12",
+    "price": 338000,
+    "tags": ["car", "diesel", "luxury"],
+    "offertext": "Equipat amb un motor V8, ofereix una mescla perfecta entre luxe, rendiment i tecnologia.",
+    "imgC": [
+      "/images/Aston%20Martin%20DB12%20v1.png",
+      "/images/Aston%20Martin%20DB12%20v2.png",
+      "/images/Aston%20Martin%20DB12%20v3.png"
+    ]
+  }
+]
+
