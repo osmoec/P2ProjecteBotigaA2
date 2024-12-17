@@ -28,19 +28,22 @@ export class SignInComponent {
   constructor(private router: Router, private serveiUsuaris: ServeiUsuarisService) {}
 
   public validarDatos(): boolean {
-    if (!this.nom) { alert('Por favor, Complete su nombre'); return false; }
-    if (!this.cognom) { alert('Por favor, Complete su apellido'); return false; }
-    if (!this.usuari) { alert('Por favor, Complete su nombre de usuario'); return false; }
-    if (!this.DNI) {alert('Por favor, Complete su DNI');return false;}
+    if (!this.nom) {alert('Si us plau, completa el teu nom');return false;}
+    if (!this.cognom) {alert('Si us plau, completa el teu cognom');return false;}
+    if (!this.usuari) {alert('Si us plau, completa el teu nom d\'usuari');return false;}
+    if (!this.DNI) {alert('Si us plau, completa el teu DNI');return false;}
     if (this.DNI.length !== 9 || isNaN(Number(this.DNI.slice(0, 8))) || this.DNI[8] !== this.DNI[8].toUpperCase()) {
-      alert('El DNI debe ser 8 numeros seguidos de una letra mayuscula');
+      alert('El DNI ha de ser 8 números seguits d\'una lletra majúscula');
       return false;
     }
-    if (!this.aniversari) { alert('Por favor, Complete su fecha de nacimiento'); return false; }
-    if (!this.telefon || this.telefon.length != 9) { alert('Por favor, Complete el numero de telefono con formato XXXXXXXXX'); return false; }
-    if (!this.contrasena) { alert('Por favor, Complete la contraseña'); return false; }
-    if (this.contrasena !== this.confContrasena) { alert('Las contraseñas no coinciden'); return false; }
-    if (!this.adreca) { alert('Por favor, Complete con su direccion'); return false; }
+    if (!this.aniversari) {alert('Si us plau, completa la teva data de naixement');return false}
+    if (!this.telefon || this.telefon.length != 9) {
+      alert('Si us plau, completa el numero de telefon amb el format XXXXXXXXX');
+      return false;
+    }
+    if (!this.contrasena) {alert('Si us plau, completa la contrasenya');return false;}
+    if (this.contrasena !== this.confContrasena) {alert('Les contrasenyes no coincideixen');return false;}
+    if (!this.adreca) {alert('Si us plau, completa la teva adreça');return false;}
     return true;
   }
 
