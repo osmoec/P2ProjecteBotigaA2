@@ -29,9 +29,9 @@
                 <small>{{ coche.offertext }}</small>
                 <p>{{ coche.price }}</p>
                 <div class="actions">
-                  <button type="button" class="btn btn-warning">Afegir a la cistella</button>
+                  <button type="button" class="btn btn-warning" (click)="addToCart(coche, +quantity.value)">Afegir a la cistella</button>
                   <label for="quantity{{ coche.id }}" class="quantity-label">Cantidad:</label>
-                  <input type="number" class="quantity-input" min="1" value="1" id="quantity{{ coche.id }}">
+                  <input type="number" class="quantity-input" min="1" value="1" id="quantity{{ coche.id }}" #quantity>
                 </div>
               </div>
             </div>
