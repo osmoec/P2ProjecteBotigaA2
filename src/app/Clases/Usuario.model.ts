@@ -1,8 +1,7 @@
 export class Usuario {
-
-  nombre : string;
-  apellido : string;
-  correo : string;
+  nombre: string;
+  apellido: string;
+  correo: string;
   usuario : string;
   DNI : string;
   cumpleaños : Date;
@@ -15,6 +14,12 @@ export class Usuario {
   numeroTarjeta : string | undefined;
   fechaTarjeta : string | undefined;
   CVVTarjeta : string | undefined;
+
+  //Cesta
+  cochesCesta: any | undefined;
+
+  //Comandas
+  comandas: any[] | undefined
 
   constructor(nombre : string, apellido : string, correo : string, usuario : string, DNI : string, cumpleaños : Date, telefono : string, contraseña : string, direccion : string) {
     this.nombre = nombre
