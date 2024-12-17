@@ -1,15 +1,27 @@
 <main>
   <article>
+    <textarea [(ngModel)]="textbuscar" class="form-control" rows="1" placeholder="Escribe aquí para buscar..."></textarea>
+    <button (click)="buscarSimilar(textbuscar)" class="btn btn-outline-danger">buscar</button>
+    <br>
+    <br>
+    <div class="dropdown">
+      <button class="btn btn-outline-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        Filtrar por categoría
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <li><a class="dropdown-item" (click)="sinFiltrar()">Todo</a></li>
+        <li><a class="dropdown-item" (click)="filtrarPorTag('car')">Car</a></li>
+        <li><a class="dropdown-item" (click)="filtrarPorTag('motorcycle')">Bike</a></li>
+        <li><a class="dropdown-item" (click)="filtrarPorTag('diesel')">Diesel</a></li>
+        <li><a class="dropdown-item" (click)="filtrarPorTag('gasoline')">Gasoline</a></li>
+        <li><a class="dropdown-item" (click)="filtrarPorTag('luxury')">Luxury</a></li>
+        <li><a class="dropdown-item" (click)="filtrarPorTag('semi-luxury')">Semi-luxury</a></li>
+      </ul>
+    </div>
+    <br>
+    <br>
+    <br>
 
-    <button (click)="sinFiltrar()">todo</button>
-    <button (click)="filtrarPorTag('car')">car</button>
-    <button (click)="filtrarPorTag('motorcycle')">bike</button>
-    <button (click)="filtrarPorTag('diesel')">diesel</button>
-    <button (click)="filtrarPorTag('gasoline')">gasoline</button>
-    <button (click)="filtrarPorTag('luxury')">luxury</button>
-    <button (click)="filtrarPorTag('semi-luxury')">semi-luxury</button>
-    <textarea [(ngModel)]="textbuscar"></textarea>
-    <button (click)="buscarSimilar(textbuscar)">buscar</button>
 
     <div id="contingutCotxes">
     <div class="container">
