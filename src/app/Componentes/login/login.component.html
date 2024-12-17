@@ -1,4 +1,4 @@
-<article>
+<article *ngIf="!logat">
   <div id="formulari-contenidor">
     <form action="" method="post" class="bg-secondary rounded">
       <div class="article-titol-div">
@@ -6,17 +6,20 @@
       </div>
       <div class="mb-3">
         <label class="form-label">Correu</label>
-        <input name="correu-sessio" type="email" placeholder="Usuari/Correu" class="form-control" required>
+        <input name="correu-sessio" type="text" placeholder="Usuari/Correu" class="form-control" [(ngModel)]="usuari"  required>
       </div>
       <div class="mb-3">
         <label class="form-label ">Contrasenya</label>
-        <input name="password-sessio" type="password" class="form-control" required>
+        <input name="password-sessio" type="password" class="form-control" [(ngModel)]="contrasenya" required>
       </div>
       <div class="mb-3 form-check">
         <input type="checkbox" class="form-check-input">
         <label name="reocordar-dades" class="form-check-label">Recordar?</label>
       </div>
-      <button type="submit" class="btn btn-primary mb-3">Iniciar sessió</button>
+      <div *ngIf="usuari_notrobat">
+        <p>{{usuari_notrobat}}</p>
+      </div>
+      <button type="submit" class="btn btn-primary mb-3" (click)="login($event)">Iniciar sessió</button>
     </form>
   </div>
 
