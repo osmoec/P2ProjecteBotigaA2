@@ -19,13 +19,16 @@ export class LoginComponent implements OnInit {
   contrasenya = '';
   logat = false;
   usuari_notrobat = '';
+  usuari_logat = '';
 
   constructor(private serveiUsuaris: ServeiUsuarisService) {}
 
   ngOnInit() {
-    const estaLogat = localStorage.getItem('logat');
-    if (estaLogat === 'true') {
-      this.logat = true;
+    this.logat = localStorage.getItem('logat') === 'true';
+    this.usuari_logat = localStorage.getItem('usuari') || '';
+    const usuari = this.serveiUsuaris.getUsuariLogat();
+    if (usuari) {
+      this.usuari_logat = usuari.usuario;
     }
     this.usuaris = this.serveiUsuaris.getUsuarios();
   }
@@ -38,6 +41,7 @@ export class LoginComponent implements OnInit {
         (this.usuaris[i].usuario === this.usuari && this.usuaris[i].contrasena === this.contrasenya)
       ) {
         this.logat = true;
+        this.serveiUsuaris.setUsuariLogat(this.usuaris[i].usuario);
       }
     }
     if (this.logat) {
