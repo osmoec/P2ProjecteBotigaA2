@@ -17,7 +17,7 @@ import { Coche } from '../../Clases/Coche.model';
     Carousel,
     PrimeTemplate,
     FormsModule,
-    HttpClientModule  // Agrega HttpClientModule en los imports del componente
+    HttpClientModule
   ],
   templateUrl: './catalogo.component.html',
   styleUrls: ['./catalogo.component.css']

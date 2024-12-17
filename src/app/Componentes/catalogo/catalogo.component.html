@@ -1,6 +1,6 @@
 <main>
   <article>
-    <textarea [(ngModel)]="textbuscar" class="form-control" rows="1" placeholder="Escribe aquí para buscar..."></textarea>
+    <input type="text" [(ngModel)]="textbuscar" class="form-control" rows="1" placeholder="Escribe aquí para buscar...">
     <button (click)="buscarSimilar(textbuscar)" class="btn btn-outline-danger">buscar</button>
     <br>
     <br>
@@ -19,9 +19,6 @@
       </ul>
     </div>
     <br>
-    <br>
-    <br>
-
 
     <div id="contingutCotxes">
     <div class="container">
@@ -39,11 +36,14 @@
               <div class="product-info">
                 <h3>{{ coche.name }}</h3>
                 <small>{{ coche.offertext }}</small>
-                <p>{{ coche.price }}</p>
+                <p>{{ coche.price.toLocaleString('es-ES') }} €</p>
                 <div class="actions">
-                  <button type="button" class="btn btn-warning" (click)="addToCart(coche, +quantity.value)">Afegir a la cistella</button>
+                  <button type="button" class="btn btn-warning" (click)=" addToCart(coche, +quantity.value)">Afegir a la cistella</button>
+                  <br>
                   <label for="quantity{{ coche.id }}" class="quantity-label">Cantidad:</label>
-                  <input type="number" class="quantity-input" min="1" value="1" id="quantity{{ coche.id }}" #quantity>
+                  <br>
+                  <input type="number" class="quantity-input btn btn-outline-danger" min="1" value="1" id="quantity{{ coche.id }}" #quantity>
+
                 </div>
               </div>
             </div>
