@@ -48,7 +48,7 @@ export class CatalogoComponent {
   }
 
   buscarSimilar(textbus: string){
-    textbus.toLowerCase()
+    textbus = textbus.toLowerCase()
     // @ts-ignore
     this.cochesT = this.coches.filter(textsimilar => textsimilar.name.toLowerCase().includes(textbus))
 
