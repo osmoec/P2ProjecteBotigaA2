@@ -225,10 +225,6 @@ pre {
 
 @media screen and (min-width: 1024px){
 
-  .menuP{
-    width: 60%;
-  }
-
   .footercomplert{
     width: 100%;
   }
@@ -278,10 +274,6 @@ pre {
   }
 
   .buttonmen{
-    width: 100%;
-  }
-
-  .menuP{
     width: 100%;
   }
 

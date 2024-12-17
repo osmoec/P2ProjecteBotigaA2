@@ -1,15 +1,24 @@
 <main>
   <article>
-
-    <button (click)="sinFiltrar()">todo</button>
-    <button (click)="filtrarPorTag('car')">car</button>
-    <button (click)="filtrarPorTag('motorcycle')">bike</button>
-    <button (click)="filtrarPorTag('diesel')">diesel</button>
-    <button (click)="filtrarPorTag('gasoline')">gasoline</button>
-    <button (click)="filtrarPorTag('luxury')">luxury</button>
-    <button (click)="filtrarPorTag('semi-luxury')">semi-luxury</button>
-    <textarea [(ngModel)]="textbuscar"></textarea>
-    <button (click)="buscarSimilar(textbuscar)">buscar</button>
+    <input type="text" [(ngModel)]="textbuscar" class="form-control" rows="1" placeholder="Escribe aquí para buscar...">
+    <button (click)="buscarSimilar(textbuscar)" class="btn btn-outline-danger">buscar</button>
+    <br>
+    <br>
+    <div class="dropdown">
+      <button class="btn btn-outline-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        Filtrar por categoría
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <li><a class="dropdown-item" (click)="sinFiltrar()">Todo</a></li>
+        <li><a class="dropdown-item" (click)="filtrarPorTag('car')">Car</a></li>
+        <li><a class="dropdown-item" (click)="filtrarPorTag('motorcycle')">Bike</a></li>
+        <li><a class="dropdown-item" (click)="filtrarPorTag('diesel')">Diesel</a></li>
+        <li><a class="dropdown-item" (click)="filtrarPorTag('gasoline')">Gasoline</a></li>
+        <li><a class="dropdown-item" (click)="filtrarPorTag('luxury')">Luxury</a></li>
+        <li><a class="dropdown-item" (click)="filtrarPorTag('semi-luxury')">Semi-luxury</a></li>
+      </ul>
+    </div>
+    <br>
 
     <div id="contingutCotxes">
     <div class="container">
@@ -27,11 +36,14 @@
               <div class="product-info">
                 <h3>{{ coche.name }}</h3>
                 <small>{{ coche.offertext }}</small>
-                <p>{{ coche.price }}</p>
+                <p>{{ coche.price.toLocaleString('es-ES') }} €</p>
                 <div class="actions">
-                  <button type="button" class="btn btn-warning">Afegir a la cistella</button>
+                  <button type="button" class="btn btn-warning" (click)=" addToCart(coche, +quantity.value)">Afegir a la cistella</button>
+                  <br>
                   <label for="quantity{{ coche.id }}" class="quantity-label">Cantidad:</label>
-                  <input type="number" class="quantity-input" min="1" value="1" id="quantity{{ coche.id }}">
+                  <br>
+                  <input type="number" class="quantity-input btn btn-outline-danger" min="1" value="1" id="quantity{{ coche.id }}" #quantity>
+
                 </div>
               </div>
             </div>
