@@ -6,7 +6,7 @@ import { Usuario } from '../Clases/Usuario.model';
 })
 export class ServeiUsuarisService {
   private usuaris: Usuario[] = [];
-
+  usuari_logat = ''
   constructor() {
     const usuarisGuardats = localStorage.getItem('usuaris');
     if (usuarisGuardats) {
@@ -17,8 +17,14 @@ export class ServeiUsuarisService {
     this.usuaris.push(usuari);
     localStorage.setItem('usuaris', JSON.stringify(this.usuaris));
   }
-
-
+  getUsuariLogat(): Usuario | null {
+    const usuari = this.usuaris.find(u => u.usuario === this.usuari_logat);
+    return usuari || null;
+  }
+  setUsuariLogat(usuari: string): void {
+    this.usuari_logat = usuari;
+    localStorage.setItem('usuari_logat', usuari);
+  }
   getUsuarios(): Usuario[] {
     return this.usuaris;
   }
