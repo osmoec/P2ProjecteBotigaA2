@@ -14,23 +14,46 @@ import { ServeiUsuarisService } from '../../Servicios/servei-usuaris.service';
 })
 export class LoginComponent implements OnInit {
   usuaris: Usuario[] = [];
+
+  //Datos de usuario
   usuari = '';
+
+  usuari_logat = '';
   correu = '';
   contrasenya = '';
+  adreca = '';
+  dni = ''
+  nom = ''
+  cognom = ''
+
+
+
   logat = false;
   usuari_notrobat = '';
-  usuari_logat = '';
 
   constructor(private serveiUsuaris: ServeiUsuarisService) {}
 
   ngOnInit() {
     this.logat = localStorage.getItem('logat') === 'true';
     this.usuari_logat = localStorage.getItem('usuari') || '';
-    const usuari = this.serveiUsuaris.getUsuariLogat();
-    if (usuari) {
-      this.usuari_logat = usuari.usuario;
+    if (this.logat) {
+      this.datosUsuario()
     }
     this.usuaris = this.serveiUsuaris.getUsuarios();
+  }
+
+  datosUsuario(){
+    var usuarioRegistrado = this.serveiUsuaris.getUsuariLogat(localStorage.getItem('usuari')!)
+    if (usuarioRegistrado){
+      const usuari = usuarioRegistrado
+      this.usuari_logat = usuari.usuario;
+      this.adreca = usuari.direccion
+      this.dni = usuari.DNI
+      this.correu = usuari.correo
+      this.nom = usuari.nombre
+      this.cognom = usuari.apellido
+    }
+
   }
 
   login(event: Event) {

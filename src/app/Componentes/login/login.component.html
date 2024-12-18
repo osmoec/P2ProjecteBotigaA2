@@ -24,5 +24,19 @@
   </div>
 
   <p class="fs-2 mt-3"><strong>No tens compte? Crea aqui la teva compte per comneçar a comprar </strong><a routerLink="/signin" class="btn btn-primary" type="button"><img class="iconosAzul" src="multimedia/iconacrear.png"></a></p>
-
 </article>
+
+<article *ngIf="logat">
+  <div>
+    <h1 class="article-titol">Benvingut/da, {{ this.usuari_logat }}!</h1>
+    <ul class="list-group">
+      <li class="list-group-item"><strong>Nom:</strong> {{ this.nom }}</li>
+      <li class="list-group-item"><strong>Cognom:</strong> {{ this.cognom }}</li>
+      <li class="list-group-item"><strong>Correu:</strong> {{ this.correu }}</li>
+      <li class="list-group-item"><strong>Adreça:</strong> {{ this.adreca }}</li>
+      <li class="list-group-item"><strong>DNI:</strong> {{ this.dni }}</li>
+
+    </ul>
+  </div>
+</article>
+
