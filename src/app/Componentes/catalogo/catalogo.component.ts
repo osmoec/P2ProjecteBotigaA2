@@ -6,6 +6,8 @@ import { Carousel } from 'primeng/carousel';
 import { PrimeTemplate } from 'primeng/api';
 import { FormsModule } from '@angular/forms';
 import { Coche } from '../../Clases/Coche.model';
+import {ServeiUsuarisService} from '../../Servicios/servei-usuaris.service';
+import {CestaService} from '../../Servicios/cesta.service';
 
 @Component({
   selector: 'app-catalogo',
@@ -23,7 +25,7 @@ export class CatalogoComponent {
   cochesT: Coche[] = [];
   cochesA: Coche[] = [];
 
-  constructor(private http: HttpClient) {
+  constructor(private serveiCataleg: CestaService,private http: HttpClient) {
     this.leerCochesDesdeArchivo();
   }
 
@@ -49,7 +51,14 @@ export class CatalogoComponent {
       this.cesta.push({ coche, quantity });
     }
     alert("Articulo añadido con exito")
+
+    this.serveiCataleg.cestaActual.push(this.cesta)
+
+    console.log(this.cesta)
+
   }
+
+
 
   filtrarPorTag(tagD: string): void {
     if (this.coches && this.coches.length > 0) {
