@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http'; // Importa HttpClientModule
 import { HttpClient } from '@angular/common/http';
-import { NgbCarousel, NgbSlide } from '@ng-bootstrap/ng-bootstrap';
 import { filter, first } from 'rxjs';
 import { Carousel } from 'primeng/carousel';
 import { PrimeTemplate } from 'primeng/api';
@@ -11,14 +10,7 @@ import { Coche } from '../../Clases/Coche.model';
 @Component({
   selector: 'app-catalogo',
   standalone: true,
-  imports: [
-    NgbCarousel,
-    NgbSlide,
-    Carousel,
-    PrimeTemplate,
-    FormsModule,
-    HttpClientModule
-  ],
+  imports: [Carousel, PrimeTemplate, FormsModule, HttpClientModule],
   templateUrl: './catalogo.component.html',
   styleUrls: ['./catalogo.component.css']
 })
