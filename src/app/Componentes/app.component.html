@@ -13,19 +13,36 @@
 <!-- Este es el nav-->
 <nav class="mt-2 navbar navbar-expand-lg justify-content-center">
   <div class="container-fluid menuresponsive">
-    <div class="d-flex  menuP">
-      <div class="me-2 buttonmen"><a type="button" class="btn btn-outline-danger" routerLink="/home">Home</a></div>
-      <div class="me-2 buttonmen"><a type="button" class="btn btn-outline-danger" routerLink="/catalogo">Catalec</a></div>
-      <div class="me-2 buttonmen"><a type="button" class="btn btn-outline-danger" routerLink="/sobrenosotros">Sobre nosaltres</a></div>
-      <div class="me-2 buttonmen"><a type="button" class="btn btn-outline-danger" routerLink="/contacto">Contacte</a></div>
-      <div class="me-2 buttonmen"><a type="button" class="btn btn-outline-danger" routerLink="/condiciones">Condicions</a></div>
+    <div class="d-flex menuP">
+      <div class="me-2 buttonmen">
+        <a type="button" class="btn btn-outline-danger" routerLink="/home">Home</a>
+      </div>
+      <div class="me-2 buttonmen">
+        <a type="button" class="btn btn-outline-danger" routerLink="/catalogo">Catalec</a>
+      </div>
+      <div class="me-2 buttonmen">
+        <a type="button" class="btn btn-outline-danger" routerLink="/sobrenosotros">Sobre nosaltres</a>
+      </div>
+      <div class="me-2 buttonmen">
+        <a type="button" class="btn btn-outline-danger" routerLink="/contacto">Contacte</a>
+      </div>
+      <div class="me-2 buttonmen">
+        <a type="button" class="btn btn-outline-danger" routerLink="/condiciones">Condicions</a>
+      </div>
     </div>
-    <div class="d-flex flex-row justify-content-md-end justify-content-between">
-      <a routerLink="/login" class="btn btn-primary me-2" type="button"><img class="iconosAzul" src="multimedia/compte.png"></a>
-      <a routerLink="/cesta" class="btn btn-primary" type="button"><img class="iconosAzul" src="multimedia/compra.png"></a>
+    <div class="d-flex flex-row justify-content-md-end justify-content-between align-items-center">
+      <a routerLink="/login" class="btn btn-primary me-2" type="button">
+        <img class="iconosAzul" src="multimedia/compte.png">
+      </a>
+      <a routerLink="/cesta" class="btn btn-primary me-2" type="button">
+        <img class="iconosAzul" src="multimedia/compra.png">
+      </a>
+      <div *ngIf="logat" class="d-flex align-items-center">
+        <span class="me-2 fs-5 user-name">{{ usuariLogat }}</span>
+        <button class="btn btn-outline-danger btn-logout" (click)="logout()">Logout</button>
+      </div>
     </div>
   </div>
-
 </nav>
 
 <router-outlet/>

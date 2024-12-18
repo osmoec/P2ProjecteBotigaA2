@@ -1,0 +1,26 @@
+
+.user-name {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #0d6efd;
+  margin-right: 10px;
+  font-family: 'Arial', sans-serif;
+}
+
+
+.btn-logout {
+  background-color: #f8d7da;
+  border: none;
+  color: #721c24;
+  font-size: 1rem;
+  padding: 8px 16px;
+  border-radius: 5px;
+}
+
+.btn-logout:hover {
+  background-color: #721c24;
+  color: #f8d7da;
+}
+
+
+
