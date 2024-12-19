@@ -7,7 +7,8 @@ import { PrimeTemplate } from 'primeng/api';
 import { FormsModule } from '@angular/forms';
 import { Coche } from '../../Clases/Coche.model';
 import {ServeiUsuarisService} from '../../Servicios/servei-usuaris.service';
-import {CestaService} from '../../Servicios/cesta.service';
+import {routes} from '../app.routes';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-catalogo',
@@ -18,14 +19,13 @@ import {CestaService} from '../../Servicios/cesta.service';
 })
 export class CatalogoComponent {
 
-  cesta: { coche: Coche, quantity: number }[] = [];
 
   textbuscar: string = "";
   coches: Coche[] = [];
   cochesT: Coche[] = [];
   cochesA: Coche[] = [];
 
-  constructor(private serveiCataleg: CestaService,private http: HttpClient) {
+  constructor(private router: Router, private serveiUsuari: ServeiUsuarisService,private http: HttpClient) {
     this.leerCochesDesdeArchivo();
   }
 
@@ -43,18 +43,23 @@ export class CatalogoComponent {
   }
 
   addToCart(coche: Coche, quantity: number): void {
+    //No permitas añadir a la cesta si no has iniciado sesion
+
+    if(!this.serveiUsuari.usuari_logat_bool){
+      alert("Antes de continuar, inicia sesion")
+      this.router.navigate(['/login']);
+      return
+    }
+
+
     // Añadir coche a la cesta si no existe, o actualizar cantidad si ya está en la cesta
-    const existingItem = this.cesta.find(item => item.coche.id === coche.id);
+    const existingItem = this.serveiUsuari.usuari_logat?.cesta.find(item => item.coche.id === coche.id);
     if (existingItem) {
       existingItem.quantity += quantity;
     } else {
-      this.cesta.push({ coche, quantity });
+      this.serveiUsuari.usuari_logat?.cesta.push({ coche, quantity });
     }
     alert("Articulo añadido con exito")
-
-    this.serveiCataleg.cestaActual.push(this.cesta)
-
-    console.log(this.cesta)
 
   }
 

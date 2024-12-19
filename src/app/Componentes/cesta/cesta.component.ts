@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {CestaService} from '../../Servicios/cesta.service';
+import {ServeiUsuarisService} from '../../Servicios/servei-usuaris.service';
 
 @Component({
   selector: 'app-cesta',
@@ -14,11 +14,16 @@ export class CestaComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  constructor(private serveiCataleg: CestaService) {
-    this.cestaActual = this.serveiCataleg.cestaActual
+  constructor(protected serveiUsuari: ServeiUsuarisService) {
+    this.cestaActual = this.serveiUsuari.usuari_logat?.cesta
+    console.log(this.serveiUsuari.usuari_logat?.cesta)
   }
 
-  eliminarcesta(){
+  guardarCesta() {
+    this.serveiUsuari.usuari_logat?.cesta
+  }
+
+  eliminarcesta(id : number){
 
   }
 

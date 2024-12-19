@@ -18,7 +18,7 @@ export class Usuario {
   fechaTarjeta : string | undefined;
   CVVTarjeta : string | undefined;
 
-  cesta : Coche[] = [];
+    cesta: { coche: Coche, quantity: number }[] = [];
 
   constructor(nombre : string, apellido : string, correo : string, usuario : string, DNI : string, cumpleaños : Date, telefono : string, contraseña : string, direccion : string) {
     this.nombre = nombre
