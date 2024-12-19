@@ -18,7 +18,7 @@
         <a type="button" class="btn btn-outline-danger" routerLink="/home">Home</a>
       </div>
       <div class="me-2 buttonmen">
-        <a type="button" class="btn btn-outline-danger" routerLink="/catalogo">Catalec</a>
+        <a type="button" class="btn btn-outline-danger" routerLink="/catalogo">Catàleg</a>
       </div>
       <div class="me-2 buttonmen">
         <a type="button" class="btn btn-outline-danger" routerLink="/sobrenosotros">Sobre nosaltres</a>
@@ -37,9 +37,9 @@
       <a routerLink="/cesta" class="btn btn-primary me-2" type="button">
         <img class="iconosAzul" src="multimedia/compra.png">
       </a>
-      <div *ngIf="logat" class="d-flex align-items-center">
-        <span class="me-2 fs-5 user-name">{{ usuariLogat }}</span>
-        <button class="btn btn-outline-danger btn-logout" data-bs-toggle="modal" data-bs-target="#logoutModal">
+      <div class="d-flex align-items-center" *ngIf="serveiUsuaris.usuari_logat_bool">
+        <p class="user-name mb-0">{{ serveiUsuaris.usuari_logat?.usuario }}!</p>
+        <button class="btn btn-outline-danger btn-logout ms-2" data-bs-toggle="modal" data-bs-target="#logoutModal">
           Logout
         </button>
       </div>
@@ -47,7 +47,7 @@
   </div>
 </nav>
 
-<!--Bootstrap per a confirmar el logout-->
+<!-- Bootstrap per a confirmar el logout -->
 <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -56,11 +56,11 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Estas segur que vols tancar sessio?
+        Estàs segur que vols tancar sessió?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel·lar</button>
-        <button type="button" class="btn btn-danger" (click)="logout()" data-bs-dismiss="modal">Logout</button>
+        <button class="btn btn-danger" (click)="logout()">Logout</button>
       </div>
     </div>
   </div>
