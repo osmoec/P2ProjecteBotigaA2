@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, viewChild} from '@angular/core';
 import { Usuario } from '../../Clases/Usuario.model';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
@@ -14,12 +14,12 @@ import {routes} from '../app.routes';
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
-  usuaris: Usuario[] = [];
+  usuaris: Usuario[];
 
   //Datos de usuario
   usuari = '';
 
-  usuari_logat = '';
+  usuari_logat : Usuario | null = null;
   correu = '';
   contrasenya = '';
   adreca = '';
@@ -32,11 +32,15 @@ export class LoginComponent implements OnInit {
   logat = false;
   usuari_notrobat = '';
 
-  constructor(private router: Router, private serveiUsuaris: ServeiUsuarisService) {}
+  constructor(private router: Router, private serveiUsuaris: ServeiUsuarisService) {
+    this.usuaris = this.serveiUsuaris.usuaris
+  }
 
   ngOnInit() {
-    this.logat = localStorage.getItem('logat') === 'true';
-    this.usuari_logat = localStorage.getItem('usuari') || '';
+    if (this.serveiUsuaris.usuari_logat) {
+      this.logat = true
+    }
+    this.usuari_logat = this.serveiUsuaris.usuari_logat;
     if (this.logat) {
       this.datosUsuario()
     }
@@ -45,11 +49,8 @@ export class LoginComponent implements OnInit {
 
   datosUsuario(){
     var usuarioRegistrado = this.serveiUsuaris.getUsuariLogat(localStorage.getItem('usuari')!)
-    console.log(usuarioRegistrado)
-    console.log(localStorage.getItem('usuari'))
-    console.log(this.serveiUsuaris.usuaris)
     if (usuarioRegistrado){
-      this.usuari_logat = usuarioRegistrado.usuario;
+      this.usuari = usuarioRegistrado.usuario;
       this.adreca = usuarioRegistrado.direccion
       this.dni = usuarioRegistrado.DNI
       this.correu = usuarioRegistrado.correo
@@ -61,20 +62,22 @@ export class LoginComponent implements OnInit {
 
   login(event: Event) {
     event.preventDefault();
+    console.log(this.usuaris)
     for (let i = 0; i < this.usuaris.length; i++) {
+      console.log(this.usuaris[i].usuario + "   " + this.usuaris[i].contrasena)
+      console.log(this.usuari + "   " + this.contrasenya)
       if (
         (this.usuaris[i].correo === this.correu && this.usuaris[i].contrasena === this.contrasenya) ||
         (this.usuaris[i].usuario === this.usuari && this.usuaris[i].contrasena === this.contrasenya)
       ) {
-        this.logat = true;
-        this.serveiUsuaris.setUsuariLogat(this.usuaris[i].usuario);
+        this.serveiUsuaris.usuari_logat = this.usuaris[i]
+        this.logat = true
       }
     }
     if (this.logat) {
-      localStorage.setItem('logat', 'true');
       localStorage.setItem('usuari', this.usuari);
-      console.log('Estas logat');
       this.datosUsuario()
+      this.serveiUsuaris.actualizarEstadoSesion()
       this.router.navigate(['/login']);
     } else {
       this.usuari_notrobat = "L'usuari o la contrasenya no es correcta";

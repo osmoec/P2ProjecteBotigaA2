@@ -6,16 +6,23 @@ import { Usuario } from '../Clases/Usuario.model';
 })
 export class ServeiUsuarisService {
   public usuaris: Usuario[] = [];
-  usuari_logat = '';
+  public usuari_logat : Usuario | null = null;
+
+  public usuari_logat_bool : boolean = false
 
   constructor() {
     console.log("Se reseteo el servicio de usuario")
     this.cargarDatos()
-    console.log("Datos de usuario:")
-    console.log(this.usuaris)
-
   }
 
+  actualizarEstadoSesion () {
+    if (this.usuari_logat) {
+      this.usuari_logat_bool = true
+    }
+    else {
+      this.usuari_logat_bool = false
+    }
+  }
   addUsuario(usuari: Usuario): void {
     this.usuaris.push(usuari);
   }
@@ -23,10 +30,6 @@ export class ServeiUsuarisService {
   getUsuariLogat(usuari_logat : string): Usuario | null {
     const usuari = this.usuaris.find(u => u.usuario === usuari_logat);
     return usuari || null;
-  }
-
-  setUsuariLogat(usuari: string): void {
-    this.usuari_logat = usuari;
   }
 
   getUsuarios(): Usuario[] {
@@ -54,8 +57,6 @@ export class ServeiUsuarisService {
           data.direccion
         )
       );
-      console.log(this.usuaris)
-
     }
   }
 }

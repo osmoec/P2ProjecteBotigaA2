@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgIf } from '@angular/common';
+import {Usuario} from '../../Clases/Usuario.model';
+import {ServeiUsuarisService} from '../../Servicios/servei-usuaris.service';
 
 @Component({
   selector: 'app-header',
@@ -10,19 +12,24 @@ import { NgIf } from '@angular/common';
 })
 export class HeaderComponent implements OnInit {
   logat = false;
-  usuariLogat = '';
+  usuariLogat : Usuario | null;
 
+  constructor(protected serveiUsuaris: ServeiUsuarisService) {
+    this.usuariLogat = this.serveiUsuaris.usuari_logat
+  }
   ngOnInit() {
-    this.logat = localStorage.getItem('logat') === 'true';
-    this.usuariLogat = localStorage.getItem('usuari') || '';
+    console.log(this.serveiUsuaris.usuari_logat)
+    if (this.serveiUsuaris.usuari_logat) {
+      this.logat = true
+    }
+    console.log("usuario logeado? " + this.logat)
+
   }
 
   logout() {
-    localStorage.removeItem('logat');
-    localStorage.removeItem('usuari');
-    this.logat = false;
-    this.usuariLogat = '';
+    this.serveiUsuaris.usuari_logat = null
     window.location.reload();
   }
+
 }
 
