@@ -61,7 +61,6 @@ article input[type="number"]{
 .cistellaflex{
   display: flex;
   flex-direction: row;
-  margin-bottom: 5%;
   justify-content: space-between;
   gap: 5%;
 }

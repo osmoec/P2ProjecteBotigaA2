@@ -5,12 +5,12 @@
 
   <div><h1 id="titolcistella">Cistella</h1></div>
 
-  @for (cocheA of cestaActual; track cestaActual.quantity){
+  @for (cocheA of serveiUsuari.usuari_logat?.cesta; track serveiUsuari.usuari_logat?.cesta){
     <div class="cistellaflex">
       <div id="div-productes">
         <div class="d-flex flex-row mb-3 justify-content-between align-items-center producte">
           <div class="me-3">
-            <img [src]="cocheA.coche.img[0]" alt="Imagen de {{ cocheA.coche.name }}" />
+            <img [src]="cocheA.coche.imgC[0]" alt="Imagen de {{ cocheA.coche.name }}" />
           </div>
           <div class="me-3">
             <p>{{ cocheA.coche.name }} {{ cocheA.coche.price }}€</p>
@@ -22,7 +22,7 @@
           <div class="me-3">
             <button type="button" class="btn-close" aria-label="Close"></button>
           </div>
-          //(click)="eliminardeCesta(coche.id)"
+          <!--//(click)="eliminardeCesta(coche.id)"-->
         </div>
       </div>
     </div>
