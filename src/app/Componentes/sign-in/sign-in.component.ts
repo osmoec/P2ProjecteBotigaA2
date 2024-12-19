@@ -62,6 +62,7 @@ export class SignInComponent {
       this.serveiUsuaris.addUsuario(nouUsuari);
 
       alert('Registre completat amb èxit!');
+      this.serveiUsuaris.guardarDatos()
       this.router.navigate(['/login']);
     }
   }

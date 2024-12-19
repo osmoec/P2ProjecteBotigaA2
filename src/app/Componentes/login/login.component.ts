@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../Clases/Usuario.model';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { ServeiUsuarisService } from '../../Servicios/servei-usuaris.service';
+import {routes} from '../app.routes';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,7 @@ export class LoginComponent implements OnInit {
   logat = false;
   usuari_notrobat = '';
 
-  constructor(private serveiUsuaris: ServeiUsuarisService) {}
+  constructor(private router: Router, private serveiUsuaris: ServeiUsuarisService) {}
 
   ngOnInit() {
     this.logat = localStorage.getItem('logat') === 'true';
@@ -44,14 +45,16 @@ export class LoginComponent implements OnInit {
 
   datosUsuario(){
     var usuarioRegistrado = this.serveiUsuaris.getUsuariLogat(localStorage.getItem('usuari')!)
+    console.log(usuarioRegistrado)
+    console.log(localStorage.getItem('usuari'))
+    console.log(this.serveiUsuaris.usuaris)
     if (usuarioRegistrado){
-      const usuari = usuarioRegistrado
-      this.usuari_logat = usuari.usuario;
-      this.adreca = usuari.direccion
-      this.dni = usuari.DNI
-      this.correu = usuari.correo
-      this.nom = usuari.nombre
-      this.cognom = usuari.apellido
+      this.usuari_logat = usuarioRegistrado.usuario;
+      this.adreca = usuarioRegistrado.direccion
+      this.dni = usuarioRegistrado.DNI
+      this.correu = usuarioRegistrado.correo
+      this.nom = usuarioRegistrado.nombre
+      this.cognom = usuarioRegistrado.apellido
     }
 
   }
@@ -71,7 +74,8 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('logat', 'true');
       localStorage.setItem('usuari', this.usuari);
       console.log('Estas logat');
-      window.location.reload();
+      this.datosUsuario()
+      this.router.navigate(['/login']);
     } else {
       this.usuari_notrobat = "L'usuari o la contrasenya no es correcta";
     }
