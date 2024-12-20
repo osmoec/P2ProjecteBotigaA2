@@ -5,9 +5,10 @@
 
   <div><h1 id="titolcistella">Cistella</h1></div>
 
+  <div class="cistellaflex">
+    <div id="div-productes">
   @for (cocheA of serveiUsuari.usuari_logat?.cesta; track serveiUsuari.usuari_logat?.cesta){
-    <div class="cistellaflex">
-      <div id="div-productes">
+        <div id="coche{{cocheA.coche.id}}">
         <div class="d-flex flex-row mb-3 justify-content-between align-items-center producte">
           <div class="me-3">
             <img [src]="cocheA.coche.imgC[0]" alt="Imagen de {{ cocheA.coche.name }}" />
@@ -20,16 +21,16 @@
             <input type="number" [(ngModel)]="cocheA.quantity" [min]="0" [max]="10" />
           </div>
           <div class="me-3">
-            <button type="button" class="btn-close" aria-label="Close"></button>
+            <button type="button" (click)="eliminarcesta(cocheA.coche.id)" class="btn-close" aria-label="Close"></button>
           </div>
-          <!--//(click)="eliminardeCesta(coche.id)"-->
         </div>
-      </div>
-    </div>
-
+        </div>
   }
+    </div>
+  </div>
 
-    <div>
+
+  <div>
       <div>
       <div id="formulari-contenidor">
         <form action="" method="post" class="bg-secondary rounded">

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {ServeiUsuarisService} from '../../Servicios/servei-usuaris.service';
+import {filter} from 'rxjs';
 
 @Component({
   selector: 'app-cesta',
@@ -23,8 +24,13 @@ export class CestaComponent implements OnInit {
     this.serveiUsuari.usuari_logat?.cesta
   }
 
-  eliminarcesta(id : number){
-
+  eliminarcesta(idC: number){
+    // @ts-ignore
+    var temp = this.cestaActual.filter(arr => arr.coche.id !== idC)
+    this.cestaActual = temp
+    var id = "coche"+idC
+    // @ts-ignore
+    document.getElementById(id).innerHTML = ""
   }
 
 }
