@@ -1,95 +1,68 @@
 import { Component } from '@angular/core';
-import {Router, RouterLink} from '@angular/router';
-import {FormsModule} from '@angular/forms';
-import {routes} from '../app.routes';
-import {Usuario} from '../../Clases/Usuario.model';
+import { Router, RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { Usuario } from '../../Clases/Usuario.model';
+import { ServeiUsuarisService } from '../../Servicios/servei-usuaris.service';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-sign-in',
   standalone: true,
-  imports: [
-    RouterLink,
-    FormsModule
-  ],
+  imports: [RouterLink, FormsModule, NgIf],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.css'
 })
 export class SignInComponent {
-  nom : string
-  cognom : string
-  correu : string
-  usuari : string
-  DNI : string
-  aniversari : Date
-  telefon : string
-  contrasena : string
-  confContrasena : string
-  adreca : string
+  nom: string = '';
+  cognom: string = '';
+  correu: string = '';
+  usuari: string = '';
+  DNI: string = '';
+  aniversari: Date = new Date();
+  telefon: string = '';
+  contrasena: string = '';
+  confContrasena: string = '';
+  adreca: string = '';
+  usuari_ja_registrat = '';
 
-  constructor(private router: Router) {
-    this.nom = "";
-    this.cognom = "";
-    this.correu = "";
-    this.usuari = "";
-    this.DNI = "";
-    this.aniversari = new Date();
-    this.telefon = "";
-    this.contrasena = "";
-    this.confContrasena = "";
-    this.adreca = "";
-  }
+  constructor(private router: Router, private serveiUsuaris: ServeiUsuarisService) {}
 
-
-  public validarDatos (){
-    if (!this.nom) {
-      alert('Por favor, Complete su nombre')
-      return false
+  public validarDatos(): boolean {
+    if (!this.nom) {alert('Si us plau, completa el teu nom');return false;}
+    if (!this.cognom) {alert('Si us plau, completa el teu cognom');return false;}
+    if (!this.usuari) {alert('Si us plau, completa el teu nom d\'usuari');return false;}
+    if (!this.DNI) {alert('Si us plau, completa el teu DNI');return false;}
+    if (this.DNI.length !== 9 || isNaN(Number(this.DNI.slice(0, 8))) || this.DNI[8] !== this.DNI[8].toUpperCase()) {
+      alert('El DNI ha de ser 8 números seguits d\'una lletra majúscula');
+      return false;
     }
-    if (!this.cognom) {
-      alert('Por favor, Complete su apellido')
-      return false
-    }
-    if (!this.usuari) {
-      alert('Por favor, Complete su nombre de usuario');
-      return false
-    }
-    if (!this.DNI) {
-      alert('Por favor, Complete su DNI');
-      return false
-    }
-    if (!this.aniversari) {
-      alert('Por favor, Complete su fecha de nacimiento');
-      return false
-    }
+    if (!this.aniversari) {alert('Si us plau, completa la teva data de naixement');return false}
     if (!this.telefon || this.telefon.length != 9) {
-      alert('Por favor, Complete el numero de telefono con formato XXXXXXXXX');
-      return false
+      alert('Si us plau, completa el numero de telefon amb el format XXXXXXXXX');
+      return false;
     }
-    if (!this.contrasena) {
-      alert('Por favor, Complete la contraseña');
-      return false
-    }
-    if (this.contrasena != this.confContrasena) {
-      alert('Las contraseñas no coinciden');
-      return false
-    }
-    if (!this.adreca) {
-      alert('Por favor, Complete con su direccion');
-      return false
-    }
-    return true
+    if (!this.contrasena) {alert('Si us plau, completa la contrasenya');return false;}
+    if (this.contrasena !== this.confContrasena) {alert('Les contrasenyes no coincideixen');return false;}
+    if (!this.adreca) {alert('Si us plau, completa la teva adreça');return false;}
+    return true;
   }
+
   public registro() {
-    if(this.validarDatos()){
-      console.log("Formulario correcto, accediendo")
-      // @ts-ignore
-      try {
-        new Usuario(this.nom, this.cognom, this.correu, this.usuari, this.DNI, this.aniversari, this.telefon, this.contrasena, this.adreca)
-        alert("Registro completado con exito")
+    if (this.validarDatos()) {
+      const nouUsuari = new Usuario(
+        this.nom, this.cognom, this.correu, this.usuari, this.DNI,
+        this.aniversari, this.telefon, this.contrasena, this.adreca
+      );
+      for (let user of this.serveiUsuaris.getUsuarios()) {
+        if (user.usuario === this.usuari || user.correo === this.correu) {
+          this.usuari_ja_registrat = "Aquest usuari ja esta registrat.";
+          return;
+        }
       }
-      catch (e : any) {
-        alert("Error al registrar usuario: " + e)
-      }
+      this.serveiUsuaris.addUsuario(nouUsuari);
+
+      alert('Registre completat amb èxit!');
+      this.serveiUsuaris.guardarDatos()
       this.router.navigate(['/login']);
     }
   }

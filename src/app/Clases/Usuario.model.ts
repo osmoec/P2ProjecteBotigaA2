@@ -1,7 +1,10 @@
+import {Coche} from './Coche.model';
+
 export class Usuario {
-  nombre: string;
-  apellido: string;
-  correo: string;
+
+  nombre : string;
+  apellido : string;
+  correo : string;
   usuario : string;
   DNI : string;
   cumpleaños : Date;
@@ -15,11 +18,7 @@ export class Usuario {
   fechaTarjeta : string | undefined;
   CVVTarjeta : string | undefined;
 
-  //Cesta
-  cochesCesta: any | undefined;
-
-  //Comandas
-  comandas: any[] | undefined
+    cesta: { coche: Coche, quantity: number }[] = [];
 
   constructor(nombre : string, apellido : string, correo : string, usuario : string, DNI : string, cumpleaños : Date, telefono : string, contraseña : string, direccion : string) {
     this.nombre = nombre
