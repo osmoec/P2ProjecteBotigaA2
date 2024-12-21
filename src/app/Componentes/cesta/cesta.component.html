@@ -14,14 +14,14 @@
             <img [src]="cocheA.coche.imgC[0]" alt="Imagen de {{ cocheA.coche.name }}" />
           </div>
           <div class="me-3">
-            <p>{{ cocheA.coche.name }} {{ cocheA.coche.price }}€</p>
+            <p>{{ cocheA.coche.name }} {{ cocheA.coche.price.toLocaleString('es-ES') }}€</p>
           </div>
           <div class="me-3">
             <p>Quantitat</p>
-            <input type="number" [(ngModel)]="cocheA.quantity" [min]="0" [max]="10" />
+            <input type="number" (focusout)="calcularTotals()" [(ngModel)]="cocheA.quantity" [min]="0" [max]="10" />
           </div>
           <div class="me-3">
-            <button type="button" (click)="eliminarcesta(cocheA.coche.id)" class="btn-close" aria-label="Close"></button>
+            <button type="button" (click)="eliminarcesta(cocheA.coche.id);calcularTotals()" class="btn-close" aria-label="Close"></button>
           </div>
         </div>
         </div>
@@ -89,13 +89,13 @@
               <div><p>Taxes: </p></div>
             </div>
             <div>
-              <div><p>000.00€ </p></div>
-              <div><p>000.00€ </p></div>
+              <div><p>{{totalSenseTaxes.toLocaleString('es-ES')}}€ </p></div>
+              <div><p>{{totalAmbTaxes.toLocaleString('es-ES')}}€ </p></div>
             </div>
             <div></div>
           </div>
           <h1>Total:</h1>
-          <h1>00.00€</h1>
+          <h1>{{totalAmbTaxes.toLocaleString('es-ES')}}€</h1>
           <a id="Comprar" href="paginaloadingtramitarpagament.html" type="submit" class="btn btn-primary">Comprar</a>
         </form>
       </div>

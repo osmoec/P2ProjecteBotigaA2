@@ -12,7 +12,13 @@ import {filter} from 'rxjs';
 })
 export class CestaComponent implements OnInit {
   cestaActual: any
+  totalSenseTaxes: number = 0
+  totalAmbTaxes: number = 0
+
+
   ngOnInit(): void {
+
+    this.calcularTotals()
   }
 
   constructor(protected serveiUsuari: ServeiUsuarisService) {
@@ -31,6 +37,21 @@ export class CestaComponent implements OnInit {
     var id = "coche"+idC
     // @ts-ignore
     document.getElementById(id).innerHTML = ""
+
+    this.calcularTotals()
+  }
+
+  calcularTotals(){
+
+    this.totalSenseTaxes = 0
+
+    this.totalAmbTaxes = 0
+
+    for(var preu of this.cestaActual){
+      this.totalSenseTaxes += preu.coche.price * preu.quantity
+    }
+
+    this.totalAmbTaxes = (this.totalSenseTaxes * 0.21) + this.totalSenseTaxes
   }
 
 }
