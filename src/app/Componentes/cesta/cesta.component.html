@@ -5,7 +5,7 @@
 
   <div><h1 id="titolcistella">Cistella</h1></div>
 
-  <div class="cistellaflex">
+  <div class="cistellaflex" id="cistellacont">
     <div id="div-productes">
   @for (cocheA of serveiUsuari.usuari_logat?.cesta; track serveiUsuari.usuari_logat?.cesta){
         <div id="coche{{cocheA.coche.id}}">
@@ -41,40 +41,40 @@
             <label class="form-label">Metode</label>
             <div class="mb-3">
               <label class="btn btn-primary me-2">
-                <input type="radio"  name="metodepagamanet" hidden><img class="iconoMetodePagament" src="multimedia/metodespagament/mastercard.png">
+                <input [ngModel]="metode" value="mastercard" type="radio"  name="metodepagamanet" hidden><img class="iconoMetodePagament" src="multimedia/metodespagament/mastercard.png">
               </label>
               <label class="btn btn-primary me-2">
-                <input type="radio"  name="metodepagamanet" hidden><img class="iconoMetodePagament" src="multimedia/metodespagament/visa.png">
+                <input [ngModel]="metode" value="visa" type="radio"  name="metodepagamanet" hidden><img class="iconoMetodePagament" src="multimedia/metodespagament/visa.png">
               </label>
               <label class="btn btn-primary me-2">
-                <input type="radio"  name="metodepagamanet" hidden><img class="iconoMetodePagament" src="multimedia/metodespagament/paypal.png">
+                <input [ngModel]="metode" value="paypal" type="radio"  name="metodepagamanet" hidden><img class="iconoMetodePagament" src="multimedia/metodespagament/paypal.png">
               </label>
               <label class="btn btn-primary me-2">
-                <input type="radio"  name="metodepagamanet" hidden><img class="iconoMetodePagament" src="multimedia/metodespagament/targeta.png">
+                <input [ngModel]="metode" value="targeta" type="radio"  name="metodepagamanet" hidden><img class="iconoMetodePagament" src="multimedia/metodespagament/targeta.png">
               </label>
             </div>
             <div class="d-flex flex-row mb-3 justify-content-between align-items-center gap-3">
               <div class="d-flex flex-column justify-content-center gap-1">
                 <div>
                   <label class="form-label ">Titular</label>
-                  <input name="nom-titular" type="text" placeholder="Bobby cotxes" class="form-control" required>
+                  <input [ngModel]="titular" name="nom-titular" type="text" placeholder="Bobby cotxes" class="form-control" required>
                 </div>
               </div>
               <div>
                 <div>
                   <label class="form-label ">Numero targeta/compte</label>
-                  <input name="numero-targeta" type="text" placeholder="1234 5678 9101 1120" class="form-control" required>
+                  <input [ngModel]="numCompte" name="numero-targeta" type="text" placeholder="1234 5678 9101 1120" class="form-control" required>
                 </div>
               </div>
             </div>
             <div class="d-flex flex-row mb-3 justify-content-between gap-3">
               <div>
                 <label class="form-label ">data d'expiració</label>
-                <input name="data-expiracio" type="month" placeholder="12/99" class="form-control" required>
+                <input [ngModel]="dataExpiracio" name="data-expiracio" type="month" placeholder="12/99" class="form-control" required>
               </div>
               <div class="me-3">
                 <label class="form-label ">CVV</label>
-                <input name="cvv" type="number" placeholder="999" min="0" max="999" class="form-control" required>
+                <input [ngModel]="cvv" name="cvv" type="number" placeholder="999" min="0" max="999" class="form-control" required>
               </div>
             </div>
           </div>
@@ -96,7 +96,7 @@
           </div>
           <h1>Total:</h1>
           <h1>{{totalAmbTaxes.toLocaleString('es-ES')}}€</h1>
-          <a id="Comprar" href="paginaloadingtramitarpagament.html" type="submit" class="btn btn-primary">Comprar</a>
+          <a (click)="guardarComanda()"  id="Comprar" href="paginaloadingtramitarpagament.html" type="submit" class="btn btn-primary">Comprar</a>
         </form>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import {Coche} from './Coche.model';
+import {Comanda} from './comanda.model';
 
 export class Usuario {
 
@@ -20,6 +21,8 @@ export class Usuario {
 
     cesta: { coche: Coche, quantity: number }[] = [];
 
+    comandas: any[] | undefined
+
   constructor(nombre : string, apellido : string, correo : string, usuario : string, DNI : string, cumpleaños : Date, telefono : string, contraseña : string, direccion : string) {
     this.nombre = nombre
     this.apellido = apellido
@@ -38,4 +41,5 @@ export class Usuario {
     this. fechaTarjeta = fecha
     this.CVVTarjeta = CVV
   }
+
 }
