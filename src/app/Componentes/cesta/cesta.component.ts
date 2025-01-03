@@ -62,38 +62,53 @@ export class CestaComponent implements OnInit {
   }
 
   crearComanda(totalComandaC: number, cochesComandaC: any[]) {
+    let numeroComanda = Math.floor(Math.random() * 999999) + 1;
 
-    let numeroComanda = Math.floor(Math.random() * 999999) + 1
+    if (!this.serveiUsuari.usuari_logat) {
+      throw new Error('No hay usuario logado.');
+    }
+
+    console.log("Usuario logado:", this.serveiUsuari.usuari_logat);
 
     // @ts-ignore
-    let comandaNova = new Comanda(numeroComanda, this.serveiUsuari.usuari_logat?.usuario, cochesComandaC, totalComandaC)
-
+    let comandaNova = new Comanda(numeroComanda, this.serveiUsuari.usuari_logat.usuario, cochesComandaC, totalComandaC);
     let diferent = false;
 
-    while (!diferent) {
-      // @ts-ignore
-      if (this.serveiUsuari.usuari_logat.usuaris.some(comandaNova => comandaNova.numComanda === usuario.comandas.numClient)) {
-        comandaNova.numComanda = Math.floor(Math.random() * 999999) + 1
-      } else {
-        diferent = true
+    if (this.serveiUsuari.usuari_logat.comandas) {
+      while (!diferent) {
+        if (this.serveiUsuari.usuaris.some(u => u.comandas?.some(c => c.numComanda === numeroComanda))) {
+          console.log("Número de comanda duplicado:", numeroComanda);
+          numeroComanda = Math.floor(Math.random() * 999999) + 1;
+          comandaNova.numComanda = numeroComanda;
+        } else {
+          diferent = true;
+        }
       }
     }
 
-    return comandaNova
-
+    console.log("Comanda creada:", comandaNova);
+    return comandaNova;
   }
 
-  guardarComanda() {
-    let temp = this.crearComanda(this.totalAmbTaxes, this.cestaActual)
 
-    this.serveiUsuari.usuari_logat?.comandas?.push(temp)
 
-    this.cestaActual = undefined
+  guardarComanda(comanda: Comanda) {
+
+    if (this.serveiUsuari.usuari_logat) {
+      console.log("Usuario logado antes de agregar comanda:", this.serveiUsuari.usuari_logat);
+      this.serveiUsuari.agregarComanda(comanda.numComanda!, this.serveiUsuari.usuari_logat.usuario, comanda.cochesComanda!, comanda.totalComanda!);
+      console.log("Comanda agregada al usuario logado:", this.serveiUsuari.usuari_logat);
+    }
+
+    this.cestaActual = undefined;
 
     // @ts-ignore
-    document.getElementById("cistellacont").innerHTML = ""
+    document.getElementById('cistellacont').innerHTML = '';
 
-    console.log(temp)
-
+    console.log("comanda guardada:", comanda);
+  }
+  guardarYCrearComanda() {
+    let comanda = this.crearComanda(this.totalAmbTaxes, this.cestaActual);
+    this.guardarComanda(comanda);
   }
 }

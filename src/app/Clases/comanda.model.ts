@@ -1,18 +1,17 @@
 import {Usuario} from './Usuario.model';
-
 export class Comanda {
-  numComanda: number | undefined
-  dataCreacio: number
-  usuariClient: string | undefined
-  cochesComanda: any[] | undefined
-  totalComanda: number | undefined
+  numComanda: number;
+  dataCreacio: number;
+  usuariClient: string;
+  cochesComanda: any[];
+  totalComanda: number;
 
-  constructor(numComanda: number, usuariC: string,cochesComanda: any[],totalComanda: number) {
-    this.numComanda = undefined
-    this.usuariClient = usuariC
-    this.dataCreacio = Date.now()
-    this.cochesComanda = undefined
-    this.totalComanda = undefined
+  constructor(numComanda: number, usuariC: string, cochesComanda: any[], totalComanda: number) {
+    this.numComanda = numComanda;
+    this.usuariClient = usuariC;
+    this.dataCreacio = Date.now();
+    this.cochesComanda = cochesComanda;
+    this.totalComanda = totalComanda;
   }
 
 }

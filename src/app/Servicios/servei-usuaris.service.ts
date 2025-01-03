@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from '../Clases/Usuario.model';
+import { Comanda } from '../Clases/comanda.model';
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +44,7 @@ export class ServeiUsuarisService {
   cargarDatos() {
     const usuarisGuardats = localStorage.getItem('usuaris');
     if (usuarisGuardats) {
-      const datos = JSON.parse(usuarisGuardats); // Parsear JSON desde localStorage
+      const datos = JSON.parse(usuarisGuardats);
       this.usuaris = datos.map((data: any) =>
         new Usuario(
           data.nombre,
@@ -51,12 +52,27 @@ export class ServeiUsuarisService {
           data.correo,
           data.usuario,
           data.DNI,
-          new Date(data.cumpleaños), // Convertir cumpleaños a Date
+          new Date(data.cumpleaños),
           data.telefono,
           data.contrasena,
           data.direccion
         )
       );
+    }
+
+    this.usuaris.forEach(usuario => {
+      if (!usuario.comandas) {
+        usuario.comandas = [];
+      }
+    });
+  }
+
+  agregarComanda(numComanda: number, usuariC: string, cochesComanda: any[], totalComanda: number) {
+    const usuario = this.usuaris.find(u => u.usuario === usuariC);
+    if (usuario) {
+      const nuevaComanda = new Comanda(numComanda, usuariC, cochesComanda, totalComanda);
+      usuario.comandas?.push(nuevaComanda);
+      this.guardarDatos();
     }
   }
 }

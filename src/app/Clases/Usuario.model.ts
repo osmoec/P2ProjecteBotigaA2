@@ -1,45 +1,44 @@
-import {Coche} from './Coche.model';
-import {Comanda} from './comanda.model';
+import { Coche } from './Coche.model';
+import { Comanda } from './comanda.model';
 
 export class Usuario {
+  nombre: string;
+  apellido: string;
+  correo: string;
+  usuario: string;
+  DNI: string;
+  cumpleaños: Date;
+  telefono: string;
+  contrasena: string;
+  direccion: string;
+  titularTarjeta?: string;
+  numeroTarjeta?: string;
+  fechaTarjeta?: string;
+  CVVTarjeta?: string;
 
-  nombre : string;
-  apellido : string;
-  correo : string;
-  usuario : string;
-  DNI : string;
-  cumpleaños : Date;
-  telefono : string;
-  contrasena : string;
-  direccion : string;
+  cesta: { coche: Coche, quantity: number }[] = [];
+  comandas: Comanda[] = [];
 
-  //Datos de la tarjeta
-  titularTarjeta : string | undefined;
-  numeroTarjeta : string | undefined;
-  fechaTarjeta : string | undefined;
-  CVVTarjeta : string | undefined;
-
-    cesta: { coche: Coche, quantity: number }[] = [];
-
-    comandas: any[] | undefined
-
-  constructor(nombre : string, apellido : string, correo : string, usuario : string, DNI : string, cumpleaños : Date, telefono : string, contraseña : string, direccion : string) {
-    this.nombre = nombre
-    this.apellido = apellido
-    this.correo = correo
-    this.usuario = usuario
-    this.DNI = DNI
-    this.cumpleaños = cumpleaños
-    this.telefono = telefono
-    this.contrasena = contraseña
-    this.direccion = direccion
+  constructor(
+    nombre: string, apellido: string, correo: string, usuario: string, DNI: string,
+    cumpleaños: Date, telefono: string, contrasena: string, direccion: string
+  ) {
+    this.nombre = nombre;
+    this.apellido = apellido;
+    this.correo = correo;
+    this.usuario = usuario;
+    this.DNI = DNI;
+    this.cumpleaños = cumpleaños;
+    this.telefono = telefono;
+    this.contrasena = contrasena;
+    this.direccion = direccion;
   }
 
-  public guardarDatosTarjeta(titular: string, numero : string, fecha : string, CVV : string) {
-    this.titularTarjeta = titular
-    this.numeroTarjeta = numero
-    this. fechaTarjeta = fecha
-    this.CVVTarjeta = CVV
+  public guardarDatosTarjeta(titular: string, numero: string, fecha: string, CVV: string) {
+    this.titularTarjeta = titular;
+    this.numeroTarjeta = numero;
+    this.fechaTarjeta = fecha;
+    this.CVVTarjeta = CVV;
   }
-
 }
+
