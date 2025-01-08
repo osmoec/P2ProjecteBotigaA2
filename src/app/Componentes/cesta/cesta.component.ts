@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {ServeiUsuarisService} from '../../Servicios/servei-usuaris.service';
 import {Comanda} from '../../Clases/comanda.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-cesta',
@@ -25,7 +26,7 @@ export class CestaComponent implements OnInit {
     this.calcularTotals()
   }
 
-  constructor(protected serveiUsuari: ServeiUsuarisService) {
+  constructor(protected serveiUsuari: ServeiUsuarisService, private router: Router) {
     console.log(this.serveiUsuari.usuari_logat?.cesta)
   }
 
@@ -39,13 +40,9 @@ export class CestaComponent implements OnInit {
     var temp = this.serveiUsuari.usuari_logat!.cesta.filter(arr => arr.coche.id !== idC)
     this.serveiUsuari.usuari_logat!.cesta = temp
 
-
-    var id = "coche" + idC
-    // @ts-ignore
-    document.getElementById(id).innerHTML = ""
-
     this.calcularTotals()
     this.serveiUsuari.guardarDatos()
+    this.router.navigate(['/cesta']);
   }
 
   calcularTotals() {
