@@ -60,6 +60,7 @@ export class CatalogoComponent {
       this.serveiUsuari.usuari_logat?.cesta.push({ coche, quantity });
     }
     alert("Articulo añadido con exito")
+    this.serveiUsuari.guardarDatos();
 
   }
 

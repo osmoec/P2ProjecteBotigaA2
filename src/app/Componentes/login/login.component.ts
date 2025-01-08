@@ -26,13 +26,15 @@ export class LoginComponent implements OnInit {
   dni = ''
   nom = ''
   cognom = ''
+  recordar : boolean = false;
+
 
 
 
   logat = false;
   usuari_notrobat = '';
 
-  constructor(private router: Router, private serveiUsuaris: ServeiUsuarisService) {
+  constructor(private serveiUsuaris: ServeiUsuarisService) {
     this.usuaris = this.serveiUsuaris.usuaris
   }
 
@@ -59,7 +61,7 @@ export class LoginComponent implements OnInit {
     }
 
   }
-
+  //Este evento se activa al pulsar el boton de inicio de sesion
   login(event: Event) {
     event.preventDefault();
     console.log(this.usuaris)
@@ -74,11 +76,17 @@ export class LoginComponent implements OnInit {
         this.logat = true
       }
     }
+    if (this.recordar) {
+      this.serveiUsuaris.recordarUsuario()
+    }
+    console.log(this.recordar)
+    console.log(localStorage.getItem('usuariRecordat'))
     if (this.logat) {
       localStorage.setItem('usuari', this.usuari);
       this.datosUsuario()
       this.serveiUsuaris.actualizarEstadoSesion()
-      this.router.navigate(['/login']);
+
+
     } else {
       this.usuari_notrobat = "L'usuari o la contrasenya no es correcta";
     }

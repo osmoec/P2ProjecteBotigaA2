@@ -21,7 +21,9 @@ export class Usuario {
 
   constructor(
     nombre: string, apellido: string, correo: string, usuario: string, DNI: string,
-    cumpleaños: Date, telefono: string, contrasena: string, direccion: string
+    cumpleaños: Date, telefono: string, contrasena: string, direccion: string,
+    cesta?: { coche: Coche, quantity: number }[],
+    titularTarjeta?: string, numeroTarjeta?: string, fechaTarjeta?: string, CVVTarjeta?: string
   ) {
     this.nombre = nombre;
     this.apellido = apellido;
@@ -32,6 +34,11 @@ export class Usuario {
     this.telefono = telefono;
     this.contrasena = contrasena;
     this.direccion = direccion;
+    this.cesta = cesta || []
+    this.titularTarjeta = titularTarjeta || undefined
+    this.numeroTarjeta = numeroTarjeta || undefined
+    this.fechaTarjeta = fechaTarjeta || undefined
+    this.CVVTarjeta = CVVTarjeta || undefined
   }
 
   public guardarDatosTarjeta(titular: string, numero: string, fecha: string, CVV: string) {
@@ -39,6 +46,10 @@ export class Usuario {
     this.numeroTarjeta = numero;
     this.fechaTarjeta = fecha;
     this.CVVTarjeta = CVV;
+  }
+
+  public guardarDatosCesta(cesta: { coche: Coche, quantity: number }[]) {
+    this.cesta = cesta;
   }
 }
 

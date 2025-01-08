@@ -14,15 +14,15 @@ export class ServeiUsuarisService {
   constructor() {
     console.log("Se reseteo el servicio de usuario")
     this.cargarDatos()
+    if (localStorage.getItem('usuariRecordat') !== null) {
+      this.usuari_logat = this.usuaris.find(u => u.usuario === localStorage.getItem('usuariRecordat')) || null
+      this.usuari_logat_bool = true
+    }
   }
 
   actualizarEstadoSesion () {
-    if (this.usuari_logat) {
-      this.usuari_logat_bool = true
-    }
-    else {
-      this.usuari_logat_bool = false
-    }
+    this.usuari_logat? this.usuari_logat_bool = true : this.usuari_logat_bool = false
+
   }
   addUsuario(usuari: Usuario): void {
     this.usuaris.push(usuari);
@@ -55,7 +55,12 @@ export class ServeiUsuarisService {
           new Date(data.cumpleaños),
           data.telefono,
           data.contrasena,
-          data.direccion
+          data.direccion,
+          data.cesta,
+          data.titularTarjeta,
+          data.numeroTarjeta,
+          data.fechaTarjeta,
+          data.CVVTarjeta
         )
       );
     }
@@ -74,5 +79,13 @@ export class ServeiUsuarisService {
       usuario.comandas?.push(nuevaComanda);
       this.guardarDatos();
     }
+  }
+
+  recordarUsuario(){
+    localStorage.setItem('usuariRecordat', this.usuari_logat!.usuario);
+  }
+
+  olvidarUsuario() {
+    localStorage.removeItem('usuariRecordat')
   }
 }
