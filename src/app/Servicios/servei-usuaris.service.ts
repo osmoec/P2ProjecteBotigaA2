@@ -55,7 +55,12 @@ export class ServeiUsuarisService {
           new Date(data.cumpleaños),
           data.telefono,
           data.contrasena,
-          data.direccion
+          data.direccion,
+          data.cesta,
+          data.titularTarjeta,
+          data.numeroTarjeta,
+          data.fechaTarjeta,
+          data.CVVTarjeta
         )
       );
     }
