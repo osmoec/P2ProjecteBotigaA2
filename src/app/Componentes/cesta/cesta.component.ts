@@ -16,18 +16,19 @@ export class CestaComponent implements OnInit {
   totalAmbTaxes: number = 0
   metode: string = ""
   titular: string = ""
-  numCompte: number = 0
+  numCompte: string = ""
   dataExpiracio: string = ""
   cvv: string = ""
+  recordarTarjeta : boolean = true
 
 
   ngOnInit(): void {
 
     this.calcularTotals()
+    this.rellenarDatosTargeta()
   }
 
   constructor(protected serveiUsuari: ServeiUsuarisService, private router: Router) {
-    console.log(this.serveiUsuari.usuari_logat?.cesta)
   }
 
   guardarCesta() {
@@ -107,6 +108,18 @@ export class CestaComponent implements OnInit {
   guardarYCrearComanda() {
     let comanda = this.crearComanda(this.totalAmbTaxes, this.serveiUsuari.usuari_logat!.cesta);
     this.guardarComanda(comanda);
+    console.log(this.recordarTarjeta)
+    if (this.recordarTarjeta) {
+      this.serveiUsuari.usuari_logat?.guardarDatosTarjeta(this.titular, this.numCompte, this.dataExpiracio, this.cvv)
+    }
+    this.serveiUsuari.guardarDatos()
 
+  }
+
+  rellenarDatosTargeta() {
+    this.titular = this.serveiUsuari.usuari_logat?.titularTarjeta || ""
+    this.numCompte = this.serveiUsuari.usuari_logat?.numeroTarjeta || ""
+    this.dataExpiracio = this.serveiUsuari.usuari_logat?.fechaTarjeta ||""
+    this.cvv = this.serveiUsuari.usuari_logat?.CVVTarjeta || ""
   }
 }
