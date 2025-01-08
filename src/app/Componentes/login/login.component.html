@@ -13,8 +13,9 @@
         <input name="password-sessio" type="password" class="form-control" [(ngModel)]="contrasenya" required>
       </div>
       <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input">
+        <input [(ngModel)]="recordar" name="Recordar" type="checkbox" class="form-check-input">
         <label name="reocordar-dades" class="form-check-label">Recordar?</label>
+
       </div>
       <div *ngIf="usuari_notrobat">
         <p>{{usuari_notrobat}}</p>

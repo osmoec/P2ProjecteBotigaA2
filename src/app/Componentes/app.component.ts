@@ -32,6 +32,7 @@ export class AppComponent {
 
   logout() {
     this.serveiUsuaris.usuari_logat = null
+    this.serveiUsuaris.olvidarUsuario()
     window.location.reload();
   }
 }
