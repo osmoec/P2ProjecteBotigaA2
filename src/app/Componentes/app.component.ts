@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, viewChild} from '@angular/core';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import {HeaderComponent} from './header/header.component';
 import {ServeiUsuarisService} from '../Servicios/servei-usuaris.service';
@@ -14,7 +14,14 @@ import {Usuario} from '../Clases/Usuario.model';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'P2ProjecteBotigaA2';
+  // @ts-ignore
+  @ViewChild('nomusuari') nomusuari: any;
+
+  ngAfterViewInit() {
+    if(this.serveiUsuaris.usuari_logat){
+      this.nomusuari.nativeElement.innerText = this.serveiUsuaris.usuari_logat.usuario
+    }
+  }
   logat = false;
   usuariLogat : Usuario | null;
 
