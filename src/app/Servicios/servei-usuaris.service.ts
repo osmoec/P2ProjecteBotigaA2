@@ -72,10 +72,10 @@ export class ServeiUsuarisService {
     });
   }
 
-  agregarComanda(numComanda: number, usuariC: string, cochesComanda: any[], totalComanda: number) {
+  agregarComanda(numComanda: number, usuariC: string, cochesComanda: any[], totalComanda: number,metodePagament: string) {
     const usuario = this.usuaris.find(u => u.usuario === usuariC);
     if (usuario) {
-      const nuevaComanda = new Comanda(numComanda, usuariC, cochesComanda, totalComanda);
+      const nuevaComanda = new Comanda(numComanda, usuariC, cochesComanda, totalComanda,metodePagament);
       usuario.comandas?.push(nuevaComanda);
       this.guardarDatos();
     }

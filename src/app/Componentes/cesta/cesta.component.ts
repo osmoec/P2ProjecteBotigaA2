@@ -23,7 +23,7 @@ export class CestaComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    console.log(this.metode)
     this.calcularTotals()
     this.rellenarDatosTargeta()
   }
@@ -60,7 +60,7 @@ export class CestaComponent implements OnInit {
     }
   }
 
-  crearComanda(totalComandaC: number, cochesComandaC: any[]) {
+  crearComanda(totalComandaC: number, cochesComandaC: any[],metodePagament: string) {
     let numeroComanda = Math.floor(Math.random() * 999999) + 1;
 
     if (!this.serveiUsuari.usuari_logat) {
@@ -70,7 +70,7 @@ export class CestaComponent implements OnInit {
     console.log("Usuario logado:", this.serveiUsuari.usuari_logat);
 
     // @ts-ignore
-    let comandaNova = new Comanda(numeroComanda, this.serveiUsuari.usuari_logat.usuario, cochesComandaC, totalComandaC);
+    let comandaNova = new Comanda(numeroComanda, this.serveiUsuari.usuari_logat.usuario, cochesComandaC, totalComandaC,metodePagament);
     let diferent = false;
 
     if (this.serveiUsuari.usuari_logat.comandas) {
@@ -95,7 +95,7 @@ export class CestaComponent implements OnInit {
 
     if (this.serveiUsuari.usuari_logat) {
       console.log("Usuario logado antes de agregar comanda:", this.serveiUsuari.usuari_logat);
-      this.serveiUsuari.agregarComanda(comanda.numComanda!, this.serveiUsuari.usuari_logat.usuario, comanda.cochesComanda!, comanda.totalComanda!);
+      this.serveiUsuari.agregarComanda(comanda.numComanda!, this.serveiUsuari.usuari_logat.usuario, comanda.cochesComanda!, comanda.totalComanda!,this.metode);
       console.log("Comanda agregada al usuario logado:", this.serveiUsuari.usuari_logat);
     }
 
@@ -108,7 +108,7 @@ export class CestaComponent implements OnInit {
   }
   guardarYCrearComanda() {
     if ((this.serveiUsuari.usuari_logat && this.serveiUsuari.usuari_logat.cesta.length != 0) && this.serveiUsuari.usuari_logat_bool){
-      let comanda = this.crearComanda(this.totalAmbTaxes, this.serveiUsuari.usuari_logat!.cesta);
+      let comanda = this.crearComanda(this.totalAmbTaxes, this.serveiUsuari.usuari_logat!.cesta,this.metode);
       this.guardarComanda(comanda);
       console.log(this.recordarTarjeta)
       if (this.recordarTarjeta) {
@@ -127,5 +127,9 @@ export class CestaComponent implements OnInit {
     this.numCompte = this.serveiUsuari.usuari_logat?.numeroTarjeta || ""
     this.dataExpiracio = this.serveiUsuari.usuari_logat?.fechaTarjeta ||""
     this.cvv = this.serveiUsuari.usuari_logat?.CVVTarjeta || ""
+  }
+
+  targeta(metode:string){
+    this.metode  = metode;
   }
 }
