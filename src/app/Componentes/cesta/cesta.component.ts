@@ -47,16 +47,17 @@ export class CestaComponent implements OnInit {
   }
 
   calcularTotals() {
+    if ((this.serveiUsuari.usuari_logat && this.serveiUsuari.usuari_logat.cesta.length != 0) && this.serveiUsuari.usuari_logat_bool) {
+      this.totalSenseTaxes = 0
 
-    this.totalSenseTaxes = 0
+      this.totalAmbTaxes = 0
 
-    this.totalAmbTaxes = 0
+      for (var preu of this.serveiUsuari.usuari_logat!.cesta) {
+        this.totalSenseTaxes += preu.coche.price * preu.quantity
+      }
 
-    for (var preu of this.serveiUsuari.usuari_logat!.cesta) {
-      this.totalSenseTaxes += preu.coche.price * preu.quantity
+      this.totalAmbTaxes = (this.totalSenseTaxes * 0.21) + this.totalSenseTaxes
     }
-
-    this.totalAmbTaxes = (this.totalSenseTaxes * 0.21) + this.totalSenseTaxes
   }
 
   crearComanda(totalComandaC: number, cochesComandaC: any[]) {
@@ -106,13 +107,18 @@ export class CestaComponent implements OnInit {
     console.log("comanda guardada:", comanda);
   }
   guardarYCrearComanda() {
-    let comanda = this.crearComanda(this.totalAmbTaxes, this.serveiUsuari.usuari_logat!.cesta);
-    this.guardarComanda(comanda);
-    console.log(this.recordarTarjeta)
-    if (this.recordarTarjeta) {
-      this.serveiUsuari.usuari_logat?.guardarDatosTarjeta(this.titular, this.numCompte, this.dataExpiracio, this.cvv)
+    if ((this.serveiUsuari.usuari_logat && this.serveiUsuari.usuari_logat.cesta.length != 0) && this.serveiUsuari.usuari_logat_bool){
+      let comanda = this.crearComanda(this.totalAmbTaxes, this.serveiUsuari.usuari_logat!.cesta);
+      this.guardarComanda(comanda);
+      console.log(this.recordarTarjeta)
+      if (this.recordarTarjeta) {
+        this.serveiUsuari.usuari_logat?.guardarDatosTarjeta(this.titular, this.numCompte, this.dataExpiracio, this.cvv)
+      }
+      this.serveiUsuari.guardarDatos()
     }
-    this.serveiUsuari.guardarDatos()
+    else{
+      alert("Ho sento, no es poden comprar productes amb el carro buit o sense haver iniciat sessio")
+    }
 
   }
 
