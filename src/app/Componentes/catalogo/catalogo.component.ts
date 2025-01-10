@@ -33,6 +33,7 @@ export class CatalogoComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+
     if (this.filtreA) {
       // @ts-ignore
       this.refrescat.nativeElement.innerText = this.filtre;
