@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Usuario } from '../../Clases/Usuario.model';
 import { ServeiUsuarisService } from '../../Servicios/servei-usuaris.service';
-import {NgIf} from '@angular/common';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-sign-in',
@@ -13,6 +13,8 @@ import {NgIf} from '@angular/common';
   styleUrl: './sign-in.component.css'
 })
 export class SignInComponent {
+  @ViewChild('miInput') miInputRef!: ElementRef;
+
   nom: string = '';
   cognom: string = '';
   correu: string = '';
@@ -61,11 +63,10 @@ export class SignInComponent {
       }
       this.serveiUsuaris.addUsuario(nouUsuari);
 
-      alert('Registre completat amb èxit!');
-      this.serveiUsuaris.guardarDatos()
+      // Mostrar mensaje de bienvenida con el nombre capturado
+      alert(`Benvingut/da, ${this.miInputRef.nativeElement.value}!`);
+      this.serveiUsuaris.guardarDatos();
       this.router.navigate(['/login']);
     }
   }
 }
-
-
