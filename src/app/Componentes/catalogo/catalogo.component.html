@@ -1,10 +1,12 @@
 <main>
   <article>
     <input type="text" [(ngModel)]="textbuscar" class="form-control" rows="1" placeholder="Escribe aquí para buscar...">
+    <br>
     <button (click)="buscarSimilar(textbuscar)" class="btn btn-outline-danger">buscar</button>
     <br>
     <br>
     <div class="dropdown">
+      <p #refrescat *ngIf="filtreA">filtrat per {{ filtre }}</p>
       <button class="btn btn-outline-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
         Filtrar por categoría
       </button>
