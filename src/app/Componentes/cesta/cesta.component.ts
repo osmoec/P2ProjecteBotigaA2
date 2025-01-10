@@ -23,7 +23,6 @@ export class CestaComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log(this.metode)
     this.calcularTotals()
     this.rellenarDatosTargeta()
   }
@@ -108,6 +107,7 @@ export class CestaComponent implements OnInit {
   }
   guardarYCrearComanda() {
     if ((this.serveiUsuari.usuari_logat && this.serveiUsuari.usuari_logat.cesta.length != 0) && this.serveiUsuari.usuari_logat_bool){
+      if (this.metode != ""){
       let comanda = this.crearComanda(this.totalAmbTaxes, this.serveiUsuari.usuari_logat!.cesta,this.metode);
       this.guardarComanda(comanda);
       console.log(this.recordarTarjeta)
@@ -115,6 +115,10 @@ export class CestaComponent implements OnInit {
         this.serveiUsuari.usuari_logat?.guardarDatosTarjeta(this.titular, this.numCompte, this.dataExpiracio, this.cvv)
       }
       this.serveiUsuari.guardarDatos()
+      }
+      else{
+        alert("Selecciona metode de pagament")
+      }
     }
     else{
       alert("Ho sento, no es poden comprar productes amb el carro buit o sense haver iniciat sessio")
