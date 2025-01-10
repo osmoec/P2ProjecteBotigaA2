@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import {HeaderComponent} from './header/header.component';
 import {ServeiUsuarisService} from '../Servicios/servei-usuaris.service';
@@ -21,16 +21,8 @@ export class AppComponent {
   constructor(protected serveiUsuaris: ServeiUsuarisService) {
     this.usuariLogat = this.serveiUsuaris.usuari_logat
   }
-  ngOnInit() {
-    console.log(this.serveiUsuaris.usuari_logat)
-    if (this.serveiUsuaris.usuari_logat) {
-      this.logat = true
-    }
-    console.log("usuario logeado? " + this.logat)
 
-  }
-
-  logout() {
+    logout() {
     this.serveiUsuaris.usuari_logat = null
     this.serveiUsuaris.olvidarUsuario()
     window.location.reload();
