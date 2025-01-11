@@ -1,108 +1,123 @@
 <!DOCTYPE html>
 <body>
-
 <article>
 
   <div><h1 id="titolcistella">Cistella</h1></div>
 
   <div class="cistellaflex" id="cistellacont">
     <div id="div-productes">
-  @for (cocheA of serveiUsuari.usuari_logat?.cesta; track serveiUsuari.usuari_logat?.cesta){
+      @for (cocheA of serveiUsuari.usuari_logat?.cesta; track serveiUsuari.usuari_logat?.cesta){
         <div id="coche{{cocheA.coche.id}}">
-        <div class="d-flex flex-row mb-3 justify-content-between align-items-center producte">
-          <div class="me-3">
-            <img [src]="cocheA.coche.imgC[0]" alt="Imagen de {{ cocheA.coche.name }}" />
-          </div>
-          <div class="me-3">
-            <p>{{ cocheA.coche.name }} {{ cocheA.coche.price.toLocaleString('es-ES') }}€</p>
-          </div>
-          <div class="me-3">
-            <p>Quantitat</p>
-            <input type="number" (focusout)="calcularTotals()" [(ngModel)]="cocheA.quantity" [min]="0" [max]="10" />
-          </div>
-          <div class="me-3">
-            <button type="button" (click)="eliminarcesta(cocheA.coche.id);calcularTotals()" class="btn-close" aria-label="Close"></button>
+          <div class="d-flex flex-row mb-3 justify-content-between align-items-center producte">
+            <div class="me-3">
+              <img [src]="cocheA.coche.imgC[0]" alt="Imagen de {{ cocheA.coche.name }}" />
+            </div>
+            <div class="me-3">
+              <p>{{ cocheA.coche.name }} {{ cocheA.coche.price.toLocaleString('es-ES') }}€</p>
+            </div>
+            <div class="me-3">
+              <p>Quantitat</p>
+              <input type="number" (focusout)="calcularTotals()" [(ngModel)]="cocheA.quantity" [min]="0" [max]="10" />
+            </div>
+            <div class="me-3">
+              <button type="button" (click)="eliminarcesta(cocheA.coche.id);calcularTotals()" class="btn-close" aria-label="Close"></button>
+            </div>
           </div>
         </div>
-        </div>
-  }
+      }
     </div>
   </div>
 
-
   <div>
-      <div>
-      <div id="formulari-contenidor">
-        <form action="" method="post" class="bg-secondary rounded">
-          <div class="article-titol-div">
-            <h1 class="article-titol">Pagament</h1>
-          </div>
+    <div id="formulari-contenidor">
+      <form action="" method="post" class="bg-secondary rounded">
+        <div class="article-titol-div">
+          <h1 class="article-titol">Pagament</h1>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Metode</label>
           <div class="mb-3">
-            <label class="form-label">Metode</label>
-            <div class="mb-3">
-              <label class="btn btn-primary me-2">
-                <input (click)="targeta('mastercard')" required [ngModel]="metode" value="mastercard" type="radio"  name="metodepagamanet" hidden><img class="iconoMetodePagament" src="multimedia/metodespagament/mastercard.png">
-              </label>
-              <label class="btn btn-primary me-2">
-                <input (click)="targeta('visa')" required [ngModel]="metode" value="visa" type="radio"  name="metodepagamanet" hidden><img class="iconoMetodePagament" src="multimedia/metodespagament/visa.png">
-              </label>
-              <label class="btn btn-primary me-2">
-                <input (click)="targeta('paypal')" required [ngModel]="metode" value="paypal" type="radio"  name="metodepagamanet" hidden><img class="iconoMetodePagament" src="multimedia/metodespagament/paypal.png">
-              </label>
-              <label class="btn btn-primary me-2">
-                <input (click)="targeta('targeta')" required [ngModel]="metode" value="targeta" type="radio"  name="metodepagamanet" hidden><img class="iconoMetodePagament" src="multimedia/metodespagament/targeta.png">
-              </label>
-            </div>
-            <div class="d-flex flex-row mb-3 justify-content-between align-items-center gap-3">
-              <div class="d-flex flex-column justify-content-center gap-1">
-                <div>
-                  <label class="form-label ">Titular</label>
-                  <input [(ngModel)]="titular" name="nom-titular" type="text" placeholder="Bobby cotxes" class="form-control" required>
-                </div>
-              </div>
-              <div>
-                <div>
-                  <label class="form-label ">Numero targeta/compte</label>
-                  <input [(ngModel)]="numCompte" name="numero-targeta" type="text" placeholder="1234 5678 9101 1120" class="form-control" required>
-                </div>
-              </div>
-            </div>
-            <div class="d-flex flex-row mb-3 justify-content-between gap-3">
-              <div>
-                <label class="form-label ">data d'expiració</label>
-                <input [(ngModel)]="dataExpiracio" name="data-expiracio" type="month" placeholder="12/99" class="form-control" required>
-              </div>
-              <div class="me-3">
-                <label class="form-label ">CVV</label>
-                <input [(ngModel)]="cvv" name="cvv" type="number" placeholder="999" min="0" max="999" class="form-control" required>
-              </div>
-            </div>
+            <label class="btn btn-primary me-2">
+              <input (click)="targeta('mastercard')" required [ngModel]="metode" value="mastercard" type="radio" name="metodepagamanet" hidden><img class="iconoMetodePagament" src="multimedia/metodespagament/mastercard.png">
+            </label>
+            <label class="btn btn-primary me-2">
+              <input (click)="targeta('visa')" required [ngModel]="metode" value="visa" type="radio" name="metodepagamanet" hidden><img class="iconoMetodePagament" src="multimedia/metodespagament/visa.png">
+            </label>
+            <label class="btn btn-primary me-2">
+              <input (click)="targeta('paypal')" required [ngModel]="metode" value="paypal" type="radio" name="metodepagamanet" hidden><img class="iconoMetodePagament" src="multimedia/metodespagament/paypal.png">
+            </label>
+            <label class="btn btn-primary me-2">
+              <input (click)="targeta('targeta')" required [ngModel]="metode" value="targeta" type="radio" name="metodepagamanet" hidden><img class="iconoMetodePagament" src="multimedia/metodespagament/targeta.png">
+            </label>
           </div>
-          <div class="m-3 form-check">
-            <input [(ngModel)]="recordarTarjeta" name="reocordar-targeta" type="checkbox" class="form-check-input">
-            <label class="form-check-label">Guardar metode de pagament amb el teu compte</label>
-          </div>
-          <div class="d-flex flex-row mb-3 mt-3 justify-content-between gap-3">
-            <h2>Factura:</h2>
-            <div>
-              <div><p>Total productes: </p></div>
-              <div><p>Taxes: </p></div>
+          <div class="d-flex flex-row mb-3 justify-content-between align-items-center gap-3">
+            <div class="d-flex flex-column justify-content-center gap-1">
+              <div>
+                <label class="form-label ">Titular</label>
+                <input [(ngModel)]="titular" name="nom-titular" type="text" placeholder="Bobby cotxes" class="form-control" required>
+              </div>
             </div>
             <div>
-              <div><p>{{totalSenseTaxes.toLocaleString('es-ES')}}€ </p></div>
-              <div><p>{{totalAmbTaxes.toLocaleString('es-ES')}}€ </p></div>
+              <div>
+                <label class="form-label ">Numero targeta/compte</label>
+                <input [(ngModel)]="numCompte" name="numero-targeta" type="text" placeholder="1234 5678 9101 1120" class="form-control" required>
+              </div>
             </div>
-            <div></div>
           </div>
-          <h1>Total:</h1>
-          <h1>{{totalAmbTaxes.toLocaleString('es-ES')}}€</h1>
-          <a (click)="guardarYCrearComanda()"  id="Comprar"  type="submit" class="btn btn-primary">Comprar</a>
-        </form>
+          <div class="d-flex flex-row mb-3 justify-content-between gap-3">
+            <div>
+              <label class="form-label ">data d'expiració</label>
+              <input [(ngModel)]="dataExpiracio" name="data-expiracio" type="month" placeholder="12/99" class="form-control" required>
+            </div>
+            <div class="me-3">
+              <label class="form-label ">CVV</label>
+              <input [(ngModel)]="cvv" name="cvv" type="number" placeholder="999" min="0" max="999" class="form-control" required>
+            </div>
+          </div>
+        </div>
+        <div class="m-3 form-check">
+          <input [(ngModel)]="recordarTarjeta" name="reocordar-targeta" type="checkbox" class="form-check-input">
+          <label class="form-check-label">Guardar metode de pagament amb el teu compte</label>
+        </div>
+        <div class="d-flex flex-row mb-3 mt-3 justify-content-between gap-3">
+          <h2>Factura:</h2>
+          <div>
+            <div><p>Total productes: </p></div>
+            <div><p>Taxes: </p></div>
+          </div>
+          <div>
+            <div><p>{{totalSenseTaxes.toLocaleString('es-ES')}}€ </p></div>
+            <div><p>{{totalAmbTaxes.toLocaleString('es-ES')}}€ </p></div>
+          </div>
+          <div></div>
+        </div>
+        <h1>Total:</h1>
+        <h1>{{totalAmbTaxes.toLocaleString('es-ES')}}€</h1>
+        <a id="Comprar" data-bs-toggle="modal" data-bs-target="#confirmarCompraModal" class="btn btn-primary">Comprar</a>
+      </form>
+    </div>
+  </div>
+
+</article>
+
+<!-- Modal per confirmar la compra -->
+<div class="modal fade" id="confirmarCompraModal" tabindex="-1" aria-labelledby="confirmarCompraModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmarCompraModalLabel">Confirmar Compra</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tanca"></button>
+      </div>
+      <div class="modal-body">
+        Estàs segur que vols finalitzar la compra?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel·lar</button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="guardarYCrearComanda()">Confirma la Compra</button>
       </div>
     </div>
   </div>
-</article>
-
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
