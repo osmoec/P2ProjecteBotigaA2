@@ -115,10 +115,19 @@ export class CestaComponent implements OnInit {
         this.serveiUsuari.usuari_logat?.guardarDatosTarjeta(this.titular, this.numCompte, this.dataExpiracio, this.cvv)
       }
       this.serveiUsuari.guardarDatos()
+        this.totalSenseTaxes = 0
+        this.totalAmbTaxes = 0
+        this.metode = ""
+        this.titular = ""
+        this.numCompte = ""
+        this.dataExpiracio = ""
+        this.cvv = ""
+        this.recordarTarjeta  = false
       }
       else{
         alert("Selecciona metode de pagament")
       }
+
     }
     else{
       alert("Ho sento, no es poden comprar productes amb el carro buit o sense haver iniciat sessio")
