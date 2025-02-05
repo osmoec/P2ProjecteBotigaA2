@@ -51,16 +51,13 @@ export class SignInComponent {
 
   public registro() {
     if (this.validarDatos()) {
-      const nouUsuari = new Usuario(
-        this.nom, this.cognom, this.correu, this.usuari, this.DNI,
-        this.aniversari, this.telefon, this.contrasena, this.adreca
-      );
-      for (let user of this.serveiUsuaris.getUsuarios()) {
+      const nouUsuari = {usuari: this.usuari, dades: {nombre :this.nom, apellido: this.cognom ,correo: this.correu, usuario: this.usuari, DNI: this.DNI, fechaNacimiento: this.aniversari, telefono: this.telefon, contrasena: this.contrasena, direccion: this.adreca, comandas: [], titularTarjeta: null, numeroTarjeta: null, fechaTarjeta: null, CVVTarjeta: null}}
+      /*for (let user of this.serveiUsuaris.getUsuarios()) {
         if (user.usuario === this.usuari || user.correo === this.correu) {
           this.usuari_ja_registrat = "Aquest usuari ja esta registrat.";
           return;
         }
-      }
+      }*/
       this.serveiUsuaris.addUsuario(nouUsuari);
 
       // Mostrar mensaje de bienvenida con el nombre capturado

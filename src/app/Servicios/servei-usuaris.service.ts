@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from '../Clases/Usuario.model';
 import { Comanda } from '../Clases/comanda.model';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class ServeiUsuarisService {
 
   public usuari_logat_bool : boolean = false
 
-  constructor() {
+  constructor(public http: HttpClient) {
     console.log("Se reseteo el servicio de usuario")
     this.cargarDatos()
     if (localStorage.getItem('usuariRecordat') !== null) {
@@ -24,8 +25,8 @@ export class ServeiUsuarisService {
     this.usuari_logat? this.usuari_logat_bool = true : this.usuari_logat_bool = false
 
   }
-  addUsuario(usuari: Usuario): void {
-    this.usuaris.push(usuari);
+  addUsuario(usuari: any): void {
+    this.http.post('http://localhost:3080/usuaris/push',usuari).subscribe()
   }
 
   getUsuariLogat(usuari_logat : string): Usuario | null {
