@@ -39,25 +39,26 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.serveiUsuaris.usuari_logat) {
-      this.logat = true
+    const usuariId = localStorage.getItem('usuari');
+    if (usuariId) {
+      this.serveiUsuaris.cargarDatos(usuariId);
     }
     this.usuari_logat = this.serveiUsuaris.usuari_logat;
-    if (this.logat) {
-      this.datosUsuario()
+    if (this.usuari_logat) {
+      this.logat = true;
+      this.datosUsuario();
     }
     this.usuaris = this.serveiUsuaris.getUsuarios();
   }
 
-  datosUsuario(){
-    var usuarioRegistrado = this.serveiUsuaris.getUsuariLogat(localStorage.getItem('usuari')!)
-    if (usuarioRegistrado){
-      this.usuari = usuarioRegistrado.usuario;
-      this.adreca = usuarioRegistrado.direccion
-      this.dni = usuarioRegistrado.DNI
-      this.correu = usuarioRegistrado.correo
-      this.nom = usuarioRegistrado.nombre
-      this.cognom = usuarioRegistrado.apellido
+  datosUsuario() {
+    if (this.usuari_logat) {
+      this.usuari = this.usuari_logat.usuario;
+      this.adreca = this.usuari_logat.direccion;
+      this.dni = this.usuari_logat.DNI;
+      this.correu = this.usuari_logat.correo;
+      this.nom = this.usuari_logat.nombre;
+      this.cognom = this.usuari_logat.apellido;
     }
 
   }

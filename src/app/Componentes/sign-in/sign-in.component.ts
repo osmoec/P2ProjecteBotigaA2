@@ -51,7 +51,8 @@ export class SignInComponent {
 
   public registro() {
     if (this.validarDatos()) {
-      const nouUsuari = {usuari: this.usuari, dades: {nombre :this.nom, apellido: this.cognom ,correo: this.correu, usuario: this.usuari, DNI: this.DNI, fechaNacimiento: this.aniversari, telefono: this.telefon, contrasena: this.contrasena, direccion: this.adreca, comandas: [], titularTarjeta: null, numeroTarjeta: null, fechaTarjeta: null, CVVTarjeta: null}}
+      const nouUsuari = new Usuario(this.nom, this.cognom, this.correu, this.usuari, this.DNI, this.aniversari, this.telefon, this.contrasena, this.adreca, [], undefined, undefined, undefined, undefined);
+
       /*for (let user of this.serveiUsuaris.getUsuarios()) {
         if (user.usuario === this.usuari || user.correo === this.correu) {
           this.usuari_ja_registrat = "Aquest usuari ja esta registrat.";
@@ -62,7 +63,7 @@ export class SignInComponent {
 
       // Mostrar mensaje de bienvenida con el nombre capturado
       alert(`Benvingut/da, ${this.miInputRef.nativeElement.value}!`);
-      this.serveiUsuaris.guardarDatos();
+      this.serveiUsuaris.guardarDatos(nouUsuari);
       this.router.navigate(['/login']);
     }
   }

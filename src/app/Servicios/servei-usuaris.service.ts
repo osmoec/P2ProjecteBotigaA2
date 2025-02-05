@@ -13,11 +13,14 @@ export class ServeiUsuarisService {
   public usuari_logat_bool : boolean = false
 
   constructor(public http: HttpClient) {
-    console.log("Se reseteo el servicio de usuario")
-    this.cargarDatos()
+    console.log("Se reseteo el servicio de usuario");
+    const usuariId = localStorage.getItem('usuari');
+    if (usuariId) {
+      this.cargarDatos(usuariId);
+    }
     if (localStorage.getItem('usuariRecordat') !== null) {
-      this.usuari_logat = this.usuaris.find(u => u.usuario === localStorage.getItem('usuariRecordat')) || null
-      this.usuari_logat_bool = true
+      this.usuari_logat = this.usuaris.find(u => u.usuario === localStorage.getItem('usuariRecordat')) || null;
+      this.usuari_logat_bool = true;
     }
   }
 
@@ -38,47 +41,30 @@ export class ServeiUsuarisService {
     return this.usuaris;
   }
 
-  guardarDatos(): void {
-    localStorage.setItem('usuaris', JSON.stringify(this.usuaris));
+  guardarDatos(usuari: Usuario): void {
+    this.http.put('http://localhost:3080/usuaris/informaciopersonal', usuari).subscribe(
+      response => {
+        console.log('Datos actualizados:', response);
+      });
   }
 
-  cargarDatos() {
-    const usuarisGuardats = localStorage.getItem('usuaris');
-    if (usuarisGuardats) {
-      const datos = JSON.parse(usuarisGuardats);
-      this.usuaris = datos.map((data: any) =>
-        new Usuario(
-          data.nombre,
-          data.apellido,
-          data.correo,
-          data.usuario,
-          data.DNI,
-          new Date(data.cumpleaños),
-          data.telefono,
-          data.contrasena,
-          data.direccion,
-          data.cesta,
-          data.titularTarjeta,
-          data.numeroTarjeta,
-          data.fechaTarjeta,
-          data.CVVTarjeta
-        )
-      );
-    }
 
-    this.usuaris.forEach(usuario => {
-      if (!usuario.comandas) {
-        usuario.comandas = [];
-      }
-    });
+  cargarDatos(usuariId: string) {
+    this.http.get<Usuario>('http://localhost:3080/usuaris/informaciopersonal', { params: { usuariId } }).subscribe(
+      (data: Usuario) => {
+        this.usuari_logat = data;
+        console.log('Datos cargados:', data);
+      });
   }
+
+
 
   agregarComanda(numComanda: number, usuariC: string, cochesComanda: any[], totalComanda: number,metodePagament: string) {
     const usuario = this.usuaris.find(u => u.usuario === usuariC);
     if (usuario) {
       const nuevaComanda = new Comanda(numComanda, usuariC, cochesComanda, totalComanda,metodePagament);
       usuario.comandas?.push(nuevaComanda);
-      this.guardarDatos();
+      this.guardarDatos(usuario);
     }
   }
 
