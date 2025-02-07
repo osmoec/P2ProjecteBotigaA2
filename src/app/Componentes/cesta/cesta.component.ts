@@ -41,7 +41,7 @@ export class CestaComponent implements OnInit {
     this.serveiUsuari.usuari_logat!.cesta = temp
 
     this.calcularTotals()
-    this.serveiUsuari.guardarDatos()
+    this.serveiUsuari.guardarDatos(this.serveiUsuari.usuari_logat!)
     this.router.navigate(['/cesta']);
   }
 
@@ -114,7 +114,7 @@ export class CestaComponent implements OnInit {
       if (this.recordarTarjeta) {
         this.serveiUsuari.usuari_logat?.guardarDatosTarjeta(this.titular, this.numCompte, this.dataExpiracio, this.cvv)
       }
-      this.serveiUsuari.guardarDatos()
+      this.serveiUsuari.guardarDatos(this.serveiUsuari.usuari_logat!)
         this.totalSenseTaxes = 0
         this.totalAmbTaxes = 0
         this.metode = ""

@@ -67,7 +67,7 @@ export class CatalogoComponent implements AfterViewInit {
       this.serveiUsuari.usuari_logat?.cesta.push({ coche, quantity });
     }
     alert("Articulo añadido con éxito");
-    this.serveiUsuari.guardarDatos();
+    this.serveiUsuari.guardarDatos(this.serveiUsuari.usuari_logat!);
   }
 
   filtrarPorTag(tagD: string) {
