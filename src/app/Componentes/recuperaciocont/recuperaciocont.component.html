@@ -1,0 +1,17 @@
+<article>
+  <div id="formulari-contenidor">
+    <form action="" method="post" class="bg-secondary rounded">
+      <div class="article-titol-div">
+        <h1 class="article-titol">has oblidat la contrasenya?</h1>
+        <h2 class="article-titol">Introdueix el teu usuari i t'enviarem un correu de recuperacio</h2>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Correu</label>
+        <input name="correu-sessio" type="text" placeholder="Usuari" class="form-control" [(ngModel)]="usuari"  required>
+      </div>
+      <button type="submit" class="btn btn-primary mb-3" (click)="enviaCorreu()">Iniciar sessió</button>
+    </form>
+  </div>
+
+</article>
+

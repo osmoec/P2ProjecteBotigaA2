@@ -5,6 +5,7 @@ import { NgIf } from '@angular/common';
 import {Router, RouterLink} from '@angular/router';
 import { ServeiUsuarisService } from '../../Servicios/servei-usuaris.service';
 import {routes} from '../app.routes';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -34,7 +35,7 @@ export class LoginComponent implements OnInit {
   logat = false;
   usuari_notrobat = '';
 
-  constructor(private serveiUsuaris: ServeiUsuarisService) {
+  constructor(private serveiUsuaris: ServeiUsuarisService, public http: HttpClient) {
     this.usuaris = this.serveiUsuaris.usuaris
   }
 
@@ -91,5 +92,10 @@ export class LoginComponent implements OnInit {
       this.usuari_notrobat = "L'usuari o la contrasenya no es correcta";
     }
   }
+
+  /*public recuperarCorreu(){
+    let usuari = {nom: this.usuariA.usuari,email: this.usuariA.correo}
+    this.http.put<any>('http://localhost:3080/mail',usuari).subscribe()
+  }*/
 
 }

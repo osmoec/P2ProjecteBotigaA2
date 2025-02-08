@@ -5,6 +5,7 @@ import { Usuario } from '../../Clases/Usuario.model';
 import { ServeiUsuarisService } from '../../Servicios/servei-usuaris.service';
 import { NgIf } from '@angular/common';
 
+
 @Component({
   selector: 'app-sign-in',
   standalone: true,
@@ -51,7 +52,20 @@ export class SignInComponent {
 
   public registro() {
     if (this.validarDatos()) {
-      const nouUsuari = {usuari: this.usuari, dades: {nombre :this.nom, apellido: this.cognom ,correo: this.correu, usuario: this.usuari, DNI: this.DNI, fechaNacimiento: this.aniversari, telefono: this.telefon, contrasena: this.contrasena, direccion: this.adreca, comandas: [], titularTarjeta: null, numeroTarjeta: null, fechaTarjeta: null, CVVTarjeta: null}}
+      let temp = ""
+      for (let i = 0; i < 10; i++){
+        if ((i % 2) === 0){
+          temp = temp + String.fromCharCode(Math.floor((Math.random()*26)+65))
+        }
+        else{
+          temp = temp + (Math.floor(Math.random()*26)+65)
+        }
+
+      }
+
+      console.log(temp)
+
+      const nouUsuari = {usuari: this.usuari, dades: {nombre :this.nom, apellido: this.cognom ,correo: this.correu, usuario: this.usuari, DNI: this.DNI, fechaNacimiento: this.aniversari, telefono: this.telefon, contrasena: this.contrasena, direccion: this.adreca, comandas: [], titularTarjeta: null, numeroTarjeta: null, fechaTarjeta: null, CVVTarjeta: null, clauUnica: temp.trim()}}
       /*for (let user of this.serveiUsuaris.getUsuarios()) {
         if (user.usuario === this.usuari || user.correo === this.correu) {
           this.usuari_ja_registrat = "Aquest usuari ja esta registrat.";
