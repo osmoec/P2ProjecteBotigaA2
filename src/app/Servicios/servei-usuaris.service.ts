@@ -68,7 +68,6 @@ export class ServeiUsuarisService {
   }
 
 
-
   cargarDatos(usuariId: string, contrasena: string, recordar: boolean): Promise<boolean> {
     return new Promise((resolve) => {
       this.http.get<any>(`http://localhost:3080/usuaris/informaciopersonal/${usuariId}/${contrasena}`)
@@ -148,6 +147,9 @@ export class ServeiUsuarisService {
           );
     });
   }
+
+
+
 
 
   agregarComanda(comanda : Comanda) {

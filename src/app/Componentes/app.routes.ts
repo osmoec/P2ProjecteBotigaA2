@@ -8,6 +8,7 @@ import {IndiceComponent} from './indice/indice.component';
 import {SignInComponent} from './sign-in/sign-in.component';
 import {CatalogoComponent} from './catalogo/catalogo.component';
 import {SobrenosotrosComponent} from './sobrenosotros/sobrenosotros.component';
+import {ModificarDadesComponent} from './modificar-dades/modificar-dades.component';
 
 export const routes: Routes = [
   {path: '', component: IndiceComponent},
@@ -18,4 +19,7 @@ export const routes: Routes = [
   {path: 'home', component: IndiceComponent},
   {path: 'signin', component: SignInComponent},
   {path: 'catalogo', component: CatalogoComponent},
+  {path: 'modificarDades',component: ModificarDadesComponent},
   {path: 'sobrenosotros', component: SobrenosotrosComponent}];
+
+

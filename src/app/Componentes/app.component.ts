@@ -6,7 +6,6 @@ import {NgIf} from '@angular/common';
 import {Usuario} from '../Clases/Usuario.model';
 import {ListaVehiculosService} from '../Servicios/lista-vehiculos.service';
 
-
 @Component({
   selector: 'app-root',
   standalone: true,
