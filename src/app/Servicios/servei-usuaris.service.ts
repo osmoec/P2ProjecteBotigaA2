@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Usuario } from '../Clases/Usuario.model';
 import { Comanda } from '../Clases/comanda.model';
 import {HttpClient} from '@angular/common/http';
+import {ListaVehiculosService} from './lista-vehiculos.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +10,9 @@ import {HttpClient} from '@angular/common/http';
 export class ServeiUsuarisService {
   public usuari_logat : Usuario | null = null;
 
-  public usuari_logat_bool : boolean = false
+  usuari_logat_bool : boolean = false
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, private listaCoches : ListaVehiculosService) {
     console.log("Se reseteo el servicio de usuario");
     const usuariId = localStorage.getItem('usuario');
     const contrasena = localStorage.getItem('contrasena');
@@ -23,65 +24,113 @@ export class ServeiUsuarisService {
 
   actualizarEstadoSesion () {
     this.usuari_logat? this.usuari_logat_bool = true : this.usuari_logat_bool = false
-
-  }
-  addUsuario(usuari: any): void {
-    this.http.post('http://localhost:3080/usuaris/push',usuari).subscribe()
   }
 
-  guardarDatos(usuari: Usuario): void {
-    this.http.put('http://localhost:3080/usuaris/informaciopersonal', usuari.usuario).subscribe(
-      response => {
-        console.log('Datos actualizados:', response);
-      });
-  }
-
-
-  cargarDatos(usuariId: string, contrasena: string, recordar: boolean): Promise<boolean> {
+  addUsuario(usuari: any): Promise<boolean> {
     return new Promise((resolve) => {
-      this.http.get<any>(`http://localhost:3080/usuaris/informaciopersonal/${usuariId}/${contrasena}`)
-        .subscribe(
+      this.http.put<any>('http://localhost:3080/usuaris/push', usuari).subscribe(
           (response) => {
             if (response.success) {
-              console.log(response.user)
-              var usuario = new Usuario(
-                response.user.nombre,
-                response.user.apellido,
-                response.user.correo,
-                usuariId,
-                response.user.DNI,
-                new Date(response.user.fechaNacimiento),
-                response.user.telefono,
-                contrasena,
-                response.user.direccion,
-                response.user.cesta,
-                response.user.titularTarjeta,
-                response.user.numeroTarjeta,
-                response.user.fechaTarjeta,
-                response.user.CVVTarjeta)
-              this.usuari_logat = usuario;
-              console.log('✅ Datos cargados correctamente:', this.usuari_logat);
-
-              if (recordar) {
-                this.recordarUsuario(usuariId, contrasena);
-              }
-
-              resolve(true); // Devuelve true si todo fue exitoso
+              console.log('✅ Usuario registrado correctamente:', response.message);
+              resolve(true);
             } else {
-              console.warn('⚠️ Error en la carga de datos:', response.message);
-              resolve(false); // Devuelve false si el backend devuelve error
+              console.warn('⚠️ Error en la respuesta:', response.message);
+              resolve(false);
             }
           },
           (error) => {
             console.error('❌ Error en la petición:', error);
-            resolve(false); // Devuelve false si hay un error en la petición
+            resolve(false);
           }
-        );
+      );
+    });
+  }
+
+
+  guardarDatos(usuari: any): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.http.put<any>('http://localhost:3080/usuaris/push', usuari).subscribe(
+          (response) => {
+            if (response.success) {
+              console.log('✅ Datos actualizados:', response.message);
+              resolve(true);
+            } else {
+              console.warn('⚠️ Error al actualizar datos:', response.message);
+              resolve(false);
+            }
+          },
+          (error) => {
+            console.error('❌ Error en la petición:', error);
+            resolve(false);
+          }
+      );
     });
   }
 
 
 
+  cargarDatos(usuariId: string, contrasena: string, recordar: boolean): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.http.get<any>(`http://localhost:3080/usuaris/informaciopersonal/${usuariId}/${contrasena}`)
+          .subscribe(
+              (response) => {
+                if (response.success && response.user) {
+                  console.log('✅ Respuesta del servidor:', response.user);
+
+                  // Convertir fecha de nacimiento a un objeto Date válido
+                  let fechaNacimiento: Date | null = null;
+                  if (response.user.cumpleaños) {
+                    const fechaParseada = new Date(response.user.cumpleaños);
+                    fechaNacimiento = isNaN(fechaParseada.getTime()) ? null : fechaParseada;
+                  }
+
+                  // Crear el objeto usuario con validación de datos opcionales
+                  const usuario = new Usuario(
+                      response.user.nombre || '',
+                      response.user.apellido || '',
+                      response.user.correo || '',
+                      usuariId,
+                      response.user.DNI || '',
+                      new Date(response.user.cumpleanos) || new Date(),
+                      response.user.telefono || '',
+                      contrasena,
+                      response.user.direccion || '',
+                    response.user.cesta
+                      ? response.user.cesta.map((item: any) => {
+                        const cocheEncontrado = this.listaCoches.coches.find(coche => coche.id === item.coche.id) || null;
+                        return {
+                          coche: cocheEncontrado,  // Guarda el objeto completo de Coche
+                          quantity: item.quantity  // Guarda la cantidad
+                        };
+                      })
+                      : [],
+                      response.user.titularTarjeta || undefined,
+                      response.user.numeroTarjeta || undefined,
+                      response.user.fechaTarjeta || undefined,
+                      response.user.CVVTarjeta || undefined
+                  );
+
+                  this.usuari_logat = usuario;
+                  console.log('✅ Datos cargados correctamente:', this.usuari_logat);
+                  this.actualizarEstadoSesion()
+
+                  if (recordar) {
+                    this.recordarUsuario(usuariId, contrasena);
+                  }
+
+                  resolve(true); // Devuelve true si todo fue exitoso
+                } else {
+                  console.warn('⚠️ Error en la carga de datos:', response.message);
+                  resolve(false); // Devuelve false si el backend devuelve error
+                }
+              },
+              (error) => {
+                console.error('❌ Error en la petición:', error);
+                resolve(false); // Devuelve false si hay un error en la petición
+              }
+          );
+    });
+  }
 
 
   agregarComanda(comanda : Comanda) {

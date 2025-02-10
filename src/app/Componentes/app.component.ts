@@ -4,6 +4,7 @@ import {HeaderComponent} from './header/header.component';
 import {ServeiUsuarisService} from '../Servicios/servei-usuaris.service';
 import {NgIf} from '@angular/common';
 import {Usuario} from '../Clases/Usuario.model';
+import {ListaVehiculosService} from '../Servicios/lista-vehiculos.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class AppComponent {
   logat = false;
   usuariLogat : Usuario | null;
 
-  constructor(protected serveiUsuaris: ServeiUsuarisService) {
+  constructor(protected serveiUsuaris: ServeiUsuarisService, protected listaCoches : ListaVehiculosService) {
     this.usuariLogat = this.serveiUsuaris.usuari_logat
   }
 

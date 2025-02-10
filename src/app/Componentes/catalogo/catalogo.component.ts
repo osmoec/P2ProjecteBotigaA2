@@ -9,6 +9,7 @@ import { Coche } from '../../Clases/Coche.model';
 import { ServeiUsuarisService } from '../../Servicios/servei-usuaris.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import {ListaVehiculosService} from '../../Servicios/lista-vehiculos.service';
 
 @Component({
   selector: 'app-catalogo',
@@ -28,8 +29,8 @@ export class CatalogoComponent implements AfterViewInit {
   filtre: string = "";
   filtreA: boolean = false;
 
-  constructor(private router: Router, private serveiUsuari: ServeiUsuarisService, private http: HttpClient) {
-    this.leerCochesDesdeArchivo();
+  constructor(private router: Router, private serveiUsuari: ServeiUsuarisService, private listaCoches : ListaVehiculosService) {
+    this.cochesA = this.listaCoches.coches
   }
 
   ngAfterViewInit(): void {
@@ -40,18 +41,7 @@ export class CatalogoComponent implements AfterViewInit {
     }
   }
 
-  leerCochesDesdeArchivo() {
-    this.http.get<Coche[]>('/json/cochesCatalogo.json')
-      .subscribe({
-        next: (data) => {
-          this.coches = data.map(obj => new Coche(
-            obj.id, obj.name, obj.price, obj.tags, obj.offertext, obj.imgC
-          ));
-          this.cochesA = this.coches;
-        },
-        error: (err) => console.error('Error cargando el archivo JSON', err)
-      });
-  }
+
 
   addToCart(coche: Coche, quantity: number) {
     if (!this.serveiUsuari.usuari_logat_bool) {

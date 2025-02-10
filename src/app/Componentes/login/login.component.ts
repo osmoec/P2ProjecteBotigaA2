@@ -13,7 +13,7 @@ import {routes} from '../app.routes';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   //Datos de usuario
   usuari = '';
@@ -25,22 +25,9 @@ export class LoginComponent implements OnInit {
   cognom = ''
   recordar : boolean = false;
 
-  logat = false;
   usuari_notrobat = '';
 
-  constructor(private serveiUsuaris: ServeiUsuarisService) {
-
-  }
-
-  ngOnInit() {
-    setTimeout(() => {
-      if (localStorage.getItem('recordar')){
-        this.logat = true
-      }
-      this.datosUsuario()
-      console.log(this.serveiUsuaris.usuari_logat)
-    }, 100);
-
+  constructor(protected serveiUsuaris: ServeiUsuarisService) {
 
   }
 
@@ -64,7 +51,6 @@ export class LoginComponent implements OnInit {
     if (resultado) {
       this.datosUsuario();
       this.serveiUsuaris.actualizarEstadoSesion();
-      this.logat = true
     } else {
       this.usuari_notrobat = "L'usuari o la contrasenya no és correcta";
     }

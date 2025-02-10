@@ -7,7 +7,7 @@ export class Usuario {
   correo: string;
   usuario: string;
   DNI: string;
-  cumpleaños: Date;
+  cumpleanos: Date;
   telefono: string;
   contrasena: string;
   direccion: string;
@@ -21,7 +21,7 @@ export class Usuario {
 
   constructor(
     nombre: string, apellido: string, correo: string, usuario: string, DNI: string,
-    cumpleaños: Date, telefono: string, contrasena: string, direccion: string,
+    cumpleanos: Date, telefono: string, contrasena: string, direccion: string,
     cesta?: { coche: Coche, quantity: number }[],
     titularTarjeta?: string, numeroTarjeta?: string, fechaTarjeta?: string, CVVTarjeta?: string
   ) {
@@ -30,7 +30,7 @@ export class Usuario {
     this.correo = correo;
     this.usuario = usuario;
     this.DNI = DNI;
-    this.cumpleaños = cumpleaños;
+    this.cumpleanos = cumpleanos;
     this.telefono = telefono;
     this.contrasena = contrasena;
     this.direccion = direccion;
