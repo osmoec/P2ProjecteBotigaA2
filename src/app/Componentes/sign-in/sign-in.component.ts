@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Usuario } from '../../Clases/Usuario.model';
 import { ServeiUsuarisService } from '../../Servicios/servei-usuaris.service';
 import { NgIf } from '@angular/common';
+import {HttpClient} from '@angular/common/http';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class SignInComponent {
   adreca: string = '';
   usuari_ja_registrat = '';
 
-  constructor(private router: Router, private serveiUsuaris: ServeiUsuarisService) {}
+  constructor(private router: Router, private serveiUsuaris: ServeiUsuarisService, public http: HttpClient) {}
 
   public validarDatos(): boolean {
     if (!this.nom) {alert('Si us plau, completa el teu nom');return false;}
@@ -65,13 +66,15 @@ export class SignInComponent {
 
       console.log(temp)
 
-      const nouUsuari = {usuari: this.usuari, dades: {nombre :this.nom, apellido: this.cognom ,correo: this.correu, usuario: this.usuari, DNI: this.DNI, fechaNacimiento: this.aniversari, telefono: this.telefon, contrasena: this.contrasena, direccion: this.adreca, comandas: [], titularTarjeta: null, numeroTarjeta: null, fechaTarjeta: null, CVVTarjeta: null, clauUnica: temp.trim()}}
+      const nouUsuari = {usuari: this.usuari, dades: {nombre :this.nom, apellido: this.cognom ,correo: this.correu, usuario: this.usuari, DNI: this.DNI, fechaNacimiento: this.aniversari, telefono: this.telefon, contrasena: this.contrasena, direccion: this.adreca, comandas: [], titularTarjeta: null, numeroTarjeta: null, fechaTarjeta: null, CVVTarjeta: null, clauUnica: temp.trim(), usuariConfirmat: false}}
       /*for (let user of this.serveiUsuaris.getUsuarios()) {
         if (user.usuario === this.usuari || user.correo === this.correu) {
           this.usuari_ja_registrat = "Aquest usuari ja esta registrat.";
           return;
         }
       }*/
+      this.http.post('http://localhost:3080/usuaris/mailconfusr',{usuariid: this.usuari}).subscribe()
+
       this.serveiUsuaris.addUsuario(nouUsuari);
 
       // Mostrar mensaje de bienvenida con el nombre capturado

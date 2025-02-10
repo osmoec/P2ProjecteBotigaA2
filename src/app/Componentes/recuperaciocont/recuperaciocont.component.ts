@@ -23,9 +23,10 @@ export class RecuperaciocontComponent {
   }
 
   enviaCorreu() {
-    console.log(this.usuari);
 
-    this.http.post("http://localhost:3080/mail", { usuariid: this.usuari }).subscribe();
+
+    console.log(this.usuari);
+    this.http.post("http://localhost:3080/mail", { usuariid: this.usuari}).subscribe();
 
     this.usuari = ""
   }

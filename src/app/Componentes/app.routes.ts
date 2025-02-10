@@ -11,6 +11,7 @@ import {SobrenosotrosComponent} from './sobrenosotros/sobrenosotros.component';
 import {RecuperaciocontComponent} from './recuperaciocont/recuperaciocont.component';
 import {RecuperaciousuariComponent} from './recuperaciousuari/recuperaciousuari.component';
 import {CanvicontrasenyaComponent} from './canvicontrasenya/canvicontrasenya.component';
+import {ConfirmarCompteComponent} from '../confirmar-compte/confirmar-compte.component';
 
 export const routes: Routes = [
   {path: '', component: IndiceComponent},
@@ -24,5 +25,6 @@ export const routes: Routes = [
   {path: 'sobrenosotros', component: SobrenosotrosComponent},
   {path: 'recuperacioCompte', component: RecuperaciocontComponent},
   {path: 'recuperacio', component: RecuperaciousuariComponent},
-  {path: '3z03u2Yn/:usuari', component: CanvicontrasenyaComponent}
+  {path: '3z03u2Yn/:usuari', component: CanvicontrasenyaComponent},
+  {path: 'confirmacioCompte', component: ConfirmarCompteComponent}
 ];

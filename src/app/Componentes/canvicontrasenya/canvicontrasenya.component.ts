@@ -33,12 +33,28 @@ export class CanvicontrasenyaComponent {
 
   actualitzarCont(){
     if (this.contrasena === this.confContrasena){
-      let temp = {usuari: this.router.snapshot.paramMap.get('usuari'), contrasena: this.contrasena}
+      let novaClau = ""
+      for (let i = 0; i < 10; i++){
+        if ((i % 2) === 0){
+          novaClau = novaClau + String.fromCharCode(Math.floor((Math.random()*26)+65))
+        }
+        else{
+          novaClau = novaClau + (Math.floor(Math.random()*26)+65)
+        }
+
+      }
+
+      let temp = {usuari: this.router.snapshot.paramMap.get('usuari'), contrasena: this.contrasena, clauUnica: novaClau}
       console.log(temp)
-    this.http.post("http://localhost:3080/usuaris/recuperaciocont",temp).subscribe()
+      this.http.post("http://localhost:3080/usuaris/recuperaciocont",temp).subscribe()
+      this.contrasena = ""
+      this.confContrasena = ""
+
     }
     else{
       console.log("no son iguals")
+      this.contrasena = ""
+      this.confContrasena = ""
     }
   }
 
