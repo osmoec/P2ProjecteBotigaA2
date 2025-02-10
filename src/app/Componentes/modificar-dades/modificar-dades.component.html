@@ -1,0 +1,47 @@
+<form (ngSubmit)="modificarDatos()">
+    <div>
+        <label for="nom">Nombre:</label>
+        <input type="text" id="nom" name="nom" [(ngModel)]="usuariLogat.nombre" required>
+    </div>
+    <div>
+        <label for="cognom">Apellido:</label>
+        <input type="text" id="cognom" name="cognom" [(ngModel)]="usuariLogat.apellido" required>
+    </div>
+    <div>
+        <label for="correu">Correo:</label>
+        <input type="email" id="correu" name="correu" [(ngModel)]="usuariLogat.correo" required>
+    </div>
+    <div>
+        <label for="adreca">Dirección:</label>
+        <input type="text" id="adreca" name="adreca" [(ngModel)]="usuariLogat.direccion" required>
+    </div>
+    <div>
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" name="dni" [(ngModel)]="usuariLogat.DNI" required>
+    </div>
+    <div>
+        <label for="cumpleanos">Fecha de Nacimiento:</label>
+        <input type="date" id="cumpleanos" name="cumpleanos" [(ngModel)]="usuariLogat.cumpleanos" required>
+    </div>
+    <div>
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" name="telefono" [(ngModel)]="usuariLogat.telefono" required>
+    </div>
+    <div>
+        <label for="titularTarjeta">Titular de la Tarjeta:</label>
+        <input type="text" id="titularTarjeta" name="titularTarjeta" [(ngModel)]="usuariLogat.titularTarjeta">
+    </div>
+    <div>
+        <label for="numeroTarjeta">Número de la Tarjeta:</label>
+        <input type="text" id="numeroTarjeta" name="numeroTarjeta" [(ngModel)]="usuariLogat.numeroTarjeta">
+    </div>
+    <div>
+        <label for="fechaTarjeta">Fecha de Expiración de la Tarjeta:</label>
+        <input type="text" id="fechaTarjeta" name="fechaTarjeta" [(ngModel)]="usuariLogat.fechaTarjeta">
+    </div>
+    <div>
+        <label for="CVVTarjeta">CVV de la Tarjeta:</label>
+        <input type="text" id="CVVTarjeta" name="CVVTarjeta" [(ngModel)]="usuariLogat.CVVTarjeta">
+    </div>
+    <button type="submit">Guardar cambios</button>
+</form>
