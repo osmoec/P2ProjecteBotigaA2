@@ -15,7 +15,6 @@
       <div class="mb-3 form-check">
         <input [(ngModel)]="recordar" name="Recordar" type="checkbox" class="form-check-input">
         <label name="reocordar-dades" class="form-check-label">Recordar?</label>
-
       </div>
       <div *ngIf="usuari_notrobat">
         <p>{{usuari_notrobat}}</p>
@@ -25,6 +24,7 @@
   </div>
 
   <p class="fs-2 mt-3"><strong>No tens compte? Crea aqui la teva compte per comneçar a comprar </strong><a routerLink="/signin" class="btn btn-primary" type="button"><img class="iconosAzul" src="multimedia/iconacrear.png"></a></p>
+  <p class="fs-2 mt-3"><strong>Has perdut la teva contrasenya? fer servir la teva clau de recuperacio per recuperar-la </strong><a routerLink="/recuperacioCompte" class="btn btn-primary" type="button"><img class="iconosAzul" src="multimedia/iconacrear.png"></a></p>
 </article>
 
 <article *ngIf="logat">

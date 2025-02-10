@@ -1,1 +1,19 @@
-<p>canvicontrasenya works!</p>
+<article>
+  <div id="formulari-contenidor">
+    <form action="" method="post" class="bg-secondary rounded">
+      <div class="article-titol-div">
+        <h1 class="article-titol">Introdueix la nova contrasenya per l'usuari: {{this.usuari}}</h1>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Nova contrasenya</label>
+        <input name="correu-sessio" type="text" placeholder="Usuari" class="form-control" [(ngModel)]="contrasena"  required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Confirmar contrasenya</label>
+        <input name="correu-sessio" type="text" placeholder="Usuari" class="form-control" [(ngModel)]="confContrasena"  required>
+      </div>
+      <button type="submit" class="btn btn-primary mb-3" (click)="actualitzarCont()">Iniciar sessió</button>
+    </form>
+  </div>
+
+</article>

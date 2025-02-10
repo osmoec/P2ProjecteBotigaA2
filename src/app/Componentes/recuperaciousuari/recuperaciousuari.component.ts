@@ -52,7 +52,7 @@ export class RecuperaciousuariComponent {
 
     console.log("Resulstat tramesa: "+res)
     if (res){
-      this.router.navigate(['/3z03u2Yn'],{queryParams: {usuari : this.usuari}})
+      this.router.navigate(['3z03u2Yn',this.usuari])
       this.usuari = ""
       this.clau = ""
       this.clauR = ""

@@ -24,5 +24,5 @@ export const routes: Routes = [
   {path: 'sobrenosotros', component: SobrenosotrosComponent},
   {path: 'recuperacioCompte', component: RecuperaciocontComponent},
   {path: 'recuperacio', component: RecuperaciousuariComponent},
-  {path: '3z03u2Yn', component: CanvicontrasenyaComponent}
+  {path: '3z03u2Yn/:usuari', component: CanvicontrasenyaComponent}
 ];
