@@ -53,6 +53,7 @@ export class SignInComponent {
 
   public registro() {
     if (this.validarDatos()) {
+
       let temp = ""
       for (let i = 0; i < 10; i++){
         if ((i % 2) === 0){
@@ -66,21 +67,37 @@ export class SignInComponent {
 
       console.log(temp)
 
-      const nouUsuari = {usuari: this.usuari, dades: {nombre :this.nom, apellido: this.cognom ,correo: this.correu, usuario: this.usuari, DNI: this.DNI, fechaNacimiento: this.aniversari, telefono: this.telefon, contrasena: this.contrasena, direccion: this.adreca, comandas: [], titularTarjeta: null, numeroTarjeta: null, fechaTarjeta: null, CVVTarjeta: null, clauUnica: temp.trim(), usuariConfirmat: false}}
-      /*for (let user of this.serveiUsuaris.getUsuarios()) {
-        if (user.usuario === this.usuari || user.correo === this.correu) {
-          this.usuari_ja_registrat = "Aquest usuari ja esta registrat.";
-          return;
+      const nouUsuari = new Usuario(
+        this.nom,
+        this.cognom,
+        this.correu,
+        this.usuari, // ID del usuario
+        this.DNI,
+        this.aniversari,
+        this.telefon,
+        this.contrasena,
+        this.adreca,
+        temp,
+        false
+      )
+
+      // Llamar a la función asincrónica y esperar la respuesta
+      this.serveiUsuaris.addUsuario(nouUsuari).then((success) => {
+        if (success) {
+          // ✅ Si el usuario se creó correctamente, continuar con el flujo
+          alert(`Benvingut/da, ${this.nom}!`);
+
+
+
+          this.http.post('http://localhost:3080/usuaris/mailconfusr',{usuariid: this.usuari}).subscribe()
+          this.serveiUsuaris.guardarDatos(nouUsuari);
+          this.router.navigate(['/login']);
+        } else {
+          // ❌ Si hubo un error, mostrar un mensaje
+          alert("Error en el registro. Inténtalo de nuevo.");
         }
-      }*/
-      this.http.post('http://localhost:3080/usuaris/mailconfusr',{usuariid: this.usuari}).subscribe()
-
-      this.serveiUsuaris.addUsuario(nouUsuari);
-
-      // Mostrar mensaje de bienvenida con el nombre capturado
-      alert(`Benvingut/da, ${this.miInputRef.nativeElement.value}!`);
-      this.serveiUsuaris.guardarDatos();
-      this.router.navigate(['/login']);
+      });
     }
   }
+
 }

@@ -1,4 +1,4 @@
-<article *ngIf="!logat">
+<article *ngIf="!serveiUsuaris.usuari_logat_bool">
   <div id="formulari-contenidor">
     <form action="" method="post" class="bg-secondary rounded">
       <div class="article-titol-div">
@@ -27,7 +27,8 @@
   <p class="fs-2 mt-3"><strong>Has perdut la teva contrasenya? fer servir la teva clau de recuperacio per recuperar-la </strong><a routerLink="/recuperacioCompte" class="btn btn-primary" type="button"><img class="iconosAzul" src="multimedia/iconacrear.png"></a></p>
 </article>
 
-<article *ngIf="logat">
+<article *ngIf="serveiUsuaris.usuari_logat_bool">
+  {{this.datosUsuario()}}
   <div>
     <h1 class="article-titol">Benvingut/da, {{ this.usuari }}!</h1>
     <ul class="list-group">
@@ -36,8 +37,8 @@
       <li class="list-group-item"><strong>Correu:</strong> {{ this.correu }}</li>
       <li class="list-group-item"><strong>Adreça:</strong> {{ this.adreca }}</li>
       <li class="list-group-item"><strong>DNI:</strong> {{ this.dni }}</li>
-
     </ul>
+    <button routerLink="/modificarDades">Modificar dades</button>
   </div>
 </article>
 

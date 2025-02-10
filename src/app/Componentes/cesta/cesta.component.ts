@@ -41,7 +41,7 @@ export class CestaComponent implements OnInit {
     this.serveiUsuari.usuari_logat!.cesta = temp
 
     this.calcularTotals()
-    this.serveiUsuari.guardarDatos()
+    this.serveiUsuari.guardarDatos(this.serveiUsuari.usuari_logat!)
     this.router.navigate(['/cesta']);
   }
 
@@ -59,42 +59,18 @@ export class CestaComponent implements OnInit {
     }
   }
 
-  crearComanda(totalComandaC: number, cochesComandaC: any[],metodePagament: string) {
-    let numeroComanda = Math.floor(Math.random() * 999999) + 1;
-
+  guardarComanda(totalComandaC: number, cochesComandaC: any[],metodePagament: string) {
+    var comanda
     if (!this.serveiUsuari.usuari_logat) {
       throw new Error('No hay usuario logado.');
     }
+    else {
+      comanda = new Comanda(this.serveiUsuari.usuari_logat.usuario, cochesComandaC, totalComandaC,metodePagament);
 
-    console.log("Usuario logado:", this.serveiUsuari.usuari_logat);
-
-    // @ts-ignore
-    let comandaNova = new Comanda(numeroComanda, this.serveiUsuari.usuari_logat.usuario, cochesComandaC, totalComandaC,metodePagament);
-    let diferent = false;
-
-    if (this.serveiUsuari.usuari_logat.comandas) {
-      while (!diferent) {
-        if (this.serveiUsuari.usuaris.some(u => u.comandas?.some(c => c.numComanda === numeroComanda))) {
-          console.log("Número de comanda duplicado:", numeroComanda);
-          numeroComanda = Math.floor(Math.random() * 999999) + 1;
-          comandaNova.numComanda = numeroComanda;
-        } else {
-          diferent = true;
-        }
-      }
     }
 
-    console.log("Comanda creada:", comandaNova);
-    return comandaNova;
-  }
-
-
-
-  guardarComanda(comanda: Comanda) {
-
     if (this.serveiUsuari.usuari_logat) {
-      console.log("Usuario logado antes de agregar comanda:", this.serveiUsuari.usuari_logat);
-      this.serveiUsuari.agregarComanda(comanda.numComanda!, this.serveiUsuari.usuari_logat.usuario, comanda.cochesComanda!, comanda.totalComanda!,this.metode);
+      this.serveiUsuari.agregarComanda(comanda);
       console.log("Comanda agregada al usuario logado:", this.serveiUsuari.usuari_logat);
     }
 
@@ -103,18 +79,17 @@ export class CestaComponent implements OnInit {
     // @ts-ignore
     document.getElementById('cistellacont').innerHTML = '';
 
-    console.log("comanda guardada:", comanda);
   }
+
   guardarYCrearComanda() {
     if ((this.serveiUsuari.usuari_logat && this.serveiUsuari.usuari_logat.cesta.length != 0) && this.serveiUsuari.usuari_logat_bool){
       if (this.metode != ""){
-      let comanda = this.crearComanda(this.totalAmbTaxes, this.serveiUsuari.usuari_logat!.cesta,this.metode);
-      this.guardarComanda(comanda);
-      console.log(this.recordarTarjeta)
+      this.guardarComanda(this.totalAmbTaxes, this.serveiUsuari.usuari_logat!.cesta,this.metode);
+
       if (this.recordarTarjeta) {
         this.serveiUsuari.usuari_logat?.guardarDatosTarjeta(this.titular, this.numCompte, this.dataExpiracio, this.cvv)
       }
-      this.serveiUsuari.guardarDatos()
+      this.serveiUsuari.guardarDatos(this.serveiUsuari.usuari_logat!)
         this.totalSenseTaxes = 0
         this.totalAmbTaxes = 0
         this.metode = ""
