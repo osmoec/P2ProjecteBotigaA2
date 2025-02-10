@@ -23,7 +23,8 @@ export class Usuario {
     nombre: string, apellido: string, correo: string, usuario: string, DNI: string,
     cumpleanos: Date, telefono: string, contrasena: string, direccion: string,
     cesta?: { coche: Coche, quantity: number }[],
-    titularTarjeta?: string, numeroTarjeta?: string, fechaTarjeta?: string, CVVTarjeta?: string
+    titularTarjeta?: string, numeroTarjeta?: string, fechaTarjeta?: string, CVVTarjeta?: string,
+    comandas?: Comanda[]
   ) {
     this.nombre = nombre;
     this.apellido = apellido;
@@ -34,6 +35,7 @@ export class Usuario {
     this.telefono = telefono;
     this.contrasena = contrasena;
     this.direccion = direccion;
+    this.comandas = comandas || [];
     this.cesta = cesta || []
     this.titularTarjeta = titularTarjeta || undefined
     this.numeroTarjeta = numeroTarjeta || undefined

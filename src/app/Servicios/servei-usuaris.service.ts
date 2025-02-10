@@ -104,10 +104,27 @@ export class ServeiUsuarisService {
                         };
                       })
                       : [],
-                      response.user.titularTarjeta || undefined,
-                      response.user.numeroTarjeta || undefined,
-                      response.user.fechaTarjeta || undefined,
-                      response.user.CVVTarjeta || undefined
+                    response.user.titularTarjeta || undefined,
+                    response.user.numeroTarjeta || undefined,
+                    response.user.fechaTarjeta || undefined,
+                    response.user.CVVTarjeta || undefined,
+                    response.user.comandas
+                      ? response.user.comandas.map((item: any) => {
+                        var comanda = new Comanda(
+                          item.usuariClient,
+                          item.cochesComanda
+                            ? response.user.cesta.map((item: any) => {
+                              const cocheEncontrado = this.listaCoches.coches.find(coche => coche.id === item.cochesComanda.id) || null;
+                              return {
+                                coche: cocheEncontrado,  // Guarda el objeto completo de Coche
+                              };
+                            })
+                            : [],
+                          item.totalComanda,
+                          item.metodePagament
+                        )
+                        return comanda
+                      }) : []
                   );
 
                   this.usuari_logat = usuario;

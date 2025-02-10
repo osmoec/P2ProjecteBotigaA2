@@ -13,5 +13,4 @@ export class Comanda {
     this.totalComanda = totalComanda;
     this.metodePagament = metodePagament
   }
-
 }

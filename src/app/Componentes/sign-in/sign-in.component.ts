@@ -60,7 +60,7 @@ export class SignInComponent {
         this.aniversari,
         this.telefon,
         this.contrasena,
-        this.adreca,
+        this.adreca
       )
       // Llamar a la función asincrónica y esperar la respuesta
       this.serveiUsuaris.addUsuario(nouUsuari).then((success) => {
