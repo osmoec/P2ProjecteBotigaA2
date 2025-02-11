@@ -1,47 +1,76 @@
-<form (ngSubmit)="modificarDatos()">
-    <div>
-        <label for="nom">Nombre:</label>
-        <input type="text" id="nom" name="nom" [(ngModel)]="usuariLogat.nombre" required>
+<div class="form-container">
+  <form id="modificarForm" class="container mt-4">
+    <div class="row">
+      <div class="col">
+        <label for="nom" class="form-label">Nom:</label>
+        <input type="text" id="nom" name="nom" class="form-control" [(ngModel)]="usuariLogat.nombre" required>
+      </div>
+      <div class="col">
+        <label for="cognom" class="form-label">Cognom:</label>
+        <input type="text" id="cognom" name="cognom" class="form-control" [(ngModel)]="usuariLogat.apellido" required>
+      </div>
+      <div class="col">
+        <label for="correu" class="form-label">Correu electrònic:</label>
+        <input type="email" id="correu" name="correu" class="form-control" [(ngModel)]="usuariLogat.correo" required>
+      </div>
     </div>
-    <div>
-        <label for="cognom">Apellido:</label>
-        <input type="text" id="cognom" name="cognom" [(ngModel)]="usuariLogat.apellido" required>
+    <div class="row">
+      <div class="col">
+        <label for="adreca" class="form-label">Adreça:</label>
+        <input type="text" id="adreca" name="adreca" class="form-control" [(ngModel)]="usuariLogat.direccion" required>
+      </div>
+      <div class="col">
+        <label for="dni" class="form-label">DNI:</label>
+        <input type="text" id="dni" name="dni" class="form-control" [(ngModel)]="usuariLogat.DNI" required>
+      </div>
+      <div class="col">
+        <label for="cumpleanos" class="form-label">Data de naixement:</label>
+        <input type="date" id="cumpleanos" name="cumpleanos" class="form-control" [(ngModel)]="usuariLogat.cumpleanos" required>
+      </div>
     </div>
-    <div>
-        <label for="correu">Correo:</label>
-        <input type="email" id="correu" name="correu" [(ngModel)]="usuariLogat.correo" required>
+    <div class="row">
+      <div class="col">
+        <label for="telefono" class="form-label">Telèfon:</label>
+        <input type="tel" id="telefono" name="telefono" class="form-control" [(ngModel)]="usuariLogat.telefono" required>
+      </div>
+      <div class="col">
+        <label for="titularTarjeta" class="form-label">Titular de la targeta:</label>
+        <input type="text" id="titularTarjeta" name="titularTarjeta" class="form-control" [(ngModel)]="usuariLogat.titularTarjeta">
+      </div>
+      <div class="col">
+        <label for="numeroTarjeta" class="form-label">Número de la targeta:</label>
+        <input type="text" id="numeroTarjeta" name="numeroTarjeta" class="form-control" [(ngModel)]="usuariLogat.numeroTarjeta">
+      </div>
     </div>
-    <div>
-        <label for="adreca">Dirección:</label>
-        <input type="text" id="adreca" name="adreca" [(ngModel)]="usuariLogat.direccion" required>
+    <div class="row">
+      <div class="col">
+        <label for="fechaTarjeta" class="form-label">Data d'expiració de la targeta:</label>
+        <input type="text" id="fechaTarjeta" name="fechaTarjeta" class="form-control" [(ngModel)]="usuariLogat.fechaTarjeta">
+      </div>
+      <div class="col">
+        <label for="CVVTarjeta" class="form-label">CVV de la targeta:</label>
+        <input type="text" id="CVVTarjeta" name="CVVTarjeta" class="form-control" [(ngModel)]="usuariLogat.CVVTarjeta">
+      </div>
     </div>
-    <div>
-        <label for="dni">DNI:</label>
-        <input type="text" id="dni" name="dni" [(ngModel)]="usuariLogat.DNI" required>
+    <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#confirmModal">Desar canvis</button>
+  </form>
+</div>
+
+
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmModalLabel">Confirmació</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Estas segur que vols desar els canvis?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel·lar</button>
+        <button type="button" class="btn btn-primary" (click)="modificarDatos()">Desar</button>
+      </div>
     </div>
-    <div>
-        <label for="cumpleanos">Fecha de Nacimiento:</label>
-        <input type="date" id="cumpleanos" name="cumpleanos" [(ngModel)]="usuariLogat.cumpleanos" required>
-    </div>
-    <div>
-        <label for="telefono">Teléfono:</label>
-        <input type="tel" id="telefono" name="telefono" [(ngModel)]="usuariLogat.telefono" required>
-    </div>
-    <div>
-        <label for="titularTarjeta">Titular de la Tarjeta:</label>
-        <input type="text" id="titularTarjeta" name="titularTarjeta" [(ngModel)]="usuariLogat.titularTarjeta">
-    </div>
-    <div>
-        <label for="numeroTarjeta">Número de la Tarjeta:</label>
-        <input type="text" id="numeroTarjeta" name="numeroTarjeta" [(ngModel)]="usuariLogat.numeroTarjeta">
-    </div>
-    <div>
-        <label for="fechaTarjeta">Fecha de Expiración de la Tarjeta:</label>
-        <input type="text" id="fechaTarjeta" name="fechaTarjeta" [(ngModel)]="usuariLogat.fechaTarjeta">
-    </div>
-    <div>
-        <label for="CVVTarjeta">CVV de la Tarjeta:</label>
-        <input type="text" id="CVVTarjeta" name="CVVTarjeta" [(ngModel)]="usuariLogat.CVVTarjeta">
-    </div>
-    <button type="submit">Guardar cambios</button>
-</form>
+  </div>
+</div>

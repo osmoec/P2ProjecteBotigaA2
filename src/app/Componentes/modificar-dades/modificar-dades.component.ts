@@ -58,5 +58,7 @@ export class ModificarDadesComponent implements OnInit {
     } else {
       alert('No se pudo actualizar los datos.');
     }
+    window.location.reload();
   }
+
 }

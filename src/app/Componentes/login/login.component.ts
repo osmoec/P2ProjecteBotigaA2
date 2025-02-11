@@ -27,7 +27,8 @@ export class LoginComponent {
 
   usuari_notrobat = '';
 
-  constructor(protected serveiUsuaris: ServeiUsuarisService) {
+
+  constructor(private router: Router,protected serveiUsuaris: ServeiUsuarisService) {
 
   }
 
@@ -55,6 +56,9 @@ export class LoginComponent {
       this.usuari_notrobat = "L'usuari o la contrasenya no és correcta";
     }
   }
+  modificarDades() {
 
+    this.router.navigate(['/modificarDades']);
+  }
 
 }
