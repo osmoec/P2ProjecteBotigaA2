@@ -11,7 +11,7 @@ import {SobrenosotrosComponent} from './sobrenosotros/sobrenosotros.component';
 import {RecuperaciocontComponent} from './recuperaciocont/recuperaciocont.component';
 import {RecuperaciousuariComponent} from './recuperaciousuari/recuperaciousuari.component';
 import {CanvicontrasenyaComponent} from './canvicontrasenya/canvicontrasenya.component';
-import {ConfirmarCompteComponent} from '../confirmar-compte/confirmar-compte.component';
+import {ConfirmarCompteComponent} from './confirmar-compte/confirmar-compte.component';
 import {ModificarDadesComponent} from './modificar-dades/modificar-dades.component';
 
 export const routes: Routes = [

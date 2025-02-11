@@ -11,8 +11,8 @@ export class Usuario {
   telefono: string;
   contrasena: string;
   direccion: string;
-  clauUnica: string;
-  usuariConfirmat: boolean;
+  clauUnica?: string;
+  usuariConfirmat?: boolean;
   titularTarjeta?: string;
   numeroTarjeta?: string;
   fechaTarjeta?: string;
@@ -24,7 +24,7 @@ export class Usuario {
   constructor(
     nombre: string, apellido: string, correo: string, usuario: string, DNI: string,
     cumpleanos: Date, telefono: string, contrasena: string, direccion: string,
-    clauUnica: string,
+    clauUnica?: string,usuariConfirmat?: boolean,
     cesta?: { coche: Coche, quantity: number }[],
     titularTarjeta?: string, numeroTarjeta?: string, fechaTarjeta?: string, CVVTarjeta?: string,
     comandas?: Comanda[]
@@ -38,8 +38,8 @@ export class Usuario {
     this.telefono = telefono;
     this.contrasena = contrasena;
     this.direccion = direccion;
-    this.clauUnica = clauUnica;
-    this.usuariConfirmat = false;
+    this.clauUnica = clauUnica || undefined;
+    this.usuariConfirmat = usuariConfirmat || undefined;
     this.comandas = comandas || [];
     this.cesta = cesta || []
     this.titularTarjeta = titularTarjeta || undefined
@@ -57,6 +57,10 @@ export class Usuario {
 
   public guardarDatosCesta(cesta: { coche: Coche, quantity: number }[]) {
     this.cesta = cesta;
+  }
+
+  public getUsuariConfirmat(){
+    return this.usuariConfirmat
   }
 }
 

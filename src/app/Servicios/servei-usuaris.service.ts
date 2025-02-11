@@ -84,6 +84,7 @@ export class ServeiUsuarisService {
                   }
 
                   // Crear el objeto usuario con validación de datos opcionales
+                  console.log(response.user.clauUnica)
                   const usuario = new Usuario(
                       response.user.nombre || '',
                       response.user.apellido || '',
@@ -94,6 +95,8 @@ export class ServeiUsuarisService {
                       response.user.telefono || '',
                       contrasena,
                       response.user.direccion || '',
+                      response.user.clauUnica,
+                      response.user.usuariConfirmat,
                     response.user.cesta
                       ? response.user.cesta.map((item: any) => {
                         const cocheEncontrado = this.listaCoches.coches.find(coche => coche.id === item.coche.id) || null;
@@ -126,15 +129,20 @@ export class ServeiUsuarisService {
                       }) : []
                   );
 
-                  this.usuari_logat = usuario;
-                  console.log('✅ Datos cargados correctamente:', this.usuari_logat);
-                  this.actualizarEstadoSesion()
+                  if (usuario.getUsuariConfirmat() === true) {
+                    this.usuari_logat = usuario;
+                    console.log('✅ Datos cargados correctamente:', this.usuari_logat);
+                    this.actualizarEstadoSesion();
 
-                  if (recordar) {
-                    this.recordarUsuario(usuariId, contrasena);
+                    if (recordar) {
+                      this.recordarUsuario(usuariId, contrasena);
+                    }
+
+                    resolve(true); // Devuelve true si todo fue exitoso
+                  } else {
+                    console.warn('⚠️ Usuario no verificado:', response.message);
+                    resolve(false); // Devuelve false si el usuario no ha sido confirmado
                   }
-
-                  resolve(true); // Devuelve true si todo fue exitoso
                 } else {
                   console.warn('⚠️ Error en la carga de datos:', response.message);
                   resolve(false); // Devuelve false si el backend devuelve error
