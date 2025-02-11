@@ -38,7 +38,10 @@
       <li class="list-group-item"><strong>Adreça:</strong> {{ this.adreca }}</li>
       <li class="list-group-item"><strong>DNI:</strong> {{ this.dni }}</li>
     </ul>
-    <button routerLink="/modificarDades">Modificar dades</button>
+    <br>
+    <button type="button" class="btn btn-modificar-dades" (click)="modificarDades()">
+      Modificar dades
+    </button>
   </div>
 </article>
 

@@ -28,7 +28,8 @@ export class LoginComponent {
 
   usuari_notrobat = '';
 
-  constructor(protected serveiUsuaris: ServeiUsuarisService, public http: HttpClient) {
+
+  constructor(private router: Router,protected serveiUsuaris: ServeiUsuarisService) {
 
   }
 
@@ -56,11 +57,9 @@ export class LoginComponent {
       this.usuari_notrobat = "L'usuari o la contrasenya no és correcta";
     }
   }
+  modificarDades() {
 
-
-  /*public recuperarCorreu(){
-    let usuari = {nom: this.usuariA.usuari,email: this.usuariA.correo}
-    this.http.put<any>('http://localhost:3080/mail',usuari).subscribe()
-  }*/
+    this.router.navigate(['/modificarDades']);
+  }
 
 }
