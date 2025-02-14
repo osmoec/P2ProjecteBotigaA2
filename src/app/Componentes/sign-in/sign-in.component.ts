@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Usuario } from '../../Clases/Usuario.model';
 import { ServeiUsuarisService } from '../../Servicios/servei-usuaris.service';
 import { NgIf } from '@angular/common';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 
 
 @Component({
@@ -51,11 +51,31 @@ export class SignInComponent {
     return true;
   }
 
-  public registro() {
-    if (this.validarDatos()) {
+  public async noCoincidencies(){
+    let promesa = new Promise(async (resolve, reject) => {
+      let req = new HttpParams().set("usuari", this.usuari)
+      let res = this.http.get<any>('http://localhost:3080/usuari/conicidencies', {params: req}).subscribe((res)=>{
+        if (res.coin) {
+          resolve(false)
+        } else {
+          resolve(true)
+        }
+      })
+    })
 
+    return promesa;
+  }
+
+  public async registro() {
+  let coinc
+    await this.noCoincidencies().then(
+    (res)=>{
+      coinc = res
+    }
+  )
+    if (this.validarDatos() && coinc) {
       let temp = ""
-      for (let i = 0; i < 10; i++){
+      for (let i = 1; i < 11; i++){
         if ((i % 2) === 0){
           temp = temp + String.fromCharCode(Math.floor((Math.random()*26)+65))
         }

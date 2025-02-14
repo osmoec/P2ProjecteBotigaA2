@@ -54,7 +54,7 @@ export class LoginComponent {
       this.datosUsuario();
       this.serveiUsuaris.actualizarEstadoSesion();
     } else {
-      this.usuari_notrobat = "L'usuari o la contrasenya no és correcta";
+      this.usuari_notrobat = "L'usuari no valid o no comfirmat";
     }
   }
   modificarDades() {

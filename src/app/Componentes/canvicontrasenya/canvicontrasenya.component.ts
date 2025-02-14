@@ -34,7 +34,7 @@ export class CanvicontrasenyaComponent {
   actualitzarCont(){
     if (this.contrasena === this.confContrasena){
       let novaClau = ""
-      for (let i = 0; i < 10; i++){
+      for (let i = 1; i < 11; i++){
         if ((i % 2) === 0){
           novaClau = novaClau + String.fromCharCode(Math.floor((Math.random()*26)+65))
         }
