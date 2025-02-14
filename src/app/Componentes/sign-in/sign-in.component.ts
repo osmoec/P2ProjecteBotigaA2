@@ -117,6 +117,9 @@ export class SignInComponent {
         }
       });
     }
+    else{
+      alert("no es poden inserir usuaris ja creats")
+    }
   }
 
 }
