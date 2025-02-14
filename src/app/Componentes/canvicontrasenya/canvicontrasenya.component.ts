@@ -20,11 +20,11 @@ export class CanvicontrasenyaComponent {
   confContrasena: string = ""
 
 
-  constructor(public http: HttpClient, private router: ActivatedRoute) {
+  constructor(public http: HttpClient, private arouter: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
-    this.router.paramMap.subscribe(params => {
+    this.arouter.paramMap.subscribe(params => {
       // @ts-ignore
       this.usuari = params.get('usuari')
       console.log(this.usuari);
@@ -44,11 +44,12 @@ export class CanvicontrasenyaComponent {
 
       }
 
-      let temp = {usuari: this.router.snapshot.paramMap.get('usuari'), contrasena: this.contrasena, clauUnica: novaClau}
+      let temp = {usuari: this.arouter.snapshot.paramMap.get('usuari'), contrasena: this.contrasena, clauUnica: novaClau}
       console.log(temp)
       this.http.post("http://localhost:3080/usuaris/recuperaciocont",temp).subscribe()
       this.contrasena = ""
       this.confContrasena = ""
+      this.router.navigate(['/home']);
 
     }
     else{
