@@ -49,7 +49,8 @@ export class CanvicontrasenyaComponent {
       this.http.post("http://localhost:3080/usuaris/recuperaciocont",temp).subscribe()
       this.contrasena = ""
       this.confContrasena = ""
-      this.router.navigate(['/home']);
+      alert("Contrasenya canviada correctament")
+      this.router.navigate(['/login']);
 
     }
     else{
