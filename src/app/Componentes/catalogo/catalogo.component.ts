@@ -111,6 +111,5 @@ export class CatalogoComponent implements OnInit,AfterViewInit {
 
 
   }
-
   protected readonly first = first;
 }
