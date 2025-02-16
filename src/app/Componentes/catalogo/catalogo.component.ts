@@ -33,6 +33,9 @@ export class CatalogoComponent implements AfterViewInit {
     this.cochesA = this.listaCoches.coches
   }
 
+  ngOnInit() {
+    this.apiPublicaMarcas()
+  }
   ngAfterViewInit(): void {
 
     if (this.filtreA) {
@@ -87,6 +90,15 @@ export class CatalogoComponent implements AfterViewInit {
 
 
   }
+
+  apiPublicaMarcas() {
+    fetch('http://localhost:3080/api/cotxes')
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+      })
+  }
+
 
   protected readonly first = first;
 }
