@@ -11,6 +11,10 @@ export class ListaVehiculosService {
   constructor(private http: HttpClient) {
     this.leerCochesDesdeArchivo()
   }
+  getMarcasDestacadas() {
+    return this.http.get<any>('/api/cotxes');
+  }
+
 
   leerCochesDesdeArchivo() {
     this.http.get<Coche[]>('/json/cochesCatalogo.json')

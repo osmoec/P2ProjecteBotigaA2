@@ -101,6 +101,31 @@
           </div>
         </div>
       </div>
+      <h2 class="mt-3"><strong>Marcas Destacadas</strong></h2>
+      <div class="linea">
+        <div class="columna" *ngFor="let marca of marcasDestacadas">
+          <div class="bg-ofertes">
+            <div class="card m-1 bg-ofertes">
+              <h3>{{ marca.make_display }} <strong>{{ marca.make_country }}</strong></h3>
+              <p><small>{{ marca.make_display }} marca destacada del mes</small></p>
+              <div class="card-body">
+                <p class="card-text">Descubre más modelos de {{ marca.make_display }} en nuestro catálogo.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="catalogo-container">
+        <aside class="marcas-destacadas">
+          <h3>Marcas Destacadas</h3>
+          <ul>
+            <li *ngFor="let marca of marcasDestacadas">
+              <strong>{{ marca.make_display }}</strong> ({{ marca.make_country }})
+            </li>
+          </ul>
+        </aside>
+      </div>
+
     </div>
   </aside>
 </main>

@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import {Component, ViewChild, AfterViewInit, ElementRef, OnInit} from '@angular/core';
 import { HttpClientModule } from '@angular/common/http'; // Importa HttpClientModule
 import { HttpClient } from '@angular/common/http';
 import { filter, first } from 'rxjs';
@@ -18,7 +18,7 @@ import {ListaVehiculosService} from '../../Servicios/lista-vehiculos.service';
   templateUrl: './catalogo.component.html',
   styleUrls: ['./catalogo.component.css']
 })
-export class CatalogoComponent implements AfterViewInit {
+export class CatalogoComponent implements OnInit,AfterViewInit {
 
   @ViewChild('refrescat') refrescat: ElementRef | undefined;
 
@@ -29,13 +29,34 @@ export class CatalogoComponent implements AfterViewInit {
   filtre: string = "";
   filtreA: boolean = false;
 
-  constructor(private router: Router, private serveiUsuari: ServeiUsuarisService, private listaCoches : ListaVehiculosService) {
+  marcasDestacadas: any[] = [];
+  constructor(private router: Router, private serveiUsuari: ServeiUsuarisService, private listaCoches : ListaVehiculosService,private http: HttpClient) {
     this.cochesA = this.listaCoches.coches
   }
-
-  ngOnInit() {
-    this.apiPublicaMarcas()
+  ngOnInit(): void {
+    this.getMarcasDestacadas();
   }
+
+  getMarcasDestacadas(): void {
+    this.http.get<any>('http://localhost:3080/api/cotxes').subscribe({
+      next: (data) => {
+        if (data?.Makes) {
+          this.marcasDestacadas = this.getRandomMarcas(data.Makes, 5);
+        } else {
+          console.error("Datos inválidos recibidos:", data);
+        }
+      },
+      error: (err) => console.error('Error al obtener marcas destacadas', err)
+    });
+  }
+
+
+
+  getRandomMarcas(marcas: any[], count: number): any[] {
+    const shuffled = marcas.sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+  }
+
   ngAfterViewInit(): void {
 
     if (this.filtreA) {
@@ -90,15 +111,6 @@ export class CatalogoComponent implements AfterViewInit {
 
 
   }
-
-  apiPublicaMarcas() {
-    fetch('http://localhost:3080/api/cotxes')
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-      })
-  }
-
 
   protected readonly first = first;
 }
