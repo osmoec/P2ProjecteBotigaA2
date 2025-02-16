@@ -57,6 +57,9 @@ export class CatalogoComponent implements OnInit,AfterViewInit {
     return shuffled.slice(0, count);
   }
 
+  ngOnInit() {
+    this.apiPublicaMarcas()
+  }
   ngAfterViewInit(): void {
 
     if (this.filtreA) {
@@ -111,6 +114,15 @@ export class CatalogoComponent implements OnInit,AfterViewInit {
 
 
   }
+
+  apiPublicaMarcas() {
+    fetch('http://localhost:3080/api/cotxes')
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+      })
+  }
+
 
   protected readonly first = first;
 }
