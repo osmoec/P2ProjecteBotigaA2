@@ -38,7 +38,13 @@
               <div class="product-info">
                 <h3>{{ coche.name }}</h3>
                 <small>{{ coche.offertext }}</small>
-                <p>{{ coche.price.toLocaleString('es-ES') }} €</p>
+                <p *ngIf="!coche.oferta">{{ coche.price.toLocaleString('es-ES') }} €</p>
+                <p *ngIf="coche.oferta" [ngStyle]="{'text-decoration': 'line-through', 'color': 'gray'}">
+                  {{ coche.price.toLocaleString('es-ES') }} €
+                </p>
+                <p *ngIf="coche.oferta">
+                  {{ (coche.price * (1 - coche.oferta)).toLocaleString('es-ES') }} €
+                </p>
                 <div class="actions">
                   <button type="button" class="btn btn-warning" (click)=" addToCart(coche, +quantity.value)">Afegir a la cistella</button>
                   <br>

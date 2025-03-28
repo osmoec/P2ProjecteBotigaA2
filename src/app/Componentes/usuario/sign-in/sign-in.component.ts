@@ -1,20 +1,19 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Usuario } from '../../../Clases/Usuario.model';
 import { ServeiUsuarisService } from '../../../Servicios/servei-usuaris.service';
 import { NgIf } from '@angular/common';
-import {HttpClient, HttpParams} from '@angular/common/http';
-
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-sign-in',
   standalone: true,
-  imports: [RouterLink, FormsModule, NgIf],
+  imports: [FormsModule, NgIf],
   templateUrl: './sign-in.component.html',
-  styleUrl: './sign-in.component.css'
+  styleUrls: ['./sign-in.component.css']
 })
-export class SignInComponent {
+export class SignInComponent implements OnInit {
   @ViewChild('miInput') miInputRef!: ElementRef;
 
   nom: string = '';
@@ -28,98 +27,58 @@ export class SignInComponent {
   confContrasena: string = '';
   adreca: string = '';
   usuari_ja_registrat = '';
+  captchaCompletado: boolean = false;
 
   constructor(private router: Router, private serveiUsuaris: ServeiUsuarisService, public http: HttpClient) {}
 
+  ngOnInit() {
+    // Agregar el event listener para el mensaje desde el iframe de Doom
+    window.addEventListener('message', this.receiveMessage.bind(this), false);
+  }
+
+  receiveMessage(event: MessageEvent) {
+    if (event.origin !== 'https://doom-captcha.vercel.app') return;
+
+    console.log('Mensaje recibido:', event.data);
+
+    // Si el mensaje es un string que contiene el texto de verificación
+    if (typeof event.data === 'string' && event.data.includes('CAPTCHA verified successfully')) {
+      this.captchaCompletado = true;  // El CAPTCHA se ha completado correctamente
+    }
+  }
+
   public validarDatos(): boolean {
-    if (!this.nom) {alert('Si us plau, completa el teu nom');return false;}
-    if (!this.cognom) {alert('Si us plau, completa el teu cognom');return false;}
-    if (!this.usuari) {alert('Si us plau, completa el teu nom d\'usuari');return false;}
-    if (!this.DNI) {alert('Si us plau, completa el teu DNI');return false;}
+    // Validaciones para los campos del formulario
+    if (!this.nom) { alert('Si us plau, completa el teu nom'); return false; }
+    if (!this.cognom) { alert('Si us plau, completa el teu cognom'); return false; }
+    if (!this.usuari) { alert('Si us plau, completa el teu nom d\'usuari'); return false; }
+    if (!this.DNI) { alert('Si us plau, completa el teu DNI'); return false; }
     if (this.DNI.length !== 9 || isNaN(Number(this.DNI.slice(0, 8))) || this.DNI[8] !== this.DNI[8].toUpperCase()) {
       alert('El DNI ha de ser 8 números seguits d\'una lletra majúscula');
       return false;
     }
-    if (!this.aniversari) {alert('Si us plau, completa la teva data de naixement');return false}
+    if (!this.aniversari) { alert('Si us plau, completa la teva data de naixement'); return false; }
     if (!this.telefon || this.telefon.length != 9) {
       alert('Si us plau, completa el numero de telefon amb el format XXXXXXXXX');
       return false;
     }
-    if (!this.contrasena) {alert('Si us plau, completa la contrasenya');return false;}
-    if (this.contrasena !== this.confContrasena) {alert('Les contrasenyes no coincideixen');return false;}
-    if (!this.adreca) {alert('Si us plau, completa la teva adreça');return false;}
+    if (!this.contrasena) { alert('Si us plau, completa la contrasenya'); return false; }
+    if (this.contrasena !== this.confContrasena) { alert('Les contrasenyes no coincideixen'); return false; }
+    if (!this.adreca) { alert('Si us plau, completa la teva adreça'); return false; }
     return true;
   }
 
-  public async noCoincidencies(){
-    let promesa = new Promise(async (resolve, reject) => {
-      let req = new HttpParams().set("usuari", this.usuari)
-      let res = this.http.get<any>('http://localhost:3080/usuari/conicidencies', {params: req}).subscribe((res)=>{
-        if (res.coin) {
-          resolve(false)
-        } else {
-          resolve(true)
-        }
-      })
-    })
-
-    return promesa;
-  }
-
   public async registro() {
-  let coinc
-    await this.noCoincidencies().then(
-    (res)=>{
-      coinc = res
+    if (!this.captchaCompletado) {
+      alert('Si us plau, completa el captcha abans de registrar-te.');
+      return;
     }
-  )
-    if (this.validarDatos() && coinc) {
-      let temp = ""
-      for (let i = 1; i < 11; i++){
-        if ((i % 2) === 0){
-          temp = temp + String.fromCharCode(Math.floor((Math.random()*26)+65))
-        }
-        else{
-          temp = temp + (Math.floor(Math.random()*26)+65)
-        }
 
-      }
-
-      console.log(temp)
-
-      const nouUsuari = new Usuario(
-        this.nom,
-        this.cognom,
-        this.correu,
-        this.usuari, // ID del usuario
-        this.DNI,
-        this.aniversari,
-        this.telefon,
-        this.contrasena,
-        this.adreca,
-        temp,
-      )
-
-      // Llamar a la función asincrónica y esperar la respuesta
-      this.serveiUsuaris.addUsuario(nouUsuari).then((success) => {
-        if (success) {
-          // ✅ Si el usuario se creó correctamente, continuar con el flujo
-          alert(`Benvingut/da, ${this.nom}!`);
-
-
-
-          this.http.post('http://localhost:3080/usuaris/mailconfusr',{usuariid: this.usuari}).subscribe()
-          this.serveiUsuaris.guardarDatos(nouUsuari);
-          this.router.navigate(['/login']);
-        } else {
-          // ❌ Si hubo un error, mostrar un mensaje
-          alert("Error en el registro. Inténtalo de nuevo.");
-        }
-      });
-    }
-    else{
-      alert("no es poden inserir usuaris ja creats")
+    // Validación de datos del formulario
+    if (this.validarDatos()) {
+      alert(`Benvingut/da, ${this.nom}!`);
+      // Redirigir a la página de login
+      this.router.navigate(['/login']);
     }
   }
-
 }
