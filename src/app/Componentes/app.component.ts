@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {RouterLink, RouterOutlet} from '@angular/router';
-import {HeaderComponent} from './header/header.component';
+import {HeaderComponent} from './usuario/header/header.component';
 import {ServeiUsuarisService} from '../Servicios/servei-usuaris.service';
 import {NgIf} from '@angular/common';
 import {Usuario} from '../Clases/Usuario.model';

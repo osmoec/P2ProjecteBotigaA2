@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ServeiUsuarisService } from '../../Servicios/servei-usuaris.service';
-import { Usuario } from '../../Clases/Usuario.model';
+import { ServeiUsuarisService } from '../../../Servicios/servei-usuaris.service';
+import { Usuario } from '../../../Clases/Usuario.model';
 import {FormsModule} from '@angular/forms';
 
 @Component({

@@ -1,10 +1,10 @@
 import {Component, OnInit, viewChild} from '@angular/core';
-import { Usuario } from '../../Clases/Usuario.model';
+import { Usuario } from '../../../Clases/Usuario.model';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import {Router, RouterLink} from '@angular/router';
-import { ServeiUsuarisService } from '../../Servicios/servei-usuaris.service';
-import {routes} from '../app.routes';
+import { ServeiUsuarisService } from '../../../Servicios/servei-usuaris.service';
+import {routes} from '../../app.routes';
 import {HttpClient} from '@angular/common/http';
 
 @Component({

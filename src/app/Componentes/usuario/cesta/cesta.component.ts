@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {ServeiUsuarisService} from '../../Servicios/servei-usuaris.service';
-import {Comanda} from '../../Clases/comanda.model';
+import {ServeiUsuarisService} from '../../../Servicios/servei-usuaris.service';
+import {Comanda} from '../../../Clases/comanda.model';
 import {Router} from '@angular/router';
 import {ConnectorBDService} from '../../Servicios/connector-bd.service';
 

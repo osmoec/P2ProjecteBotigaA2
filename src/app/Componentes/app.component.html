@@ -28,6 +28,12 @@
       <div class="me-2 buttonmen">
         <a type="button" class="btn btn-outline-danger" routerLink="/condiciones">Condicions</a>
       </div>
+      @if (this.serveiUsuaris.usuari_logat_bool === true){
+        <div class="me-2 buttonmen">
+          <a type="button" class="btn btn-outline-danger" routerLink="/condiciones">Condicions</a>
+        </div>
+
+      }
     </div>
     <div class="d-flex flex-row justify-content-md-end justify-content-between align-items-center">
       <a routerLink="/login" class="btn btn-primary me-2" type="button">

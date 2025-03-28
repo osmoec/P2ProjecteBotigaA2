@@ -17,6 +17,7 @@ export class Usuario {
   numeroTarjeta?: string;
   fechaTarjeta?: string;
   CVVTarjeta?: string;
+  esAdmin?: boolean;
 
   cesta: { coche: Coche, quantity: number }[] = [];
   comandas: Comanda[] = [];
@@ -46,6 +47,7 @@ export class Usuario {
     this.numeroTarjeta = numeroTarjeta || undefined
     this.fechaTarjeta = fechaTarjeta || undefined
     this.CVVTarjeta = CVVTarjeta || undefined
+    this.esAdmin = false;
   }
 
   public guardarDatosTarjeta(titular: string, numero: string, fecha: string, CVV: string) {
