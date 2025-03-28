@@ -3,6 +3,7 @@ import {FormsModule} from '@angular/forms';
 import {ServeiUsuarisService} from '../../../Servicios/servei-usuaris.service';
 import {Comanda} from '../../../Clases/comanda.model';
 import {Router} from '@angular/router';
+import {ConnectorBDService} from '../../Servicios/connector-bd.service';
 
 @Component({
   selector: 'app-cesta',
@@ -27,7 +28,7 @@ export class CestaComponent implements OnInit {
     this.rellenarDatosTargeta()
   }
 
-  constructor(protected serveiUsuari: ServeiUsuarisService, private router: Router) {
+  constructor(protected serveiUsuari: ServeiUsuarisService, private router: Router,protected serveiConnector:ConnectorBDService) {
   }
 
   guardarCesta() {
@@ -102,11 +103,48 @@ export class CestaComponent implements OnInit {
       else{
         alert("Selecciona metode de pagament")
       }
-
     }
     else{
       alert("Ho sento, no es poden comprar productes amb el carro buit o sense haver iniciat sessio")
     }
+  this.guardarProducte();
+
+  }
+  guardarProducte(){
+    const usuari = this.serveiUsuari.usuari_logat;
+
+    if (!usuari || !usuari.cesta || usuari.cesta.length === 0) {
+      console.error("No hi ha cap usuari o la cistella esta buida");
+      return;
+    }
+
+    const factura = {
+      client_id:this.serveiUsuari.usuari_logat,
+      data_creacio: Date.now(),
+      total_comanda: this.calcularTotals(),
+      metode_pagament: this.metode
+    }
+    const factura_detalls = usuari.cesta.map(coche => ({
+      id_factura: this.serveiUsuari.usuari_logat,
+      id_cotxe: coche.coche.id,
+      quantitat: coche.quantity
+    }));
+
+    console.log("Factura:", factura);
+    console.log("Factura Detalls:", factura_detalls);
+
+    const dadesFactura = {
+      ...factura,
+      cotxes: factura_detalls
+    };
+    this.serveiConnector.registrarFactura(dadesFactura).subscribe(
+      (response) => {
+        console.log('Factura registrada correctament', response);
+      },
+      (error) => {
+        console.error('Error al registrar la factura', error);
+      }
+    );
 
   }
 
