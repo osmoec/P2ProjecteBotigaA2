@@ -113,31 +113,19 @@ export class CestaComponent implements OnInit {
   guardarProducte(){
     const usuari = this.serveiUsuari.usuari_logat;
 
-    if (!usuari || !usuari.cesta || usuari.cesta.length === 0) {
-      console.error("No hi ha cap usuari o la cistella esta buida");
-      return;
-    }
-
-    const factura = {
+    const factura = usuari!.cesta.map(coche => ({
       client_id:this.serveiUsuari.usuari_logat,
       data_creacio: Date.now(),
       total_comanda: this.calcularTotals(),
-      metode_pagament: this.metode
-    }
-    const factura_detalls = usuari.cesta.map(coche => ({
+      metode_pagament: this.metode,
+
       id_factura: this.serveiUsuari.usuari_logat,
       id_cotxe: coche.coche.id,
       quantitat: coche.quantity
     }));
 
     console.log("Factura:", factura);
-    console.log("Factura Detalls:", factura_detalls);
-
-    const dadesFactura = {
-      ...factura,
-      cotxes: factura_detalls
-    };
-    this.serveiConnector.registrarFactura(dadesFactura).subscribe(
+    this.serveiConnector.registrarFactura(factura).subscribe(
       (response) => {
         console.log('Factura registrada correctament', response);
       },
