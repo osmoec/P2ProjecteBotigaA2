@@ -3,7 +3,7 @@ import {FormsModule} from '@angular/forms';
 import {ServeiUsuarisService} from '../../../Servicios/servei-usuaris.service';
 import {Comanda} from '../../../Clases/comanda.model';
 import {Router} from '@angular/router';
-import {ConnectorBDService} from '../../Servicios/connector-bd.service';
+import {ConnectorBDService} from '../../../Servicios/connector-bd.service'
 
 @Component({
   selector: 'app-cesta',
@@ -46,7 +46,7 @@ export class CestaComponent implements OnInit {
     this.router.navigate(['/cesta']);
   }
 
-  calcularTotals() {
+  calcularTotals():number {
     if ((this.serveiUsuari.usuari_logat && this.serveiUsuari.usuari_logat.cesta.length != 0) && this.serveiUsuari.usuari_logat_bool) {
       this.totalSenseTaxes = 0
 
@@ -57,7 +57,10 @@ export class CestaComponent implements OnInit {
       }
 
       this.totalAmbTaxes = (this.totalSenseTaxes * 0.21) + this.totalSenseTaxes
+
+      return this.totalAmbTaxes;
     }
+    return 0;
   }
 
   guardarComanda(totalComandaC: number, cochesComandaC: any[],metodePagament: string) {
@@ -83,6 +86,7 @@ export class CestaComponent implements OnInit {
   }
 
   guardarYCrearComanda() {
+    this.guardarProducte();
     if ((this.serveiUsuari.usuari_logat && this.serveiUsuari.usuari_logat.cesta.length != 0) && this.serveiUsuari.usuari_logat_bool){
       if (this.metode != ""){
       this.guardarComanda(this.totalAmbTaxes, this.serveiUsuari.usuari_logat!.cesta,this.metode);
@@ -107,34 +111,39 @@ export class CestaComponent implements OnInit {
     else{
       alert("Ho sento, no es poden comprar productes amb el carro buit o sense haver iniciat sessio")
     }
-  this.guardarProducte();
 
   }
-  guardarProducte(){
+  guardarProducte() {
     const usuari = this.serveiUsuari.usuari_logat;
 
-    const factura = usuari!.cesta.map(coche => ({
-      client_id:this.serveiUsuari.usuari_logat,
-      data_creacio: Date.now(),
-      total_comanda: this.calcularTotals(),
-      metode_pagament: this.metode,
-
-      id_factura: this.serveiUsuari.usuari_logat,
+    const cotxes = usuari!.cesta.map(coche => ({
       id_cotxe: coche.coche.id,
       quantitat: coche.quantity
     }));
 
-    console.log("Factura:", factura);
+    const factura = {
+      client_id: usuari!.nombre,
+      data_creacio: new Date().toISOString().split('T')[0],
+      total_comanda: this.calcularTotals(),
+      metode_pagament: this.metode,
+      cotxes: cotxes
+    };
+
+
+
+    console.log("Factura creada correctament:", factura);
+
     this.serveiConnector.registrarFactura(factura).subscribe(
-      (response) => {
+      (response: any) => {
         console.log('Factura registrada correctament', response);
       },
-      (error) => {
+      (error: any) => {
         console.error('Error al registrar la factura', error);
       }
     );
-
   }
+
+
 
   rellenarDatosTargeta() {
     this.titular = this.serveiUsuari.usuari_logat?.titularTarjeta || ""
