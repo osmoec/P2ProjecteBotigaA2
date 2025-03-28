@@ -13,6 +13,7 @@ export class ListaVehiculosService {
   constructor(private http: HttpClient) {
     console.log("Se reseteo el servicio coches")
     this.cargarDatos()
+    console.log(this.coches)
   }
   getMarcasDestacadas() {
     return this.http.get<any>('/api/cotxes');
@@ -30,7 +31,8 @@ export class ListaVehiculosService {
                 car.price,
                 car.tags,
                 car.offertext,
-                car.imgC
+                car.imgC,
+                car.oferta
               )
               this.coches.push(coche)
             });
