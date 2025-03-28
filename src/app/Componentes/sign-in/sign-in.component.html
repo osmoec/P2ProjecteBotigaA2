@@ -50,15 +50,24 @@
         <label class="form-label">Adreça</label>
         <input name="adreca" type="text" placeholder="Rda. de Sant Antoni, 4, Ciutat Vella, 08001 Barcelona" class="form-control" required [(ngModel)]="adreca">
       </div>
+
+      <!-- ✅ Mensaje de captcha -->
+      <p *ngIf="captchaCompletado" class="text-success">✅ Captcha completado correctamente.</p>
+
+      <!-- ✅ Botón deshabilitado si el captcha no está completado -->
       <div class="d-flex flex-row mb-3 justify-content-between gap-3">
         <div>
-          <button type="submit" class="btn btn-primary">Crear</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!captchaCompletado">Crear</button>
         </div>
         <div>
           <button type="reset" class="btn btn-primary">Reiniciar</button>
         </div>
       </div>
     </form>
+
+    <!-- ✅ Doom Captcha -->
+    <iframe id="doomCaptcha" src="https://doom-captcha.vercel.app/" width="500" height="500" style="border:none;"></iframe>
+
     <p *ngIf="usuari_ja_registrat">{{ usuari_ja_registrat }}</p>
   </div>
 </article>
