@@ -5,11 +5,11 @@ import { filter, first } from 'rxjs';
 import { Carousel } from 'primeng/carousel';
 import { PrimeTemplate } from 'primeng/api';
 import { FormsModule } from '@angular/forms';
-import { Coche } from '../../Clases/Coche.model';
-import { ServeiUsuarisService } from '../../Servicios/servei-usuaris.service';
+import { Coche } from '../../../Clases/Coche.model';
+import { ServeiUsuarisService } from '../../../Servicios/servei-usuaris.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import {ListaVehiculosService} from '../../Servicios/lista-vehiculos.service';
+import {ListaVehiculosService} from '../../../Servicios/lista-vehiculos.service';
 
 @Component({
   selector: 'app-catalogo',

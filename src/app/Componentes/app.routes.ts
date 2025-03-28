@@ -1,18 +1,22 @@
 import { Routes } from '@angular/router';
 
-import {ContactoComponent} from './contacto/contacto.component';
-import {LoginComponent} from './login/login.component';
-import {CestaComponent} from './cesta/cesta.component';
-import {CondicionesComponent} from './condiciones/condiciones.component';
-import {IndiceComponent} from './indice/indice.component';
-import {SignInComponent} from './sign-in/sign-in.component';
-import {CatalogoComponent} from './catalogo/catalogo.component';
-import {SobrenosotrosComponent} from './sobrenosotros/sobrenosotros.component';
-import {RecuperaciocontComponent} from './recuperaciocont/recuperaciocont.component';
-import {RecuperaciousuariComponent} from './recuperaciousuari/recuperaciousuari.component';
-import {CanvicontrasenyaComponent} from './canvicontrasenya/canvicontrasenya.component';
-import {ConfirmarCompteComponent} from './confirmar-compte/confirmar-compte.component';
-import {ModificarDadesComponent} from './modificar-dades/modificar-dades.component';
+import {ContactoComponent} from './usuario/contacto/contacto.component';
+import {LoginComponent} from './usuario/login/login.component';
+import {CestaComponent} from './usuario/cesta/cesta.component';
+import {CondicionesComponent} from './usuario/condiciones/condiciones.component';
+import {IndiceComponent} from './usuario/indice/indice.component';
+import {SignInComponent} from './usuario/sign-in/sign-in.component';
+import {CatalogoComponent} from './usuario/catalogo/catalogo.component';
+import {SobrenosotrosComponent} from './usuario/sobrenosotros/sobrenosotros.component';
+import {RecuperaciocontComponent} from './usuario/recuperaciocont/recuperaciocont.component';
+import {RecuperaciousuariComponent} from './usuario/recuperaciousuari/recuperaciousuari.component';
+import {CanvicontrasenyaComponent} from './usuario/canvicontrasenya/canvicontrasenya.component';
+import {ConfirmarCompteComponent} from './usuario/confirmar-compte/confirmar-compte.component';
+import {ModificarDadesComponent} from './usuario/modificar-dades/modificar-dades.component';
+import {AfeguirProducteComponent} from './Administrador/afeguir-producte/afeguir-producte.component';
+import {
+  EnquestaSadisfacioClientsComponent
+} from './usuario/enquesta-sadisfacio-clients/enquesta-sadisfacio-clients.component';
 
 export const routes: Routes = [
   {path: '', component: IndiceComponent},
@@ -29,6 +33,9 @@ export const routes: Routes = [
   {path: '3z03u2Yn/:usuari', component: CanvicontrasenyaComponent},
   {path: 'confirmacioCompte', component: ConfirmarCompteComponent},
   {path: 'modificarDades',component: ModificarDadesComponent},
-  {path: 'sobrenosotros', component: SobrenosotrosComponent}];
+  {path: 'sobrenosotros', component: SobrenosotrosComponent},
+  {path: 'afeguirCotxe', component: AfeguirProducteComponent},
+  {path: 'enquestaClient', component: EnquestaSadisfacioClientsComponent}
+];
 
 

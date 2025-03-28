@@ -1,8 +1,8 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { Usuario } from '../../Clases/Usuario.model';
-import { ServeiUsuarisService } from '../../Servicios/servei-usuaris.service';
+import { Usuario } from '../../../Clases/Usuario.model';
+import { ServeiUsuarisService } from '../../../Servicios/servei-usuaris.service';
 import { NgIf } from '@angular/common';
 import {HttpClient, HttpParams} from '@angular/common/http';
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {routes} from '../app.routes';
+import {routes} from '../../app.routes';
 import {Router, RouterLink} from '@angular/router';
 import {firstValueFrom} from 'rxjs';
 
