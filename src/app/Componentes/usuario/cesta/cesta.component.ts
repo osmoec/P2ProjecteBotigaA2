@@ -1,4 +1,3 @@
-/*
 import {Component, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {ServeiUsuarisService} from '../../../Servicios/servei-usuaris.service';
@@ -90,12 +89,12 @@ export class CestaComponent implements OnInit {
     this.guardarProducte();
     if ((this.serveiUsuari.usuari_logat && this.serveiUsuari.usuari_logat.cesta.length != 0) && this.serveiUsuari.usuari_logat_bool){
       if (this.metode != ""){
-      this.guardarComanda(this.totalAmbTaxes, this.serveiUsuari.usuari_logat!.cesta,this.metode);
+        this.guardarComanda(this.totalAmbTaxes, this.serveiUsuari.usuari_logat!.cesta,this.metode);
 
-      if (this.recordarTarjeta) {
-        this.serveiUsuari.usuari_logat?.guardarDatosTarjeta(this.titular, this.numCompte, this.dataExpiracio, this.cvv)
-      }
-      this.serveiUsuari.guardarDatos(this.serveiUsuari.usuari_logat!)
+        if (this.recordarTarjeta) {
+          this.serveiUsuari.usuari_logat?.guardarDatosTarjeta(this.titular, this.numCompte, this.dataExpiracio, this.cvv)
+        }
+        this.serveiUsuari.guardarDatos(this.serveiUsuari.usuari_logat!)
         this.totalSenseTaxes = 0
         this.totalAmbTaxes = 0
         this.metode = ""
@@ -157,4 +156,3 @@ export class CestaComponent implements OnInit {
     this.metode  = metode;
   }
 }
-*/
