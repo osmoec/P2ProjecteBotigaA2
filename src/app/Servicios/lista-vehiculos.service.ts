@@ -19,6 +19,10 @@ export class ListaVehiculosService {
     return this.http.get<any>('/api/cotxes');
   }
 
+  getCocheById(id_coche: number): Coche | undefined {
+    return this.coches.find(coche => coche.id === id_coche);
+  }
+
   cargarDatos(): Promise<boolean> {
     return new Promise((resolve) => {
       this.http.get<any>(`http://localhost:3080/db/cotxes`)

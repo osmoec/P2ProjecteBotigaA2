@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<body>
+<article>
+
+  <div class="container my-4">
+    <h2 class="text-center mb-4">📋 Lista de Ofertas (Administrador)</h2>
+
+    <div class="row">
+      @for (oferta of ofertas; track oferta) {
+        <div class="col-12">
+          <div id="oferta{{ oferta.id_oferta }}" class="producte mb-3 shadow-sm">
+            <div class="row g-0 align-items-center">
+
+              <!-- Datos de la Oferta -->
+              <div class="col-md-4 p-3">
+                <h4 class="text-primary">🛒 Oferta #{{ oferta.id_oferta }}</h4>
+                <p><strong>Descuento:</strong> <span class="badge bg-success">{{ oferta.oferta }}%</span></p>
+                <p><strong>Inicio:</strong> {{ oferta.inicio_oferta | date: 'dd/MM/yyyy' }}</p>
+                <p><strong>Fin:</strong> {{ oferta.final_oferta | date: 'dd/MM/yyyy' }}</p>
+                <button class="btn btn-warning me-2">
+                  ✏️ Editar
+                </button>
+                <button class="btn btn-danger">
+                  ❌ Eliminar
+                </button>
+              </div>
+
+              <!-- Datos del Coche Relacionado -->
+              <div class="col-md-5 p-3">
+                <div *ngIf="listaVehiculos.getCocheById(oferta.id_coche) as coche">
+                  <h5 class="text-dark">🚗 {{ coche.name }}</h5>
+                  <p><strong>Precio:</strong> <span class="text-success">{{ coche.price.toLocaleString('es-ES') }}€</span></p>
+                  <p><strong>Descuento:</strong> <span class="text-success">{{  (coche.price * (oferta.oferta) / 100).toLocaleString('es-ES') }}€</span></p>
+                </div>
+                <div *ngIf="!listaVehiculos.getCocheById(oferta.id_coche)" class="alert alert-danger">
+                  🚨 Coche no encontrado para esta oferta
+                </div>
+
+              </div>
+
+              <!-- Imagen del Coche y Botones -->
+              <img *ngIf="listaVehiculos.getCocheById(oferta.id_coche)?.imgC?.[0]"
+                   [src]="listaVehiculos.getCocheById(oferta.id_coche)?.imgC?.[0]"
+                   alt="Imagen de {{ listaVehiculos.getCocheById(oferta.id_coche)?.name }}"
+                   class="img-fluid rounded col-md-3">
+
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+</article>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+<script>
+  var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+  var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+    return new bootstrap.Popover(popoverTriggerEl)
+  })
+</script>
+</body>

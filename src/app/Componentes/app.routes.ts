@@ -17,6 +17,7 @@ import {AfeguirProducteComponent} from './Administrador/afeguir-producte/afeguir
 import {
   EnquestaSadisfacioClientsComponent
 } from './usuario/enquesta-sadisfacio-clients/enquesta-sadisfacio-clients.component';
+import {OfertasComponent} from './Administrador/ofertas/ofertas.component';
 
 export const routes: Routes = [
   {path: '', component: IndiceComponent},
@@ -35,7 +36,8 @@ export const routes: Routes = [
   {path: 'modificarDades',component: ModificarDadesComponent},
   {path: 'sobrenosotros', component: SobrenosotrosComponent},
   {path: 'afeguirCotxe', component: AfeguirProducteComponent},
-  {path: 'enquestaClient', component: EnquestaSadisfacioClientsComponent}
+  {path: 'enquestaClient', component: EnquestaSadisfacioClientsComponent},
+  {path: 'ofertas', component: OfertasComponent}
 ];
 
 

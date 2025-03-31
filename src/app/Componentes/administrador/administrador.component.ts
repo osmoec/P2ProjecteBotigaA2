@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-administrador',
   standalone: true,
-  imports: [],
+  imports: [
+    FormsModule
+  ],
   templateUrl: './administrador.component.html',
   styleUrl: './administrador.component.css'
 })
