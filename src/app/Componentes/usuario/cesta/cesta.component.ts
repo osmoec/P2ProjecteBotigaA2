@@ -116,6 +116,29 @@ export class CestaComponent implements OnInit {
   guardarProducte() {
     const usuari = this.serveiUsuari.usuari_logat;
 
+    let errors = []
+
+    if (!usuari?.cesta || usuari.cesta.length === 0) {
+      errors.push("No pots fer una compra amb la cistella buida.");
+    }
+
+    if (!this.metode) {
+      errors.push("Si us plau, selecciona un mètode de pagament.");
+    }
+
+    if (this.metode === "tarjeta") {
+      if (!this.titular) errors.push("El camp 'Titular' és obligatori.");
+      if (!this.numCompte) errors.push("El camp 'Número de compte' és obligatori.");
+      if (!this.dataExpiracio) errors.push("El camp 'Data d'expiració' és obligatori.");
+      if (!this.cvv) errors.push("El camp 'CVV' és obligatori.");
+    }
+
+    if (errors.length > 0) {
+      console.error("Errors detectats:", errors);
+      alert(errors.join("\n"));
+      return;
+    }
+
     const cotxes = usuari!.cesta.map(coche => ({
       id_cotxe: coche.coche.id,
       quantitat: coche.quantity

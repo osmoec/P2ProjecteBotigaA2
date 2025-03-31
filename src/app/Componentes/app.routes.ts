@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 import {ContactoComponent} from './usuario/contacto/contacto.component';
 import {LoginComponent} from './usuario/login/login.component';
-//import {CestaComponent} from './usuario/cesta/cesta.component';
+import {CestaComponent} from './usuario/cesta/cesta.component';
 import {CondicionesComponent} from './usuario/condiciones/condiciones.component';
 import {IndiceComponent} from './usuario/indice/indice.component';
 import {SignInComponent} from './usuario/sign-in/sign-in.component';
@@ -23,7 +23,7 @@ export const routes: Routes = [
   {path: '', component: IndiceComponent},
   {path: 'contacto', component: ContactoComponent},
   {path: 'login', component: LoginComponent},
-//  {path: 'cesta', component: CestaComponent},
+  {path: 'cesta', component: CestaComponent},
   {path: 'condiciones', component: CondicionesComponent},
   {path: 'home', component: IndiceComponent},
   {path: 'signin', component: SignInComponent},
