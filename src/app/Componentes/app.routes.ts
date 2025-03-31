@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 import {ContactoComponent} from './usuario/contacto/contacto.component';
 import {LoginComponent} from './usuario/login/login.component';
-import {CestaComponent} from './usuario/cesta/cesta.component';
+//import {CestaComponent} from './usuario/cesta/cesta.component';
 import {CondicionesComponent} from './usuario/condiciones/condiciones.component';
 import {IndiceComponent} from './usuario/indice/indice.component';
 import {SignInComponent} from './usuario/sign-in/sign-in.component';
@@ -17,12 +17,13 @@ import {AfeguirProducteComponent} from './Administrador/afeguir-producte/afeguir
 import {
   EnquestaSadisfacioClientsComponent
 } from './usuario/enquesta-sadisfacio-clients/enquesta-sadisfacio-clients.component';
+import {AdministradorComponent} from './Administrador/administrador.component';
 
 export const routes: Routes = [
   {path: '', component: IndiceComponent},
   {path: 'contacto', component: ContactoComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'cesta', component: CestaComponent},
+//  {path: 'cesta', component: CestaComponent},
   {path: 'condiciones', component: CondicionesComponent},
   {path: 'home', component: IndiceComponent},
   {path: 'signin', component: SignInComponent},
@@ -35,7 +36,8 @@ export const routes: Routes = [
   {path: 'modificarDades',component: ModificarDadesComponent},
   {path: 'sobrenosotros', component: SobrenosotrosComponent},
   {path: 'afeguirCotxe', component: AfeguirProducteComponent},
-  {path: 'enquestaClient', component: EnquestaSadisfacioClientsComponent}
+  {path: 'enquestaClient', component: EnquestaSadisfacioClientsComponent},
+  {path:'er6oo890$pwkjry!g78feoe3krju89o890$pwkjfedw44ler6oo890$pwkjry!g78fere=irgj¨ewdl', component: AdministradorComponent}
 ];
 
 

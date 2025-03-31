@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {ConnectorBDService} from '../../../Servicios/connector-bd.service';
+import {ServeiUsuarisService} from '../../../Servicios/servei-usuaris.service';
 
 @Component({
   selector: 'app-afeguir-producte',
@@ -26,10 +27,14 @@ export class AfeguirProducteComponent {
 
   arxius: File[] = []
 
-  constructor(public http: HttpClient, public connectorbd: ConnectorBDService) {
+  esAdmin: boolean | undefined = false
+
+  constructor(public http: HttpClient, public connectorbd: ConnectorBDService, public serveiUsuari: ServeiUsuarisService) {
   }
 
   ngOnInit() {
+    this.serveiUsuari.noAdmin()
+
     this.connectorbd.rebreCategories().subscribe(res=>{
       this.categories = res;
     })
@@ -88,6 +93,12 @@ export class AfeguirProducteComponent {
               })
 
               this.connectorbd.desarCotxe(formulari)
+
+              this.categoriesEscollides.length = 0
+              this.arxius.length = 0
+              this.textoferta = ""
+              this.nom = ""
+              this.preu = 0
             }
           }
         }
@@ -101,7 +112,7 @@ export class AfeguirProducteComponent {
 
     let check = document.getElementById(categoria) as HTMLInputElement;
 
-    if (check.checked == true){
+    if (check.checked){
       if (this.categoriesEscollides.length < 3){
         check.checked = true
         this.categoriesEscollides.push(categoria);

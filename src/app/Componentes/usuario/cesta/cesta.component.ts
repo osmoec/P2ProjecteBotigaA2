@@ -1,3 +1,4 @@
+/*
 import {Component, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {ServeiUsuarisService} from '../../../Servicios/servei-usuaris.service';
@@ -156,3 +157,4 @@ export class CestaComponent implements OnInit {
     this.metode  = metode;
   }
 }
+*/

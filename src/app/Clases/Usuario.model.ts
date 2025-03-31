@@ -64,5 +64,13 @@ export class Usuario {
   public getUsuariConfirmat(){
     return this.usuariConfirmat
   }
+
+  public setAdmin(esAdmin: boolean) {
+    this.esAdmin = esAdmin
+  }
+
+  public getAdmin(){
+    return this.esAdmin
+  }
 }
 

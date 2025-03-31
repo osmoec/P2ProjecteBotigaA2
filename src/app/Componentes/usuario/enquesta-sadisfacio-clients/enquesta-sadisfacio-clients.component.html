@@ -1,1 +1,18 @@
-<p>enquesta-sadisfacio-clients works!</p>
+<form>
+  <h1>enquesta sadisfacio clients</h1>
+
+  <label>Quin es el teu grau de sadisfacció amb els nostre producte?</label>
+  <input id="grausadisfacioproducte" [(ngModel)]="grauSadisfacioProducte" name="grausadisfacioproducte" type="number" max="100" min="0">
+
+  <label>Quin es el teu grau de sadisfacció amb el servei al client venta/post venta de BobbyCotxes?</label>
+  <input id="grausadisfacioservei" [(ngModel)]="grauSadisfacioServei" name="grausadisfacioservei" type="number" max="100" min="0">
+
+  <label>Del 1 al 10 quina nota de recomenació de BobbyCotxes donaries?</label>
+  <input id="recomenacio" [(ngModel)]="notaRecomenacio" name="recomenacio" type="number" max="100" min="0">
+
+  <label>Algun comentari en general de millora o recomenacio per l'empresa? (no es obligatori)</label>
+  <input id="comentari" [(ngModel)]="comentari" name="comentari" type="text">
+
+  <button (click)="enviarEnquesta()">envia</button>
+
+</form>

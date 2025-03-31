@@ -3,6 +3,7 @@ import { Usuario } from '../Clases/Usuario.model';
 import { Comanda } from '../Clases/comanda.model';
 import {HttpClient} from '@angular/common/http';
 import {ListaVehiculosService} from './lista-vehiculos.service';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class ServeiUsuarisService {
 
   usuari_logat_bool : boolean = false
 
-  constructor(public http: HttpClient, private listaCoches : ListaVehiculosService) {
+  constructor(public http: HttpClient, private listaCoches : ListaVehiculosService, public router: Router){
     console.log("Se reseteo el servicio de usuario");
     const usuariId = localStorage.getItem('usuario');
     const contrasena = localStorage.getItem('contrasena');
@@ -109,8 +110,10 @@ export class ServeiUsuarisService {
                     response.user.titularTarjeta || undefined,
                     response.user.numeroTarjeta || undefined,
                     response.user.fechaTarjeta || undefined,
-                    response.user.CVVTarjeta || undefined
+                    response.user.CVVTarjeta || undefined,
                   );
+
+                  usuario.setAdmin(response.user.esAdmin);
 
                   if (usuario.getUsuariConfirmat() === true) {
                     this.usuari_logat = usuario;
@@ -120,6 +123,7 @@ export class ServeiUsuarisService {
                     if (recordar) {
                       this.recordarUsuario(usuariId, contrasena);
                     }
+
 
                     resolve(true); // Devuelve true si todo fue exitoso
                   } else {
@@ -160,5 +164,15 @@ export class ServeiUsuarisService {
     localStorage.removeItem('usuario')
     localStorage.removeItem('contrasena')
     localStorage.removeItem('recordar')
+  }
+
+  esAdmin(){
+    return this.usuari_logat?.getAdmin()
+  }
+
+  noAdmin(){
+    if (!this.usuari_logat_bool && !this.usuari_logat?.esAdmin) {
+      this.router.navigate(['home']);
+    }
   }
 }

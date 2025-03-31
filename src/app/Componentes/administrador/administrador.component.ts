@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ServeiUsuarisService} from '../../Servicios/servei-usuaris.service';
 
 @Component({
   selector: 'app-administrador',
@@ -9,4 +10,14 @@ import { Component } from '@angular/core';
 })
 export class AdministradorComponent {
 
+  esAdmin: boolean | undefined = false
+
+  constructor(public serveiUsuaris: ServeiUsuarisService) {
+
+  }
+
+  ngOnInit() {
+    this.serveiUsuaris.noAdmin()
+    this.esAdmin = this.serveiUsuaris.usuari_logat?.getAdmin()
+  }
 }
