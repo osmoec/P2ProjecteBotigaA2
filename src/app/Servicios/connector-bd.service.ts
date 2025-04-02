@@ -20,6 +20,9 @@ export class ConnectorBDService {
   registrarFactura(factura:any):Observable<any> {
     return this.http.post('http://localhost:3080/historial/afegir-factura-detall', factura);
   }
+  consultarHistorial():Observable<any> {
+    return this.http.get('http://localhost:3080/obtenir-historial')
+  }
 
   enviarFormulari(formuari:any) {
     this.http.post('http://localhost:3080/srv/enviarformularisadisfacio',formuari).subscribe()

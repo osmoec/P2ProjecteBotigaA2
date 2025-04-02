@@ -1,1 +1,53 @@
-<p>administrador works!</p>
+<div *ngIf="esAdmin; else noAdmin">
+  <h1>Historial de Factures</h1>
+
+  <table *ngIf="historial?.factures?.length > 0; else noData">
+    <thead>
+    <tr>
+      <th>ID Factura</th>
+      <th>Client ID</th>
+      <th>Data Creació</th>
+      <th>Total Comanda</th>
+      <th>Mètode de Pagament</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let factura of historial.factures">
+      <td>{{ factura.FACTURA_ID }}</td>
+      <td>{{ factura.CLIENT_ID }}</td>
+      <td>{{ factura.DATA_CREACIO | date:'dd/MM/yyyy' }}</td>
+      <td>{{ factura.TOTAL_COMANDA | currency }}</td>
+      <td>{{ factura.METODE_PAGAMENT }}</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h2>Detalls de les Factures</h2>
+
+  <table *ngIf="historial?.detalls?.length > 0; else noData">
+    <thead>
+    <tr>
+      <th>ID Detall</th>
+      <th>ID Factura</th>
+      <th>ID Cotxe</th>
+      <th>Quantitat</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let detall of historial.detalls">
+      <td>{{ detall.ID_FACTURA_DETALL }}</td>
+      <td>{{ detall.ID_FACTURA }}</td>
+      <td>{{ detall.ID_COTXE }}</td>
+      <td>{{ detall.QUANTITAT }}</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noData>
+    <p>No hi ha dades disponibles per mostrar.</p>
+  </ng-template>
+</div>
+
+<ng-template #noAdmin>
+  <p>No tens permisos d'administrador per veure aquesta informació.</p>
+</ng-template>
