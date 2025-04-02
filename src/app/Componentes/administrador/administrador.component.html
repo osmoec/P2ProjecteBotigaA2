@@ -1,44 +1,26 @@
 <div *ngIf="esAdmin; else noAdmin">
-  <h1>Historial de Factures</h1>
+  <h1>Historial de Productes</h1>
 
-  <table *ngIf="historial?.factures?.length > 0; else noData">
+  <table *ngIf="historial?.length > 0; else noData">
     <thead>
     <tr>
       <th>ID Factura</th>
-      <th>Client ID</th>
+      <th>Client</th>
       <th>Data Creació</th>
-      <th>Total Comanda</th>
-      <th>Mètode de Pagament</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let factura of historial.factures">
-      <td>{{ factura.FACTURA_ID }}</td>
-      <td>{{ factura.CLIENT_ID }}</td>
-      <td>{{ factura.DATA_CREACIO | date:'dd/MM/yyyy' }}</td>
-      <td>{{ factura.TOTAL_COMANDA | currency }}</td>
-      <td>{{ factura.METODE_PAGAMENT }}</td>
-    </tr>
-    </tbody>
-  </table>
-
-  <h2>Detalls de les Factures</h2>
-
-  <table *ngIf="historial?.detalls?.length > 0; else noData">
-    <thead>
-    <tr>
-      <th>ID Detall</th>
-      <th>ID Factura</th>
-      <th>ID Cotxe</th>
       <th>Quantitat</th>
+      <th>Nom Cotxe</th>
+      <th>En Oferta</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let detall of historial.detalls">
-      <td>{{ detall.ID_FACTURA_DETALL }}</td>
-      <td>{{ detall.ID_FACTURA }}</td>
-      <td>{{ detall.ID_COTXE }}</td>
-      <td>{{ detall.QUANTITAT }}</td>
+
+    <tr *ngFor="let item of historial">
+      <td>{{ item.FACTURA_ID }}</td>
+      <td>{{ item.CLIENT_NOM }}</td>
+      <td>{{ item.DATA_CREACIO | date:'dd/MM/yyyy' }}</td>
+      <td>{{ item.QUANTITAT }}</td>
+      <td>{{ item.COTXE_NOM }}</td>
+      <td>{{ item.EN_OFERTA === 'Sí' ? 'Sí' : 'No' }}</td>
     </tr>
     </tbody>
   </table>
@@ -49,5 +31,5 @@
 </div>
 
 <ng-template #noAdmin>
-  <p>No tens permisos d'administrador per veure aquesta informació.</p>
+  <p>No tens permisos d'administrador per veure aquesta informacio.</p>
 </ng-template>

@@ -30,10 +30,10 @@ export class AdministradorComponent implements OnInit {
       this.serveiConnector.consultarHistorial().subscribe(
         (data) => {
           console.log(data)
-          this.historial = data;
+          this.historial = data.historial;
         },
         (error) => {
-          console.error('Error en obtenir hhistorial:', error);
+          console.error('Error en obtenir historial:', error);
         }
       );
     }
