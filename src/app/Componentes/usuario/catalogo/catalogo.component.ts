@@ -74,11 +74,22 @@ export class CatalogoComponent implements OnInit,AfterViewInit {
       return;
     }
 
-    const existingItem = this.serveiUsuari.usuari_logat?.cesta.find(item => item.coche.id === coche.id);
-    if (existingItem) {
-      existingItem.quantity += quantity;
+    const existingItem = this.serveiUsuari.usuari_logat?.cesta.find(item => item.coche.id === coche.id);if (existingItem) {
+      const quantitatTotal = existingItem.quantity + quantity;
+
+      if (quantitatTotal <= 99) {
+        existingItem.quantity = quantitatTotal;
+      } else {
+        existingItem.quantity = 99;
+        alert("La quantitat màxima per a aquest cotxe és 99.");
+      }
     } else {
-      this.serveiUsuari.usuari_logat?.cesta.push({ coche, quantity });
+      if (quantity <= 99) {
+        this.serveiUsuari.usuari_logat?.cesta.push({ coche, quantity });
+      } else {
+        this.serveiUsuari.usuari_logat?.cesta.push({ coche, quantity: 99 });
+        alert("La quantitat màxima per a aquest cotxe és 99.");
+      }
     }
     alert("Articulo añadido con éxito");
     this.serveiUsuari.guardarDatos(this.serveiUsuari.usuari_logat!);

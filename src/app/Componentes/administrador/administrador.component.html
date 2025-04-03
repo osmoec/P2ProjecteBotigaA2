@@ -33,3 +33,22 @@
 <ng-template #noAdmin>
   <p>No tens permisos d'administrador per veure aquesta informacio.</p>
 </ng-template>
+
+<div *ngIf="esAdmin">
+  <h2>Gràfics de vendes</h2>
+
+  <div>
+    <h3>Quantitat venuda per dia i producte</h3>
+    <canvas id="graficaProductes"></canvas>
+  </div>
+
+  <div>
+    <h3>Vendes amb i sense oferta</h3>
+    <canvas id="graficaOferta"></canvas>
+  </div>
+</div>
+
+<div *ngIf="!esAdmin">
+  <h2>No tens permisos per veure aquest contingut</h2>
+</div>
+
