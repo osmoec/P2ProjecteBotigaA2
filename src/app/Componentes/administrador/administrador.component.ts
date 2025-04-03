@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ServeiUsuarisService } from '../../Servicios/servei-usuaris.service';
 import { ConnectorBDService } from '../../Servicios/connector-bd.service';
-import { Chart, ChartOptions, ChartData, ChartDataset } from 'chart.js/auto';
-import {DatePipe, NgForOf, NgIf} from '@angular/common';
+import { Chart, ChartDataset } from 'chart.js/auto';
+import {DatePipe, NgClass, NgForOf, NgIf} from '@angular/common';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-administrador',
@@ -11,7 +12,9 @@ import {DatePipe, NgForOf, NgIf} from '@angular/common';
   imports: [
     NgIf,
     NgForOf,
-    DatePipe
+    DatePipe,
+    NgClass,
+    NgxPaginationModule
   ],
   styleUrls: ['./administrador.component.css']
 })
@@ -21,6 +24,9 @@ export class AdministradorComponent implements OnInit {
   historial: any = [];
   graficaProductes: any;
   graficaOferta: any;
+  paginaActual: number = 1;
+  elementsPerPagina: number = 10;
+
 
   constructor(public serveiUsuaris: ServeiUsuarisService, public serveiConnector: ConnectorBDService) { }
 
