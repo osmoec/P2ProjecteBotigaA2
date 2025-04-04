@@ -18,6 +18,7 @@ import {
   EnquestaSadisfacioClientsComponent
 } from './usuario/enquesta-sadisfacio-clients/enquesta-sadisfacio-clients.component';
 import {AdministradorComponent} from './Administrador/administrador.component';
+import {OfertasComponent} from './Administrador/ofertas/ofertas.component';
 
 export const routes: Routes = [
   {path: '', component: IndiceComponent},
@@ -36,6 +37,8 @@ export const routes: Routes = [
   {path: 'modificarDades',component: ModificarDadesComponent},
   {path: 'sobrenosotros', component: SobrenosotrosComponent},
   {path: 'afeguirCotxe', component: AfeguirProducteComponent},
+  {path: 'enquestaClient', component: EnquestaSadisfacioClientsComponent},
+  {path: 'ofertas', component: OfertasComponent}
   {path: 'enquestaClient', component: EnquestaSadisfacioClientsComponent},
   {path:'er6oo890$pwkjry!g78feoe3krju89o890$pwkjfedw44ler6oo890$pwkjry!g78fere=irgj¨ewdl', component: AdministradorComponent}
 ];

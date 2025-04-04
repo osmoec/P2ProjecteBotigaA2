@@ -1,0 +1,86 @@
+
+<div class="container my-4">
+  <h2 class="text-center mb-4 text-white">📋 Lista de Ofertas</h2>
+
+  <div class="card p-3 mb-4 shadow-sm">
+    <h4>➕ Añadir Nueva Oferta</h4>
+    <div class="row g-3">
+      <div class="col-md-2">
+        <label>Descuento (%)</label>
+        <input type="number" class="form-control" [(ngModel)]="nuevaOferta.ofert" min="1" max="100">
+      </div>
+      <div class="col-md-3">
+        <label>Inicio</label>
+        <input type="date" class="form-control" [(ngModel)]="nuevaOferta.inicio_oferta">
+      </div>
+      <div class="col-md-3">
+        <label>Fin</label>
+        <input type="date" class="form-control" [(ngModel)]="nuevaOferta.final_oferta">
+      </div>
+      <div class="col-md-3">
+        <label>ID Coche</label>
+        <input type="number" class="form-control" [(ngModel)]="nuevaOferta.id_coche">
+      </div>
+      <div class="col-md-1 d-flex align-items-end">
+        <button class="btn btn-primary w-100" (click)="crearOferta()">
+          ➕ Añadir
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div *ngFor="let oferta of ofertas.slice().reverse(); let i = index" class="col-12">
+      <div id="oferta{{ oferta.id_oferta }}" class="producte mb-3 shadow-sm p-3 border rounded">
+        <div class="row g-0 align-items-center">
+
+          <!-- Datos de la Oferta -->
+          <div class="col-md-4">
+            <h4 class="text-primary">🛒 Oferta #{{ oferta.id_oferta }}</h4>
+            <p><strong>Descuento:</strong>
+              <input type="number" class="form-control d-inline-block" [(ngModel)]="oferta.oferta" [readonly]="!oferta.isEditable" style="width: 80px;" min="1" max="100">
+              <span class="badge bg-success">{{ oferta.oferta }}%</span>
+            </p>
+            <p><strong>Inicio:</strong>
+              <input type="date" class="form-control d-inline-block" [(ngModel)]="oferta.inicio_oferta" [readonly]="!oferta.isEditable" style="width: auto;">
+            </p>
+            <p><strong>Fin:</strong>
+              <input type="date" class="form-control d-inline-block" [(ngModel)]="oferta.final_oferta" [readonly]="!oferta.isEditable" style="width: auto;">
+            </p>
+            <button class="btn btn-warning me-2" (click)="toggleEdit(oferta)">
+              ✏️ {{ oferta.isEditable ? 'Cancelar' : 'Editar' }}
+            </button>
+            <button class="btn btn-success" (click)="updateOferta(oferta)" *ngIf="oferta.isEditable">
+              💾 Guardar Cambios
+            </button>
+            <button class="btn btn-danger" (click)="delRegistro(oferta.id_oferta)">
+              ❌ Eliminar
+            </button>
+          </div>
+
+          <!-- Datos del Coche Relacionado -->
+          <div class="col-md-5">
+            <div *ngIf="listaVehiculos.getCocheById(oferta.id_coche) as coche">
+              <h5 class="text-dark">🚗 {{ coche.name }}</h5>
+              <p><strong>Precio:</strong> <span> {{ coche.price.toLocaleString('es-ES') }}€</span></p>
+              <p><strong>Descuento:</strong> <span> {{ (coche.price * oferta.oferta / 100).toLocaleString('es-ES') }}€</span></p>
+            </div>
+            <div *ngIf="!listaVehiculos.getCocheById(oferta.id_coche)" class="alert alert-danger">
+              🚨 Coche no encontrado para esta oferta
+            </div>
+          </div>
+
+          <!-- Imagen del Coche -->
+          <img *ngIf="listaVehiculos.getCocheById(oferta.id_coche)?.imgC?.[0]"
+               [src]="listaVehiculos.getCocheById(oferta.id_coche)?.imgC?.[0]"
+               alt="Imagen de {{ listaVehiculos.getCocheById(oferta.id_coche)?.name }}"
+               class="img-fluid rounded col-md-3">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
