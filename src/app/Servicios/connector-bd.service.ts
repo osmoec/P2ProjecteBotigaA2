@@ -31,8 +31,8 @@ export class ConnectorBDService {
               oferta.ID_OFERTA,
               oferta.ID_COCHE,
               oferta.OFERTA,
-              new Date(oferta.INICIO_OFERTA),
-              new Date(oferta.FINAL_OFERTA)
+              oferta.INICIO_OFERTA,
+              oferta.FINAL_OFERTA
             )
             listaOfertas.push(ofertas)
           });
@@ -42,5 +42,21 @@ export class ConnectorBDService {
         }
       );
     return listaOfertas
+  }
+
+  delOferta (id : number){
+    return this.http.delete<any>(`http://localhost:3080/db/del/ofertas/${id}`)
+  }
+
+  updateOferta(oferta: Oferta) : Observable<any>{
+    return this.http.put<any>(`http://localhost:3080/db/update/ofertas/${oferta.id_oferta}`, {
+      ofert: oferta.oferta,
+      inicio_oferta: oferta.inicio_oferta,
+      final_oferta: oferta.final_oferta
+    })
+  }
+
+  crearOferta(oferta: any) {
+    return this.http.post<any>(`http://localhost:3080/db/insert/ofertas/`, oferta);
   }
 }
