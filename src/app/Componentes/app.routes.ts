@@ -38,7 +38,7 @@ export const routes: Routes = [
   {path: 'sobrenosotros', component: SobrenosotrosComponent},
   {path: 'afeguirCotxe', component: AfeguirProducteComponent},
   {path: 'enquestaClient', component: EnquestaSadisfacioClientsComponent},
-  {path: 'ofertas', component: OfertasComponent}
+  {path: 'ofertas', component: OfertasComponent},
   {path: 'enquestaClient', component: EnquestaSadisfacioClientsComponent},
   {path:'er6oo890$pwkjry!g78feoe3krju89o890$pwkjfedw44ler6oo890$pwkjry!g78fere=irgj¨ewdl', component: AdministradorComponent}
 ];
