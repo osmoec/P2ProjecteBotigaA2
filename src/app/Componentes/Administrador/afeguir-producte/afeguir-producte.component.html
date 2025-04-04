@@ -1,26 +1,69 @@
-   <form type="multipart/formdata">
-     <p>AFEGUIR COTXE</p>
+<article>
+     <div id="formulari-contenidor">
+       <form class="bg-secondary rounded">
+         <div class="article-titol-div">
+           <h1 class="article-titol">Afegir Cotxe</h1>
+         </div>
 
-     <label>nom cotxe</label>
-     <input [(ngModel)]="nom" type="text" name="nomcotxe">
+         <div class="mb-3">
+           <label class="form-label">Nom Cotxe</label>
+           <input [(ngModel)]="nom" name="nomcotxe" type="text" class="form-control" required placeholder="Nom del cotxe">
+         </div>
 
-     <label>text oferta </label>
-     <input [(ngModel)]="textoferta" type="text" name="textoferta">
+         <div class="mb-3">
+           <label class="form-label">Text Oferta</label>
+           <input [(ngModel)]="textoferta" name="textoferta" type="text" class="form-control" required placeholder="Descripció de l'oferta">
+         </div>
 
-     <label>preu cotxe</label>
-     <input [(ngModel)]="preu" type="number" (change)="onPreuChange()" name="preu">
+         <div class="mb-3">
+           <label class="form-label">Preu Cotxe</label>
+           <input id="preucotxe" [(ngModel)]="preu" name="preu" type="number" class="form-control" (change)="onPreuChange()" required placeholder="Preu del cotxe">
+         </div>
 
-     <div class="d-flex flex-column">
-       <label>categories</label>
-       @for (categoria of categories; track categoria){
-         <input type="checkbox" name="{{categoria}}" value="{{categoria}}" (click)="afeguirCategoria(categoria)" id="{{categoria}}">
-         <label for="{{categoria}}">{{categoria}}</label><br>
+         <div class="d-flex flex-column mb-3">
+           <label class="form-label">Categories</label>
+           <div>
+             @for (categoria of categories; track categoria){
+               <input type="checkbox" name="{{categoria}}" value="{{categoria}}" (click)="afeguirCategoria(categoria)" id="{{categoria}}">
+               <label for="{{categoria}}">{{categoria}}</label><br>
+             }
+           </div>
+         </div>
+
+         <div class="mb-3">
+           <label class="form-label">3 Imatges</label>
+           <input id="imatges" [(ngModel)]="arxius" name="nom" type="file" multiple class="form-control" (change)="onFileChange($event)" required>
+         </div>
+
+         <button (click)="enviarbd()">enviar</button>
+       </form>
+        <br>
+       @if(exit == undefined){
+         <p></p>
+       }
+       @else if (exit === 6){
+         <h1 class="text-success">enviat correctament</h1>
+       }
+       @else if(exit === 7){
+         <h1 class="text-danger">Error al enviar el formulari</h1>
+       }
+       @else if (exit === 8){
+         <h1 class="text-danger">Error al formulari: Cotxe existent</h1>
+       }
+       @else if (exit === 1){
+         <h1 class="text-danger">Error al formulari: nom buit</h1>
+       }
+       @else if(exit === 2){
+         <h1 class="text-danger">Error al formulari: text oferta buit</h1>
+       }
+       @else if(exit === 3){
+         <h1 class="text-danger">Error al formulari: preu buit</h1>
+       }
+       @else if(exit === 4){
+         <h1 class="text-danger">Error al formulari: categories buides</h1>
+       }
+       @else if(exit === 5){
+         <h1 class="text-danger">Error al formulari: no hi han imatges</h1>
        }
      </div>
-
-     <label id="imgfaltants"></label>
-     <label>3 imatges</label>
-     <input id="imatges" [(ngModel)]="arxius" name="nom" type="file" multiple (change)="onFileChange($event)">
-
-     <button (click)="enviarbd()">enviar</button>
-   </form>
+</article>

@@ -27,6 +27,14 @@ export class EnquestaSadisfacioClientsComponent {
 
   final: number = 0;
 
+  exit: boolean | undefined | number
+
+  check1: boolean | undefined
+
+  check2: boolean | undefined
+
+  check3: boolean | undefined
+
   constructor(public http: HttpClient, public serveiUsuai: ServeiUsuarisService, public conectordb: ConnectorBDService) {}
 
   ngOnInit(): void {
@@ -38,7 +46,31 @@ export class EnquestaSadisfacioClientsComponent {
   }
 
   enviarEnquesta(){
+    if (this.grauSadisfacioServei == 0 && this.grauSadisfacioProducte == 0 && this.notaRecomenacio == 0){
+      this.exit = 1
 
+      if (this.check1){
+        if (this.comentari == ""){
+          this.exit = 2
+          if (this.check2){
+            this.procesarEnquesta()
+          }
+        }
+      }
+    }
+    else if(this.comentari == ""){
+      this.exit = 3
+      if (this.check3){
+        this.procesarEnquesta()
+      }
+    }
+    else if (this.grauSadisfacioServei > 0 && this.grauSadisfacioProducte > 0 && this.notaRecomenacio > 0){
+      this.procesarEnquesta()
+    }
+
+  }
+
+  procesarEnquesta(){
     this.final = Date.now()
 
     let tempsDins = this.final - this.inici
@@ -72,13 +104,51 @@ export class EnquestaSadisfacioClientsComponent {
       tempsDins: tempsDef
     }
 
-    this.conectordb.enviarFormulari(enquesta)
+    this.check1 = undefined
+    this.check2 = undefined
+    this.check3 = undefined
 
+    this.conectordb.enviarFormulari(enquesta).subscribe(res=>{
+        this.exit = res
+    })
   }
 
   començarContador() {
     this.inici = Date.now()
 
 
+  }
+
+  onChangeCheck(checkID: string, numeroCheck: number){
+    let check = document.getElementById(checkID) as HTMLInputElement;
+
+    if (numeroCheck == 1){
+      this.check1 = check.checked
+    }
+    else if (numeroCheck == 2){
+      this.check2 = check.checked
+    }
+    else if (numeroCheck == 3){
+      this.check3 = check.checked
+    }
+  }
+
+  onNumberChange(id:number){
+    console.log(this.grauSadisfacioProducte + ' ' + this.grauSadisfacioServei + ' ' + this.notaRecomenacio);
+    if (id === 1){
+      if (this.grauSadisfacioProducte === null){
+        this.grauSadisfacioProducte = 0
+      }
+    }
+    else if (id === 2){
+      if (this.grauSadisfacioServei === null){
+        this.grauSadisfacioServei = 0
+      }
+    }
+    else if (id === 3){
+      if (this.notaRecomenacio === null){
+        this.notaRecomenacio = 0
+      }
+    }
   }
 }

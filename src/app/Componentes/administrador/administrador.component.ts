@@ -1,5 +1,6 @@
+import {ServeiUsuarisService} from '../../Servicios/servei-usuaris.service';
+import {RouterLink} from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { ServeiUsuarisService } from '../../Servicios/servei-usuaris.service';
 import { ConnectorBDService } from '../../Servicios/connector-bd.service';
 import { Chart, ChartDataset } from 'chart.js/auto';
 import {DatePipe, NgClass, NgForOf, NgIf} from '@angular/common';
@@ -10,6 +11,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
   templateUrl: './administrador.component.html',
   standalone: true,
   imports: [
+    RouterLink,
     NgIf,
     NgForOf,
     DatePipe,
@@ -18,7 +20,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
   ],
   styleUrls: ['./administrador.component.css']
 })
-export class AdministradorComponent implements OnInit {
+export class AdministradorComponent {
 
   esAdmin: boolean | undefined = false;
   historial: any = [];
@@ -27,10 +29,7 @@ export class AdministradorComponent implements OnInit {
   paginaActual: number = 1;
   elementsPerPagina: number = 10;
 
-
-  constructor(public serveiUsuaris: ServeiUsuarisService, public serveiConnector: ConnectorBDService) { }
-
-  ngOnInit() {
+  ngOnInit(): void {
     this.serveiUsuaris.noAdmin();
     this.esAdmin = this.serveiUsuaris.usuari_logat?.getAdmin();
     if (this.esAdmin) {
@@ -46,6 +45,8 @@ export class AdministradorComponent implements OnInit {
       );
     }
   }
+
+  constructor(public serveiUsuaris: ServeiUsuarisService, public serveiConnector: ConnectorBDService) {}
 
   renderitzarGraficaProductes() {
     const dadesProductes: { [clau: string]: { [clau: string]: number } } = {};
@@ -148,6 +149,5 @@ export class AdministradorComponent implements OnInit {
       }
     });
   }
+
 }
-
-

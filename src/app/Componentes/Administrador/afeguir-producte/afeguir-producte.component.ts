@@ -15,6 +15,8 @@ import {ServeiUsuarisService} from '../../../Servicios/servei-usuaris.service';
 })
 export class AfeguirProducteComponent {
 
+  exit: undefined | number
+
   nom: string = ""
 
   preu: number = 0
@@ -28,6 +30,8 @@ export class AfeguirProducteComponent {
   arxius: File[] = []
 
   esAdmin: boolean | undefined = false
+
+  cotxeExistent: boolean = false
 
   constructor(public http: HttpClient, public connectorbd: ConnectorBDService, public serveiUsuari: ServeiUsuarisService) {
   }
@@ -49,23 +53,37 @@ export class AfeguirProducteComponent {
     let ver = 1
 
     if (this.nom === ""){
+      this.exit = 1
       console.info('no hi ha nom')
     }
     else{
+      this.connectorbd.cotxeExisteix(this.nom).subscribe(res=>{
+        this.cotxeExistent = res
+        console.log(res)
+      })
+      if (this.cotxeExistent){
       if (this.textoferta === ""){
+        this.exit = 2
         console.info('no hi ha textoferta')
       }
       else{
         if (this.preu === 0){
+          this.exit = 3
           console.info('no hi ha preu')
         }
         else{
           if (this.categoriesEscollides.length === 0 || this.categoriesEscollides.length < 3){
             console.info('no hi han categories')
             this.categoriesEscollides.length = 0
+            this.categories.forEach(c => {
+              let check = document.getElementById(c) as HTMLInputElement;
+              check.checked = false
+            })
+            this.exit = 4
           }
           else{
             if (this.arxius.length === 0){
+              this.exit = 5
               console.info('no hi ha arxius')
             }
             else{
@@ -92,16 +110,28 @@ export class AfeguirProducteComponent {
                 formulari.append('imatges', arxius)
               })
 
-              this.connectorbd.desarCotxe(formulari)
-
               this.categoriesEscollides.length = 0
-              this.arxius.length = 0
+              this.arxius = []
               this.textoferta = ""
               this.nom = ""
               this.preu = 0
+              this.categories.forEach(c => {
+                let check = document.getElementById(c) as HTMLInputElement;
+                check.checked = false
+              })
+
+              this.connectorbd.desarCotxe(formulari).subscribe(res=>{
+                console.log(res.estate)
+                this.exit = res.estate
+              })
+
             }
           }
         }
+      }
+      }
+      else{
+        this.exit = 8
       }
     }
   }
@@ -151,10 +181,38 @@ export class AfeguirProducteComponent {
   }
 
   onPreuChange(){
-    let cadena = this.preu.toString().slice(0,9)
-    console.log(Number(cadena))
+    if (this.preu === null){
+      this.preu = 0
+    }
+    let numb = document.getElementById('preucotxe') as HTMLInputElement
+    // @ts-ignore
+    numb.value = Number(this.preu.toString().replaceAll(/\D/g, ''));
+    let cadena1 = this.preu.toString().slice(0,9)
+    let cadena2 = Number(this.preu.toString().slice(0,0))
+    console.log(Number(cadena1))
+    console.log(Number(this.preu.toString().slice(0,0)) === 0)
     if (this.preu.toString().length > 10){
-      this.preu = Number(cadena)
+      this.preu = Number(cadena1)
+      let numb = document.getElementById('preucotxe') as HTMLInputElement
+      // @ts-ignore
+      numb.value = Number(this.preu.toString().replaceAll(/\D/g, ''));
+    }
+    else if(cadena2 === 0){
+      let cad = this.preu.toString().split('')
+      let nZ = 0
+      let mesZ = true
+      for (let i = 0; i < cadena1.length; i++) {
+        if (Number(cad[i]) === 0 && !(Number(cad[i+1]) !== 0)){
+          nZ++
+          mesZ = false
+        }
+        if (Number(cad[i]) === 0 && mesZ){
+          nZ++
+        }
+      }
+      console.log(nZ)
+      this.preu = Number(this.preu.toString().slice(nZ))
+      console.log(this.preu)
     }
   }
 

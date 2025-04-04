@@ -1,18 +1,50 @@
-<form>
-  <h1>enquesta sadisfacio clients</h1>
+<article>
+  <div id="formulari-contenidor">
+    <form class="bg-secondary rounded p-4">
+      <div class="article-titol-div">
+        <h1 class="article-titol">Enquesta Satisfacció Clients</h1>
+      </div>
 
-  <label>Quin es el teu grau de sadisfacció amb els nostre producte?</label>
-  <input id="grausadisfacioproducte" [(ngModel)]="grauSadisfacioProducte" name="grausadisfacioproducte" type="number" max="100" min="0">
+      <div class="mb-3">
+        <label class="form-label">Quin es el teu grau de satisfacció amb el nostre producte? (0-100)</label>
+        <input id="grausadisfacioproducte" [(ngModel)]="grauSadisfacioProducte" name="grausadisfacioproducte" type="number" max="100" min="0" class="form-control" (change)="onNumberChange(1)" >
+      </div>
 
-  <label>Quin es el teu grau de sadisfacció amb el servei al client venta/post venta de BobbyCotxes?</label>
-  <input id="grausadisfacioservei" [(ngModel)]="grauSadisfacioServei" name="grausadisfacioservei" type="number" max="100" min="0">
+      <div class="mb-3">
+        <label class="form-label">Quin es el teu grau de satisfacció amb el servei al client de BobbyCotxes? (0-100)</label>
+        <input id="grausadisfacioservei" [(ngModel)]="grauSadisfacioServei" name="grausadisfacioservei" type="number" max="100" min="0" class="form-control" (change)="onNumberChange(2)">
+      </div>
 
-  <label>Del 1 al 10 quina nota de recomenació de BobbyCotxes donaries?</label>
-  <input id="recomenacio" [(ngModel)]="notaRecomenacio" name="recomenacio" type="number" max="100" min="0">
+      <div class="mb-3">
+        <label class="form-label">Quina nota de recomanació de BobbyCotxes donaries? (0-100)</label>
+        <input id="recomenacio" [(ngModel)]="notaRecomenacio" name="recomenacio" type="number" max="100" min="0" class="form-control" (change)="onNumberChange(3)">
+      </div>
 
-  <label>Algun comentari en general de millora o recomenacio per l'empresa? (no es obligatori)</label>
-  <input id="comentari" [(ngModel)]="comentari" name="comentari" type="text">
+      <div class="mb-3">
+        <label class="form-label">Algun comentari en general de millora o recomanació per l'empresa? (no és obligatori)</label>
+        <input id="comentari" [(ngModel)]="comentari" name="comentari" type="text" class="form-control">
+      </div>
 
-  <button (click)="enviarEnquesta()">envia</button>
-
-</form>
+      <button (click)="enviarEnquesta()" class="btn btn-primary">Enviar</button>
+    </form>
+</div>
+  <br>
+    @if (exit === undefined){
+      <p></p>
+    }
+    @else if (exit === 1){
+      <h1 class="text-warning">Formulari vuit segur que vols enviar-lo? clica el check per comfirmar</h1><input id="confBuit" name="confbuit" type="checkbox"  (change)="onChangeCheck('confBuit',1)">
+    }
+    @else if(exit === 2){
+      <h1 class="text-warning">No vols comentar per que el formulari vuit? clica el check per comfirmar que no</h1><input id="confSenseComentariDespresVuit" name="confSenseComentariDespresVuit" type="checkbox" (change)="onChangeCheck('confSenseComentariDespresVuit',2)">
+    }
+    @else if (exit === 3){
+      <h1 class="text-warning">Formulari sense comentari vols enviar-lo? clica el check per comfirmar</h1><input id="confSenseComentari" name="confSenseComentari" type="checkbox" (change)="onChangeCheck('confSenseComentari',3)">
+    }
+    @else if (exit){
+      <h1 class="text-success">Enviat correctament</h1>
+    }
+    @else if (!exit){
+      <h1 class="text-danger">Error al enviar el formulari</h1>
+    }
+</article>
