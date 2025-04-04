@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { ConnectorBDService } from '../../../Servicios/connector-bd.service';
 import { Oferta } from '../../../Clases/Oferta.model';
 import {ListaVehiculosService} from '../../../Servicios/lista-vehiculos.service';
+import {ServeiUsuarisService} from '../../../Servicios/servei-usuaris.service';
+import {routes} from '../../app.routes';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-ofertas',
@@ -17,13 +20,22 @@ import {ListaVehiculosService} from '../../../Servicios/lista-vehiculos.service'
 })
 export class OfertasComponent  implements OnInit{
   ofertas: Oferta[];
+  esAdmin = false;
 
-  constructor(protected conectorBD: ConnectorBDService, protected listaVehiculos: ListaVehiculosService) {
+  constructor(private router: Router, protected conectorBD: ConnectorBDService, protected listaVehiculos: ListaVehiculosService, protected serveiUsuaris : ServeiUsuarisService) {
     this.ofertas = conectorBD.getOfertas();
   }
 
-  ngOnInit(): void {
-    this.ofertas = this.conectorBD.getOfertas();
+  ngOnInit() {
+    this.serveiUsuaris.noAdmin();
+    this.esAdmin = this.serveiUsuaris.usuari_logat?.getAdmin()!;
+    if (this.esAdmin) {
+      this.ofertas = this.conectorBD.getOfertas();
+    }
+    else{
+      this.router.navigate(['/home']);
+    }
+
   }
 
   delRegistro(id: number) {
