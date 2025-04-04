@@ -19,6 +19,7 @@ import {
 } from './usuario/enquesta-sadisfacio-clients/enquesta-sadisfacio-clients.component';
 import {AdministradorComponent} from './Administrador/administrador.component';
 import {OfertasComponent} from './Administrador/ofertas/ofertas.component';
+import {HistorialProductesComponent} from './Administrador/historial-productes/historial-productes.component';
 
 export const routes: Routes = [
   {path: '', component: IndiceComponent},
@@ -40,7 +41,8 @@ export const routes: Routes = [
   {path: 'enquestaClient', component: EnquestaSadisfacioClientsComponent},
   {path: 'ofertas', component: OfertasComponent},
   {path: 'enquestaClient', component: EnquestaSadisfacioClientsComponent},
-  {path:'er6oo890$pwkjry!g78feoe3krju89o890$pwkjfedw44ler6oo890$pwkjry!g78fere=irgj¨ewdl', component: AdministradorComponent}
+  {path:'er6oo890$pwkjry!g78feoe3krju89o890$pwkjfedw44ler6oo890$pwkjry!g78fere=irgj¨ewdl', component: AdministradorComponent},
+  {path:'historialProductes',component: HistorialProductesComponent}
 ];
 
 
