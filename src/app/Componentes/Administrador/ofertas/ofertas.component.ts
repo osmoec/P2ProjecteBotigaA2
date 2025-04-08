@@ -5,7 +5,6 @@ import { ConnectorBDService } from '../../../Servicios/connector-bd.service';
 import { Oferta } from '../../../Clases/Oferta.model';
 import {ListaVehiculosService} from '../../../Servicios/lista-vehiculos.service';
 import {ServeiUsuarisService} from '../../../Servicios/servei-usuaris.service';
-import {routes} from '../../app.routes';
 import {Router} from '@angular/router';
 
 @Component({
@@ -76,7 +75,7 @@ export class OfertasComponent  implements OnInit{
     ofert: null,
     inicio_oferta: '',
     final_oferta: '',
-    id_coche: null
+    id_coche: 0
   };
 
   crearOferta() {
@@ -90,8 +89,9 @@ export class OfertasComponent  implements OnInit{
     this.conectorBD.crearOferta(this.nuevaOferta).subscribe(res => {
       if (res.success) {
         alert('✅ Oferta creada');
-        this.ofertas.push(new Oferta (res.oferta.ID_OFERTA, res.oferta.ID_COCHE, res.oferta.OFERTA, this.nuevaOferta.inicio_oferta, this.nuevaOferta.final_oferta));
-        this.nuevaOferta = { ofert: null, inicio_oferta: '', final_oferta: '', id_coche: null };
+        this.ofertas.push(new Oferta (res.oferta.ID_OFERTA, this.nuevaOferta.id_coche, res.oferta.OFERTA, this.nuevaOferta.inicio_oferta, this.nuevaOferta.final_oferta));
+        this.nuevaOferta = { ofert: null, inicio_oferta: '', final_oferta: '', id_coche: 0 };
+        this.ngOnInit()
       } else {
         alert('❌ Error al crear oferta');
       }
@@ -99,4 +99,5 @@ export class OfertasComponent  implements OnInit{
   }
 
 
+  protected readonly name = name;
 }

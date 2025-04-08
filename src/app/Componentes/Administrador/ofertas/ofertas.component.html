@@ -19,7 +19,9 @@
       </div>
       <div class="col-md-3">
         <label>ID Coche</label>
-        <input type="number" class="form-control" [(ngModel)]="nuevaOferta.id_coche">
+        <select id="car" class="form-control" [(ngModel)]="nuevaOferta.id_coche" name="car" required>
+          <option *ngFor="let car of listaVehiculos.coches" [value]="car.id">{{ car.name }}</option>
+        </select>
       </div>
       <div class="col-md-1 d-flex align-items-end">
         <button class="btn btn-primary w-100" (click)="crearOferta()">

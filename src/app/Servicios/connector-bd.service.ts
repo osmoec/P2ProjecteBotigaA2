@@ -28,14 +28,8 @@ export class ConnectorBDService {
       .subscribe(
         (response) => {
           response.forEach((oferta : any)=> {
-            const ofertas = new Oferta(
-              oferta.ID_OFERTA,
-              oferta.ID_COCHE,
-              oferta.OFERTA,
-              oferta.INICIO_OFERTA,
-              oferta.FINAL_OFERTA
-            )
-            listaOfertas.push(ofertas)
+            const ofertas = new Oferta(oferta.ID_OFERTA, oferta.ID_COCHE, oferta.OFERTA, oferta.INICIO_OFERTA, oferta.FINAL_OFERTA)
+              listaOfertas.push(ofertas)
           });
         },
         (error) => {
