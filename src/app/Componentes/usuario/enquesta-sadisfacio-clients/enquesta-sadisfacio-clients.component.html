@@ -25,7 +25,16 @@
         <input id="comentari" [(ngModel)]="comentari" name="comentari" type="text" class="form-control">
       </div>
 
-      <button (click)="enviarEnquesta()" class="btn btn-primary">Enviar</button>
+      @if (!captchaResolt){
+        <re-captcha
+          siteKey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+          (resolved)="captchaResolt = true">
+        </re-captcha>
+      }
+      <p *ngIf="captchaResolt" >✅ Captcha completado correctamente.</p>
+
+      <button (click)="enviarEnquesta()" [disabled]="!captchaResolt" class="btn btn-primary">Enviar</button>
+
     </form>
 </div>
   <br>
@@ -47,4 +56,7 @@
     @else if (!exit){
       <h1 class="text-danger">Error al enviar el formulari</h1>
     }
+
+
 </article>
+

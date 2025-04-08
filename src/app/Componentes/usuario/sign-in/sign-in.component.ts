@@ -5,11 +5,12 @@ import { Usuario } from '../../../Clases/Usuario.model';
 import { ServeiUsuarisService } from '../../../Servicios/servei-usuaris.service';
 import { NgIf } from '@angular/common';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import {RecaptchaModule} from 'ng-recaptcha';
 
 @Component({
   selector: 'app-sign-in',
   standalone: true,
-  imports: [FormsModule, NgIf],
+  imports: [FormsModule, NgIf, RecaptchaModule],
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.css']
 })
