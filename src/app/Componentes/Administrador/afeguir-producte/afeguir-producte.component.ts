@@ -160,40 +160,25 @@ export class AfeguirProducteComponent {
 
   }
 
-  onPreuChange(){
-    if (this.preu === null){
-      this.preu = 0
+  onPreuChange() {
+    if (this.preu === null || this.preu === undefined) {
+      this.preu = 0;
     }
-    let numb = document.getElementById('preucotxe') as HTMLInputElement
-    // @ts-ignore
-    numb.value = Number(this.preu.toString().replaceAll(/\D/g, ''));
-    let cadena1 = this.preu.toString().slice(0,9)
-    let cadena2 = Number(this.preu.toString().slice(0,0))
-    console.log(Number(cadena1))
-    console.log(Number(this.preu.toString().slice(0,0)) === 0)
-    if (this.preu.toString().length > 10){
-      this.preu = Number(cadena1)
-      let numb = document.getElementById('preucotxe') as HTMLInputElement
-      // @ts-ignore
-      numb.value = Number(this.preu.toString().replaceAll(/\D/g, ''));
+
+    let preuStr = this.preu.toString().replace(/\D/g, '');
+
+    if (preuStr.length > 10) {
+      preuStr = preuStr.slice(0, 10);
     }
-    else if(cadena2 === 0){
-      let cad = this.preu.toString().split('')
-      let nZ = 0
-      let mesZ = true
-      for (let i = 0; i < cadena1.length; i++) {
-        if (Number(cad[i]) === 0 && !(Number(cad[i+1]) !== 0)){
-          nZ++
-          mesZ = false
-        }
-        if (Number(cad[i]) === 0 && mesZ){
-          nZ++
-        }
-      }
-      console.log(nZ)
-      this.preu = Number(this.preu.toString().slice(nZ))
-      console.log(this.preu)
+
+    if (/^0+\d+/.test(preuStr)) {
+      preuStr = preuStr.replace(/^0+/, '');
     }
+    const maxPreu = 2147483647;
+    this.preu = preuStr === '' ? 0 : Math.min(Number(preuStr), maxPreu);
+
+    const numb = document.getElementById('preucotxe') as HTMLInputElement;
+    if (numb) numb.value = preuStr;
   }
 
 
