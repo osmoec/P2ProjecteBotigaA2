@@ -29,7 +29,7 @@ export class ServeiUsuarisService {
 
   addUsuario(usuari: any): Promise<boolean> {
     return new Promise((resolve) => {
-      this.http.put<any>('http://localhost:3080/usuaris/push', usuari).subscribe(
+      this.http.put<any>('http://172.16.6.1:3080/usuaris/push', usuari).subscribe(
           (response) => {
             if (response.success) {
               console.log('✅ Usuario registrado correctamente:', response.message);
@@ -50,7 +50,7 @@ export class ServeiUsuarisService {
 
   guardarDatos(usuari: any): Promise<boolean> {
     return new Promise((resolve) => {
-      this.http.put<any>('http://localhost:3080/usuaris/push', usuari).subscribe(
+      this.http.put<any>('http://172.16.6.1:3080/usuaris/push', usuari).subscribe(
           (response) => {
             if (response.success) {
               console.log('✅ Datos actualizados:', response.message);
@@ -71,7 +71,7 @@ export class ServeiUsuarisService {
 
   cargarDatos(usuariId: string, contrasena: string, recordar: boolean): Promise<boolean> {
     return new Promise((resolve) => {
-      this.http.get<any>(`http://localhost:3080/usuaris/informaciopersonal/${usuariId}/${contrasena}`)
+      this.http.get<any>(`http://172.16.6.1:3080/usuaris/informaciopersonal/${usuariId}/${contrasena}`)
           .subscribe(
               (response) => {
                 if (response.success && response.user) {
