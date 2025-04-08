@@ -44,97 +44,77 @@ export class AfeguirProducteComponent {
     })
   }
 
-  enviarbd(){
-
+  enviarbd() {
     const arxs = this.arxius;
+    let arxAt: File[] = [];
+    let ver = 1;
 
-    let arxAt: File[] = []
+    if (this.nom === "") {
+      this.exit = 1;
+    } else {
+      this.connectorbd.cotxeExisteix(this.nom).subscribe(res => {
+        this.cotxeExistent = res;
 
-    let ver = 1
+        if (this.cotxeExistent) {
+          this.exit = 8;
+        } else {
+          if (this.textoferta === "") {
+            this.exit = 2;
+          } else {
+            if (this.preu === 0) {
+              this.exit = 3;
+            } else {
+              if (this.categoriesEscollides.length === 0 || this.categoriesEscollides.length < 3) {
+                this.categoriesEscollides.length = 0;
+                this.categories.forEach(c => {
+                  let check = document.getElementById(c) as HTMLInputElement;
+                  check.checked = false;
+                });
+                this.exit = 4;
+              } else {
+                if (this.arxius.length === 0) {
+                  this.exit = 5;
+                } else {
+                  arxs.forEach(ar => {
+                    let nouArx = new File([ar], this.nom + 'v' + ver + '.png', { type: ar.type });
+                    arxAt.push(nouArx);
+                    ver++;
+                  });
 
-    if (this.nom === ""){
-      this.exit = 1
-      console.info('no hi ha nom')
-    }
-    else{
-      this.connectorbd.cotxeExisteix(this.nom).subscribe(res=>{
-        this.cotxeExistent = res
-        console.log(res)
-      })
-      if (!this.cotxeExistent){
-      if (this.textoferta === ""){
-        this.exit = 2
-        console.info('no hi ha textoferta')
-      }
-      else{
-        if (this.preu === 0){
-          this.exit = 3
-          console.info('no hi ha preu')
-        }
-        else{
-          if (this.categoriesEscollides.length === 0 || this.categoriesEscollides.length < 3){
-            console.info('no hi han categories')
-            this.categoriesEscollides.length = 0
-            this.categories.forEach(c => {
-              let check = document.getElementById(c) as HTMLInputElement;
-              check.checked = false
-            })
-            this.exit = 4
-          }
-          else{
-            if (this.arxius.length === 0){
-              this.exit = 5
-              console.info('no hi ha arxius')
-            }
-            else{
-              arxs.forEach(ar=>{
-                let nouArx = new File([ar],this.nom + 'v' + ver + '.png' , {type: ar.type});
+                  let formulari = new FormData();
+                  formulari.append('nom', this.nom);
+                  formulari.append('preu', this.preu.toString());
+                  formulari.append('categories', JSON.stringify(this.categoriesEscollides));
+                  formulari.append('textoferta', this.textoferta);
 
-                arxAt.push(nouArx)
+                  arxAt.forEach((arxius) => {
+                    formulari.append('imatges', arxius);
+                  });
 
-                ver++
-              })
+                  this.categoriesEscollides.length = 0;
+                  this.arxius = [];
+                  this.textoferta = "";
+                  this.nom = "";
+                  this.preu = 0;
+                  this.categories.forEach(c => {
+                    let check = document.getElementById(c) as HTMLInputElement;
+                    check.checked = false;
+                  });
 
-              console.log(arxAt)
-
-              let formulari = new FormData()
-
-              formulari.append('nom', this.nom);
-              formulari.append('preu',this.preu.toString());
-
-              formulari.append('categories',JSON.stringify(this.categoriesEscollides))
-
-              formulari.append('textoferta', this.textoferta)
-
-              arxAt.forEach((arxius)=>{
-                formulari.append('imatges', arxius)
-              })
-
-              this.categoriesEscollides.length = 0
-              this.arxius = []
-              this.textoferta = ""
-              this.nom = ""
-              this.preu = 0
-              this.categories.forEach(c => {
-                let check = document.getElementById(c) as HTMLInputElement;
-                check.checked = false
-              })
-
-              this.connectorbd.desarCotxe(formulari).subscribe(res=>{
-                console.log(res.estate)
-                this.exit = res.estate
-              })
-             window.location.reload()
+                  this.connectorbd.desarCotxe(formulari).subscribe(res => {
+                    this.exit = res.estate;
+                  });
+                  window.location.reload();
+                }
+              }
             }
           }
         }
-      }
-      }
-      else{
-        this.exit = 8
-      }
+      });
     }
   }
+
+
 
   afeguirCategoria(categoria:string){
 
