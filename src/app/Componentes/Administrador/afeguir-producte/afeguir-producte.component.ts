@@ -61,7 +61,7 @@ export class AfeguirProducteComponent {
         this.cotxeExistent = res
         console.log(res)
       })
-      if (this.cotxeExistent){
+      if (!this.cotxeExistent){
       if (this.textoferta === ""){
         this.exit = 2
         console.info('no hi ha textoferta')
@@ -124,7 +124,7 @@ export class AfeguirProducteComponent {
                 console.log(res.estate)
                 this.exit = res.estate
               })
-
+             window.location.reload()
             }
           }
         }

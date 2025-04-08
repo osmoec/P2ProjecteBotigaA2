@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { ServeiUsuarisService } from '../../../Servicios/servei-usuaris.service';
-import { ConnectorBDService } from '../../../Servicios/connector-bd.service';
+import {FormsModule} from '@angular/forms';
+import {HttpClient} from '@angular/common/http';
+import {ServeiUsuarisService} from '../../../Servicios/servei-usuaris.service';
+import {ConnectorBDService} from '../../../Servicios/connector-bd.service';
+import {Router} from '@angular/router';
+// @ts-ignore
 import {RecaptchaModule} from 'ng-recaptcha';
 import {NgIf} from '@angular/common';
 
@@ -28,12 +30,13 @@ export class EnquestaSadisfacioClientsComponent {
   // 🔐 Esta es la variable que te faltaba para que funcione el captcha
   captchaResolt: boolean = false;
 
+
   constructor(
     public http: HttpClient,
     public serveiUsuai: ServeiUsuarisService,
-    public conectordb: ConnectorBDService
+    public conectordb: ConnectorBDService,
+    public router: Router
   ) {}
-
   ngOnInit(): void {
     if (!this.serveiUsuai.usuari_logat_bool) {
       this.serveiUsuai.noAdmin();
@@ -117,6 +120,16 @@ export class EnquestaSadisfacioClientsComponent {
     this.conectordb.enviarFormulari(enquesta).subscribe(res => {
       this.exit = res;
     });
+    this.conectordb.enviarFormulari(enquesta).subscribe(res=>{
+        this.exit = res
+    })
+
+    if (this.exit) {
+      setTimeout(() => {
+        this.router.navigate(['/home']);
+      }, 5000);
+    }
+
   }
 
   començarContador() {
