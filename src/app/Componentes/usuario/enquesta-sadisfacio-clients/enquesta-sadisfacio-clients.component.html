@@ -7,17 +7,17 @@
 
       <div class="mb-3">
         <label class="form-label">Quin es el teu grau de satisfacció amb el nostre producte? (0-100)</label>
-        <input id="grausadisfacioproducte" [(ngModel)]="grauSadisfacioProducte" name="grausadisfacioproducte" type="number" max="100" min="0" class="form-control" (change)="onNumberChange(1)" >
+        <input id="grausadisfacioproducte" [pattern]="'^[0-9]{1,3}$'" [(ngModel)]="grauSadisfacioProducte" name="grausadisfacioproducte" type="number" max="100" min="0" class="form-control" (change)="onNumberChange(1)"  >
       </div>
 
       <div class="mb-3">
         <label class="form-label">Quin es el teu grau de satisfacció amb el servei al client de BobbyCotxes? (0-100)</label>
-        <input id="grausadisfacioservei" [(ngModel)]="grauSadisfacioServei" name="grausadisfacioservei" type="number" max="100" min="0" class="form-control" (change)="onNumberChange(2)">
+        <input id="grausadisfacioservei" [pattern]="'^[0-9]{1,3}$'" [(ngModel)]="grauSadisfacioServei" name="grausadisfacioservei" type="number" max="100" min="0" class="form-control" (change)="onNumberChange(2)">
       </div>
 
       <div class="mb-3">
         <label class="form-label">Quina nota de recomanació de BobbyCotxes donaries? (0-100)</label>
-        <input id="recomenacio" [(ngModel)]="notaRecomenacio" name="recomenacio" type="number" max="100" min="0" class="form-control" (change)="onNumberChange(3)">
+        <input id="recomenacio" [pattern]="'^[0-9]{1,3}$'" [(ngModel)]="notaRecomenacio" name="recomenacio" type="number" max="100" min="0" class="form-control" (change)="onNumberChange(3)">
       </div>
 
       <div class="mb-3">
@@ -42,13 +42,13 @@
       <p></p>
     }
     @else if (exit === 1){
-      <h1 class="text-warning">Formulari vuit segur que vols enviar-lo? clica el check per comfirmar</h1><input id="confBuit" name="confbuit" type="checkbox"  (change)="onChangeCheck('confBuit',1)">
+      <h1 class="text-warning">Formulari vuit segur que vols enviar-lo? clica el check per comfirmar</h1><br><input id="confBuit" name="confbuit" type="checkbox"  (change)="onChangeCheck('confBuit',1)" style="transform: scale(1.5);">
     }
     @else if(exit === 2){
-      <h1 class="text-warning">No vols comentar per que el formulari vuit? clica el check per comfirmar que no</h1><input id="confSenseComentariDespresVuit" name="confSenseComentariDespresVuit" type="checkbox" (change)="onChangeCheck('confSenseComentariDespresVuit',2)">
+      <h1 class="text-warning">No vols comentar per que el formulari vuit? clica el check per comfirmar que no</h1><br><input id="confSenseComentariDespresVuit" name="confSenseComentariDespresVuit" type="checkbox" (change)="onChangeCheck('confSenseComentariDespresVuit',2)" style="transform: scale(1.5);">
     }
     @else if (exit === 3){
-      <h1 class="text-warning">Formulari sense comentari vols enviar-lo? clica el check per comfirmar</h1><input id="confSenseComentari" name="confSenseComentari" type="checkbox" (change)="onChangeCheck('confSenseComentari',3)">
+      <h1 class="text-warning">Formulari sense comentari vols enviar-lo? clica el check per comfirmar</h1><br><input id="confSenseComentari" name="confSenseComentari" type="checkbox" (change)="onChangeCheck('confSenseComentari',3)" style="transform: scale(1.5);">
     }
     @else if (exit){
       <h1 class="text-success">Enviat correctament</h1>

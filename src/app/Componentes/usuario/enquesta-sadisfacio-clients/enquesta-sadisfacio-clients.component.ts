@@ -149,14 +149,28 @@ export class EnquestaSadisfacioClientsComponent {
   }
 
   onNumberChange(id: number) {
-    console.log(this.grauSadisfacioProducte + ' ' + this.grauSadisfacioServei + ' ' + this.notaRecomenacio);
-    if (id === 1 && this.grauSadisfacioProducte === null) {
-      this.grauSadisfacioProducte = 0;
-    } else if (id === 2 && this.grauSadisfacioServei === null) {
-      this.grauSadisfacioServei = 0;
-    } else if (id === 3 && this.notaRecomenacio === null) {
-      this.notaRecomenacio = 0;
+    if (id === 1) {
+      if (this.grauSadisfacioProducte == null || this.grauSadisfacioProducte < 0) {
+        this.grauSadisfacioProducte = 0;
+      } else if (this.grauSadisfacioProducte > 100) {
+        this.grauSadisfacioProducte = 100;
+      }
     }
-  }
+    else if (id === 2) {
+      if (this.grauSadisfacioServei == null || this.grauSadisfacioServei < 0) {
+        this.grauSadisfacioServei = 0;
+      } else if (this.grauSadisfacioServei > 100) {
+        this.grauSadisfacioServei = 100;
+      }
+    }
+    else if (id === 3) {
+      if (this.notaRecomenacio == null || this.notaRecomenacio < 0) {
+        this.notaRecomenacio = 0;
+      } else if (this.notaRecomenacio > 100) {
+        this.notaRecomenacio = 100;
+      }
+    }
+    console.log(this.grauSadisfacioProducte + ' ' + this.grauSadisfacioServei + ' ' + this.notaRecomenacio);
 
+  }
 }
