@@ -13,6 +13,9 @@ export class ServeiUsuarisService {
 
   usuari_logat_bool : boolean = false
 
+  url = 'http://localhost:3080'
+
+
   constructor(public http: HttpClient, private listaCoches : ListaVehiculosService, public router: Router){
     console.log("Se reseteo el servicio de usuario");
     const usuariId = localStorage.getItem('usuario');
@@ -29,7 +32,7 @@ export class ServeiUsuarisService {
 
   addUsuario(usuari: any): Promise<boolean> {
     return new Promise((resolve) => {
-      this.http.put<any>('http://172.16.6.1:3080/usuaris/push', usuari).subscribe(
+      this.http.put<any>(`${this.url}/usuaris/push`, usuari).subscribe(
           (response) => {
             if (response.success) {
               console.log('✅ Usuario registrado correctamente:', response.message);
@@ -50,7 +53,7 @@ export class ServeiUsuarisService {
 
   guardarDatos(usuari: any): Promise<boolean> {
     return new Promise((resolve) => {
-      this.http.put<any>('http://172.16.6.1:3080/usuaris/push', usuari).subscribe(
+      this.http.put<any>(`${this.url}/usuaris/push`, usuari).subscribe(
           (response) => {
             if (response.success) {
               console.log('✅ Datos actualizados:', response.message);
@@ -71,7 +74,7 @@ export class ServeiUsuarisService {
 
   cargarDatos(usuariId: string, contrasena: string, recordar: boolean): Promise<boolean> {
     return new Promise((resolve) => {
-      this.http.get<any>(`http://172.16.6.1:3080/usuaris/informaciopersonal/${usuariId}/${contrasena}`)
+      this.http.get<any>(`${this.url}/usuaris/informaciopersonal/${usuariId}/${contrasena}`)
           .subscribe(
               (response) => {
                 if (response.success && response.user) {
