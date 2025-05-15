@@ -13,6 +13,9 @@ export class ServeiUsuarisService {
 
   usuari_logat_bool : boolean = false
 
+  url = 'http://localhost:3080'
+
+
   constructor(public http: HttpClient, private listaCoches : ListaVehiculosService, public router: Router){
     console.log("Se reseteo el servicio de usuario");
     const usuariId = localStorage.getItem('usuario');

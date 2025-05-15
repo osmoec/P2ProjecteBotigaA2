@@ -7,6 +7,7 @@ import { NgIf } from '@angular/common';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import {RecaptchaModule} from 'ng-recaptcha';
 import {MetamaskService} from '../../../Servicios/metamask.service';
+import {direction} from 'html2canvas/dist/types/css/property-descriptors/direction';
 
 @Component({
   selector: 'app-sign-in',
@@ -15,7 +16,7 @@ import {MetamaskService} from '../../../Servicios/metamask.service';
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.css']
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent {
   @ViewChild('miInput') miInputRef!: ElementRef;
 
   nom: string = '';
@@ -33,21 +34,6 @@ export class SignInComponent implements OnInit {
 
   constructor(private router: Router, private serveiUsuaris: ServeiUsuarisService, public http: HttpClient, public metamask: MetamaskService) {}
 
-  ngOnInit() {
-    // Agregar el event listener para el mensaje desde el iframe de Doom
-    window.addEventListener('message', this.receiveMessage.bind(this), false);
-  }
-
-  receiveMessage(event: MessageEvent) {
-    if (event.origin !== 'https://doom-captcha.vercel.app') return;
-
-    console.log('Mensaje recibido:', event.data);
-
-    // Si el mensaje es un string que contiene el texto de verificación
-    if (typeof event.data === 'string' && event.data.includes('CAPTCHA verified successfully')) {
-      this.captchaCompletado = true;  // El CAPTCHA se ha completado correctamente
-    }
-  }
 
   public validarDatos(): boolean {
     // Validaciones para los campos del formulario
@@ -78,6 +64,7 @@ export class SignInComponent implements OnInit {
 
     // Validación de datos del formulario
     if (this.validarDatos()) {
+      this.serveiUsuaris.addUsuario(new Usuario(this.nom, this.cognom, this.correu, this.usuari, this.DNI, this.aniversari, this.telefon, this.contrasena, this.adreca))
       alert(`Benvingut/da, ${this.nom}!`);
       // Redirigir a la página de login
       this.router.navigate(['/login']);
