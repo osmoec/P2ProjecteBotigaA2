@@ -4,11 +4,13 @@ import {ServeiUsuarisService} from '../../../Servicios/servei-usuaris.service';
 import {Comanda} from '../../../Clases/comanda.model';
 import {Router} from '@angular/router';
 import {ConnectorBDService} from '../../../Servicios/connector-bd.service'
+import {NgIf} from "@angular/common";
+import {MetamaskService} from '../../../Servicios/metamask.service';
 
 @Component({
   selector: 'app-cesta',
   standalone: true,
-  imports: [FormsModule],
+    imports: [FormsModule, NgIf],
   templateUrl: './cesta.component.html',
   styleUrl: './cesta.component.css'
 })
@@ -21,14 +23,21 @@ export class CestaComponent implements OnInit {
   dataExpiracio: string = ""
   cvv: string = ""
   recordarTarjeta : boolean = true
+  preus: any[] = []
+  preuPreparat: boolean = false;
 
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.calcularTotals()
     this.rellenarDatosTargeta()
+    await this.obtenirPreus()
+
+    setInterval(() => {
+      this.obtenirPreus()},
+      61000)
   }
 
-  constructor(protected serveiUsuari: ServeiUsuarisService, private router: Router,protected serveiConnector:ConnectorBDService) {
+  constructor(protected serveiUsuari: ServeiUsuarisService, private router: Router,protected serveiConnector:ConnectorBDService, public metamask: MetamaskService) {
   }
 
   guardarCesta() {
@@ -201,5 +210,19 @@ export class CestaComponent implements OnInit {
 
   targeta(metode:string){
     this.metode  = metode;
+  }
+
+  async obtenirPreus() {
+    var bnb = await this.metamask.preuBNB()
+    var busd = await this.metamask.preuBUSD()
+    this.preus[0] = bnb.preu
+    this.preus[1] = busd.preu
+
+    console.log(this.preus)
+
+    this.preuPreparat = true;
+
+    this.preus = [...this.preus]
+
   }
 }

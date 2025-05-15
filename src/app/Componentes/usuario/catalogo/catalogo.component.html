@@ -42,9 +42,16 @@
                 <p *ngIf="coche.oferta" [ngStyle]="{'text-decoration': 'line-through', 'color': 'gray'}">
                   {{ coche.price.toLocaleString('es-ES') }} €
                 </p>
-                <p *ngIf="coche.oferta">
+                <p *ngIf="coche.oferta && preuPreparat">
                   {{ (coche.price * (1 - coche.oferta)).toLocaleString('es-ES') }} €
                 </p>
+                <p *ngIf="preuPreparat">
+                  {{ ((coche.price * (1 - coche.oferta))/this.preus[0]).toLocaleString('es-ES') }} BNB
+                </p>
+                <p *ngIf="preuPreparat">
+                  {{ ((coche.price * (1 - coche.oferta))/this.preus[1]).toLocaleString('es-ES') }} BUSD
+                </p>
+
                 <div class="actions">
                   <button type="button" class="btn btn-warning" (click)=" addToCart(coche, +quantity.value)">Afegir a la cistella</button>
                   <br>

@@ -15,6 +15,12 @@
             <div class="me-3">
               <p>{{ cocheA.coche.name }} {{ cocheA.coche.price.toLocaleString('es-ES') }}€</p>
             </div>
+            <div class="me-3" *ngIf="preuPreparat">
+              <p>{{ ((cocheA.coche.price * (1 - cocheA.coche.oferta))/this.preus[0]).toLocaleString('es-ES') }} BNB</p>
+            </div>
+            <div class="me-3" *ngIf="preuPreparat">
+              <p>{{ ((cocheA.coche.price * (1 - cocheA.coche.oferta))/this.preus[1]).toLocaleString('es-ES') }} BUSD</p>
+            </div>
             <div class="me-3">
               <p>Quantitat</p>
               <input type="number" (focusout)="calcularTotals()" [(ngModel)]="cocheA.quantity" [min]="0" [max]="10" />
@@ -48,6 +54,12 @@
             </label>
             <label class="btn btn-primary me-2">
               <input (click)="targeta('targeta')" required [ngModel]="metode" value="targeta" type="radio" name="metodepagamanet" hidden><img class="iconoMetodePagament" src="multimedia/metodespagament/targeta.png">
+            </label>
+            <label class="btn btn-primary me-2">
+              <input (click)="targeta('BNB')" required [ngModel]="metode" value="targeta" type="radio" name="metodepagamanet" hidden><img class="iconoMetodePagament" src="multimedia/metodespagament/targeta.png">
+            </label>
+            <label class="btn btn-primary me-2">
+              <input (click)="targeta('BUSD')" required [ngModel]="metode" value="targeta" type="radio" name="metodepagamanet" hidden><img class="iconoMetodePagament" src="multimedia/metodespagament/targeta.png">
             </label>
           </div>
           <div class="d-flex flex-row mb-3 justify-content-between align-items-center gap-3">
@@ -87,7 +99,11 @@
           </div>
           <div>
             <div><p>{{totalSenseTaxes.toLocaleString('es-ES')}}€ </p></div>
+            <div *ngIf="preuPreparat"><p>{{totalSenseTaxes*this.preus[0].toLocaleString('es-ES')}}€ </p></div>
+            <div *ngIf="preuPreparat"><p>{{totalSenseTaxes*this.preus[1].toLocaleString('es-ES')}}€ </p></div>
             <div><p>{{totalAmbTaxes.toLocaleString('es-ES')}}€ </p></div>
+            <div *ngIf="preuPreparat"><p>{{totalAmbTaxes*this.preus[0].toLocaleString('es-ES')}}€ </p></div>
+            <div *ngIf="preuPreparat"><p>{{totalAmbTaxes*this.preus[1].toLocaleString('es-ES')}}€ </p></div>
           </div>
           <div></div>
         </div>

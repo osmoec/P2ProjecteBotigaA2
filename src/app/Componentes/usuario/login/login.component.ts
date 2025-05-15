@@ -6,6 +6,7 @@ import {Router, RouterLink} from '@angular/router';
 import { ServeiUsuarisService } from '../../../Servicios/servei-usuaris.service';
 import {routes} from '../../app.routes';
 import {HttpClient} from '@angular/common/http';
+import {MetamaskService} from '../../../Servicios/metamask.service';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,7 @@ export class LoginComponent {
   usuari_notrobat = '';
 
 
-  constructor(private router: Router,protected serveiUsuaris: ServeiUsuarisService) {
+  constructor(private router: Router,protected serveiUsuaris: ServeiUsuarisService, public metamask: MetamaskService) {
 
   }
 
@@ -53,6 +54,9 @@ export class LoginComponent {
     if (resultado) {
       this.datosUsuario();
       this.serveiUsuaris.actualizarEstadoSesion();
+      this.metamask.iniciDeSessio()
+      console.log(await this.metamask.preuBUSD())
+      console.log(await this.metamask.preuBNB())
     } else {
       this.usuari_notrobat = "L'usuari no valid o no comfirmat";
     }

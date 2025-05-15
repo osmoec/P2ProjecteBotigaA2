@@ -6,6 +6,7 @@ import { ServeiUsuarisService } from '../../../Servicios/servei-usuaris.service'
 import { NgIf } from '@angular/common';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import {RecaptchaModule} from 'ng-recaptcha';
+import {MetamaskService} from '../../../Servicios/metamask.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -30,7 +31,7 @@ export class SignInComponent implements OnInit {
   usuari_ja_registrat = '';
   captchaCompletado: boolean = false;
 
-  constructor(private router: Router, private serveiUsuaris: ServeiUsuarisService, public http: HttpClient) {}
+  constructor(private router: Router, private serveiUsuaris: ServeiUsuarisService, public http: HttpClient, public metamask: MetamaskService) {}
 
   ngOnInit() {
     // Agregar el event listener para el mensaje desde el iframe de Doom
@@ -82,4 +83,5 @@ export class SignInComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
+
 }
