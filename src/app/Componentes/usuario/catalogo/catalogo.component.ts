@@ -10,6 +10,7 @@ import { ServeiUsuarisService } from '../../../Servicios/servei-usuaris.service'
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {ListaVehiculosService} from '../../../Servicios/lista-vehiculos.service';
+import {MetamaskService} from '../../../Servicios/metamask.service';
 
 @Component({
   selector: 'app-catalogo',
@@ -28,13 +29,21 @@ export class CatalogoComponent implements OnInit,AfterViewInit {
   cochesA: Coche[] = [];
   filtre: string = "";
   filtreA: boolean = false;
-
+  preus: any[] = []
+  preuPreparat: boolean = false;
   marcasDestacadas: any[] = [];
-  constructor(private router: Router, private serveiUsuari: ServeiUsuarisService, private listaCoches : ListaVehiculosService,private http: HttpClient) {
+
+  constructor(private router: Router, private serveiUsuari: ServeiUsuarisService, private listaCoches: ListaVehiculosService, private http: HttpClient, public metamask: MetamaskService) {
     this.cochesA = this.listaCoches.coches
   }
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.getMarcasDestacadas();
+    await this.obtenirPreus()
+
+    setInterval(() => {
+      this.obtenirPreus(),
+        61000
+    })
   }
 
   getMarcasDestacadas(): void {
@@ -123,4 +132,18 @@ export class CatalogoComponent implements OnInit,AfterViewInit {
 
   }
   protected readonly first = first;
+
+  async obtenirPreus() {
+    var bnb = await this.metamask.preuBNB()
+    var busd = await this.metamask.preuBUSD()
+    this.preus[0] = bnb.preu
+    this.preus[1] = busd.preu
+
+    console.log(this.preus)
+
+    this.preuPreparat = true;
+
+    this.preus = [...this.preus]
+
+  }
 }
