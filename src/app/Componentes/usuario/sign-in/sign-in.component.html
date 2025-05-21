@@ -51,19 +51,9 @@
         <input name="adreca" type="text" placeholder="Rda. de Sant Antoni, 4, Ciutat Vella, 08001 Barcelona" class="form-control" required [(ngModel)]="adreca">
       </div>
 
-      @if (!captchaCompletado){
-        <re-captcha
-          siteKey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-          (resolved)="captchaCompletado = true">
-        </re-captcha>
-      }
-      <!-- ✅ Mensaje de captcha -->
-      <p *ngIf="captchaCompletado">✅ Captcha completado correctamente.</p>
-
-      <!-- ✅ Botón deshabilitado si el captcha no está completado -->
       <div class="d-flex flex-row mb-3 justify-content-between gap-3">
         <div>
-          <button type="submit" class="btn btn-primary" [disabled]="!captchaCompletado">Crear</button>
+          <button type="submit" class="btn btn-primary">Crear</button>
         </div>
         <div>
           <button type="reset" class="btn btn-primary">Reiniciar</button>

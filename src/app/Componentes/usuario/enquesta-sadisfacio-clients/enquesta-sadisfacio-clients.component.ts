@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {ServeiUsuarisService} from '../../../Servicios/servei-usuaris.service';
 import {ConnectorBDService} from '../../../Servicios/connector-bd.service';
 import {Router} from '@angular/router';
+
 // @ts-ignore
 import {RecaptchaModule} from 'ng-recaptcha';
 import {NgIf} from '@angular/common';
@@ -29,6 +30,8 @@ export class EnquestaSadisfacioClientsComponent {
 
   // 🔐 Esta es la variable que te faltaba para que funcione el captcha
   captchaResolt: boolean = false;
+
+  siteKey = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
 
 
   constructor(
@@ -173,4 +176,5 @@ export class EnquestaSadisfacioClientsComponent {
     console.log(this.grauSadisfacioProducte + ' ' + this.grauSadisfacioServei + ' ' + this.notaRecomenacio);
 
   }
+
 }

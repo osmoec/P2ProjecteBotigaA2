@@ -25,12 +25,13 @@
         <input id="comentari" [(ngModel)]="comentari" name="comentari" type="text" class="form-control">
       </div>
 
-      @if (!captchaResolt){
+      <div class="mb-3" *ngIf="!captchaResolt">
         <re-captcha
-          siteKey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+          [siteKey]="siteKey"
           (resolved)="captchaResolt = true">
         </re-captcha>
-      }
+      </div>
+
       <p *ngIf="captchaResolt" >✅ Captcha completado correctamente.</p>
 
       <button (click)="enviarEnquesta()" [disabled]="!captchaResolt" class="btn btn-primary">Enviar</button>

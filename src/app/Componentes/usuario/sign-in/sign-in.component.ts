@@ -5,14 +5,13 @@ import { Usuario } from '../../../Clases/Usuario.model';
 import { ServeiUsuarisService } from '../../../Servicios/servei-usuaris.service';
 import { NgIf } from '@angular/common';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import {RecaptchaModule} from 'ng-recaptcha';
 import {MetamaskService} from '../../../Servicios/metamask.service';
 import {direction} from 'html2canvas/dist/types/css/property-descriptors/direction';
 
 @Component({
   selector: 'app-sign-in',
   standalone: true,
-  imports: [FormsModule, NgIf, RecaptchaModule],
+  imports: [FormsModule, NgIf],
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.css']
 })
@@ -30,7 +29,6 @@ export class SignInComponent {
   confContrasena: string = '';
   adreca: string = '';
   usuari_ja_registrat = '';
-  captchaCompletado: boolean = false;
 
   constructor(private router: Router, private serveiUsuaris: ServeiUsuarisService, public http: HttpClient, public metamask: MetamaskService) {}
 
@@ -57,10 +55,6 @@ export class SignInComponent {
   }
 
   public async registro() {
-    if (!this.captchaCompletado) {
-      alert('Si us plau, completa el captcha abans de registrar-te.');
-      return;
-    }
 
     // Validación de datos del formulario
     if (this.validarDatos()) {
