@@ -16,14 +16,14 @@
               <p>{{ cocheA.coche.name }} {{ cocheA.coche.price.toLocaleString('es-ES') }}€</p>
             </div>
             <div class="me-3" *ngIf="preuPreparat">
-              <p>{{ ((cocheA.coche.price * (1 - cocheA.coche.oferta))/this.preus[0]).toLocaleString('es-ES') }} BNB</p>
+              <p id="{{ cocheA.coche.name }}-BNB">{{ ((cocheA.coche.price * (1 - cocheA.coche.oferta))/this.preus[0]).toLocaleString('es-ES') }} BNB</p>
             </div>
             <div class="me-3" *ngIf="preuPreparat">
-              <p>{{ ((cocheA.coche.price * (1 - cocheA.coche.oferta))/this.preus[1]).toLocaleString('es-ES') }} BUSD</p>
+              <p id="{{ cocheA.coche.name }}-BTC">{{ ((cocheA.coche.price * (1 - cocheA.coche.oferta))/this.preus[1]).toLocaleString('es-ES') }} BTC</p>
             </div>
             <div class="me-3">
               <p>Quantitat</p>
-              <input type="number" (focusout)="calcularTotals()" [(ngModel)]="cocheA.quantity" [min]="0" [max]="10" />
+              <input type="number" (ngModelChange)="calcularTotals()" [(ngModel)]="cocheA.quantity" [min]="0" [max]="10" />
             </div>
             <div class="me-3">
               <button type="button" (click)="eliminarcesta(cocheA.coche.id);calcularTotals()" class="btn-close" aria-label="Close"></button>
@@ -56,10 +56,10 @@
               <input (click)="targeta('targeta')" required [ngModel]="metode" value="targeta" type="radio" name="metodepagamanet" hidden><img class="iconoMetodePagament" src="multimedia/metodespagament/targeta.png">
             </label>
             <label class="btn btn-primary me-2">
-              <input (click)="targeta('BNB')" required [ngModel]="metode" value="targeta" type="radio" name="metodepagamanet" hidden><img class="iconoMetodePagament" src="multimedia/metodespagament/targeta.png">
+              <input (click)="targeta('BNB')" required [ngModel]="metode" value="BNB" type="radio" name="metodepagamanet" hidden><img class="iconoMetodePagament" src="multimedia/metodespagament/bnb.png">
             </label>
             <label class="btn btn-primary me-2">
-              <input (click)="targeta('BUSD')" required [ngModel]="metode" value="targeta" type="radio" name="metodepagamanet" hidden><img class="iconoMetodePagament" src="multimedia/metodespagament/targeta.png">
+              <input (click)="targeta('BTC')" required [ngModel]="metode" value="BTC" type="radio" name="metodepagamanet" hidden><img class="iconoMetodePagament" src="multimedia/metodespagament/bitcoin.png">
             </label>
           </div>
           <div class="d-flex flex-row mb-3 justify-content-between align-items-center gap-3">
@@ -95,20 +95,24 @@
           <h2>Factura:</h2>
           <div>
             <div><p>Total productes: </p></div>
+            <div> <p> &#8203;</p> </div>
+            <div><p> &#8203;</p> </div>
             <div><p>Taxes: </p></div>
           </div>
-          <div>
-            <div><p>{{totalSenseTaxes.toLocaleString('es-ES')}}€ </p></div>
-            <div *ngIf="preuPreparat"><p>{{totalSenseTaxes*this.preus[0].toLocaleString('es-ES')}}€ </p></div>
-            <div *ngIf="preuPreparat"><p>{{totalSenseTaxes*this.preus[1].toLocaleString('es-ES')}}€ </p></div>
-            <div><p>{{totalAmbTaxes.toLocaleString('es-ES')}}€ </p></div>
-            <div *ngIf="preuPreparat"><p>{{totalAmbTaxes*this.preus[0].toLocaleString('es-ES')}}€ </p></div>
-            <div *ngIf="preuPreparat"><p>{{totalAmbTaxes*this.preus[1].toLocaleString('es-ES')}}€ </p></div>
+          <div *ngIf="preuPreparat">
+            <div><p>{{totalSenseTaxes.toLocaleString('es-ES')}}€</p></div>
+            <div><p>{{totalSenseTaxesBNB.toLocaleString('es-ES')}} BNB</p></div>
+            <div><p>{{totalSenseTaxesBTC.toLocaleString('es-ES')}} BUSD</p></div>
+            <div><p>{{totalAmbTaxes.toLocaleString('es-ES')}}€</p></div>
+            <div><p>{{totalAmbTaxesBNB.toLocaleString('es-ES')}} BNB</p></div>
+            <div><p>{{totalAmbTaxesBTC.toLocaleString('es-ES')}} BUSD</p></div>
           </div>
           <div></div>
-        </div>
-        <h1>Total:</h1>
+        </div >
+        <h1 *ngIf="preuPreparat">Total:</h1>
         <h1>{{totalAmbTaxes.toLocaleString('es-ES')}}€</h1>
+        <h1>{{totalAmbTaxesBNB.toLocaleString('es-ES')}}BNB</h1>
+        <h1>{{totalAmbTaxesBTC.toLocaleString('es-ES')}}BUSD</h1>
         <a id="Comprar" data-bs-toggle="modal" data-bs-target="#confirmarCompraModal" class="btn btn-primary">Comprar</a>
       </form>
     </div>
@@ -129,12 +133,12 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel·lar</button>
-        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="guardarYCrearComanda()">Confirma la Compra</button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="this.guardarYCrearComanda()">Confirma la Compra</button>
       </div>
     </div>
   </div>
 </div>
-
+<button (click)="transacio()">oasoasoaosaosaos</button>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 <script>

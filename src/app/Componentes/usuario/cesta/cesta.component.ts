@@ -25,7 +25,11 @@ export class CestaComponent implements OnInit {
   recordarTarjeta : boolean = true
   preus: any[] = []
   preuPreparat: boolean = false;
-
+  totalAmbTaxesBNB: number = 0
+  totalSenseTaxesBNB: number = 0
+  totalAmbTaxesBTC: number = 0
+  totalSenseTaxesBTC: number = 0
+  hashTransac: any = ""
 
   async ngOnInit(): Promise<void> {
     this.calcularTotals()
@@ -33,8 +37,8 @@ export class CestaComponent implements OnInit {
     await this.obtenirPreus()
 
     setInterval(() => {
-      this.obtenirPreus()},
-      61000)
+        this.actualitzarPreus()},
+      62000)
   }
 
   constructor(protected serveiUsuari: ServeiUsuarisService, private router: Router,protected serveiConnector:ConnectorBDService, public metamask: MetamaskService) {
@@ -67,7 +71,14 @@ export class CestaComponent implements OnInit {
 
       this.totalAmbTaxes = (this.totalSenseTaxes * 0.21) + this.totalSenseTaxes
 
-      return Math.trunc(this.totalAmbTaxes * 1e10) / 1e10;
+      if (this.preuPreparat){
+        this.totalSenseTaxesBNB = Number((this.totalAmbTaxes/this.preus[0]).toFixed(2))
+        this.totalAmbTaxesBNB = Number((this.totalAmbTaxes/this.preus[0]).toFixed(2))
+        this.totalAmbTaxesBTC= Number((this.totalSenseTaxes/this.preus[1]).toFixed(2))
+        this.totalSenseTaxesBTC = Number((this.totalSenseTaxes/this.preus[1]).toFixed(2))
+      }
+
+      return parseFloat(this.totalAmbTaxes.toFixed(10));
     }
     return 0;
   }
@@ -104,6 +115,7 @@ export class CestaComponent implements OnInit {
       throw new Error('No hi ha usuari logat.');
     }
 
+    console.log(totalComandaC)
     const comanda = new Comanda(this.serveiUsuari.usuari_logat.usuario, cochesComandaC, totalComandaC, metodePagament);
 
     this.serveiUsuari.agregarComanda(comanda);
@@ -120,7 +132,24 @@ export class CestaComponent implements OnInit {
     if ((this.serveiUsuari.usuari_logat && this.serveiUsuari.usuari_logat.cesta.length != 0) && this.serveiUsuari.usuari_logat_bool){
       if (this.metode != ""){
         const cistellaTemporal = [...this.serveiUsuari.usuari_logat!.cesta];
-        this.guardarComanda(this.totalAmbTaxes, this.serveiUsuari.usuari_logat!.cesta,this.metode);
+
+        let totalCom = 0
+
+        if (this.metode === 'BNB' || this.metode === 'BTC') {
+          if (this.metode === 'BNB'){
+            totalCom = this.totalAmbTaxesBNB
+          }
+          else if (this.metode === 'BTC'){
+            totalCom = this.totalAmbTaxesBTC
+          }
+        }
+        else{
+          totalCom = this.totalAmbTaxes
+        }
+
+
+        // @ts-ignore
+        this.guardarComanda(totalCom, this.serveiUsuari.usuari_logat!.cesta,this.metode);
         console.log(cistellaTemporal)
         this.guardarProducte(cistellaTemporal);
 
@@ -130,6 +159,10 @@ export class CestaComponent implements OnInit {
         this.serveiUsuari.guardarDatos(this.serveiUsuari.usuari_logat!)
         this.totalSenseTaxes = 0
         this.totalAmbTaxes = 0
+        this.totalAmbTaxesBTC = 0
+        this.totalSenseTaxesBTC = 0
+        this.totalAmbTaxesBNB = 0
+        this.totalSenseTaxesBNB = 0
         this.metode = ""
         this.titular = ""
         this.numCompte = ""
@@ -177,10 +210,33 @@ export class CestaComponent implements OnInit {
       quantitat: coche.quantity
     }));
 
+    let totalFacturaA = 0
+    let moneda = ""
+
+    if (this.metode === 'BNB' || this.metode === 'BTC') {
+      if (this.metode === 'BNB'){
+        totalFacturaA = this.totalAmbTaxesBNB
+        moneda = "BNB"
+      }
+      else if (this.metode === 'BTC'){
+        totalFacturaA = this.totalAmbTaxesBTC
+        moneda = "BTC"
+      }
+    }
+    else{
+      totalFacturaA = this.totalAmbTaxes
+      this.hashTransac = "no"
+      moneda = "EUR"
+    }
+
+    console.log(this.hashTransac)
+
     const factura = {
       client_id: usuari!.nombre,
       data_creacio: new Date().toISOString().slice(0, 19).replace('T', ' '),
-      total_comanda: this.calcularTotals(),
+      total_comanda: totalFacturaA,
+      moneda: moneda,
+      hash_transacio: this.hashTransac,
       metode_pagament: this.metode,
       cotxes: cotxes
     };
@@ -210,13 +266,14 @@ export class CestaComponent implements OnInit {
 
   targeta(metode:string){
     this.metode  = metode;
+    console.log(this.metode)
   }
 
   async obtenirPreus() {
     var bnb = await this.metamask.preuBNB()
-    var busd = await this.metamask.preuBUSD()
+    var btc = await this.metamask.preuBTC()
     this.preus[0] = bnb.preu
-    this.preus[1] = busd.preu
+    this.preus[1] = btc.preu
 
     console.log(this.preus)
 
@@ -224,5 +281,63 @@ export class CestaComponent implements OnInit {
 
     this.preus = [...this.preus]
 
+    this.totalSenseTaxesBNB = 0
+    this.totalAmbTaxesBNB = 0
+    this.totalSenseTaxesBTC = 0
+    this.totalAmbTaxesBTC = 0
+
+    this.totalSenseTaxesBNB = Number((this.totalSenseTaxes / this.preus[0]).toFixed(2))
+    this.totalAmbTaxesBNB = Number((this.totalAmbTaxes / this.preus[0]).toFixed(2))
+    this.totalAmbTaxesBTC = Number((this.totalAmbTaxes / this.preus[1]).toFixed(2))
+    this.totalSenseTaxesBTC = Number((this.totalSenseTaxes / this.preus[1]).toFixed(2))
+    console.log(this.totalSenseTaxesBNB)
+    console.log(this.totalAmbTaxesBNB)
+  }
+
+  protected readonly Number = Number;
+
+  async transacio(){
+      if (this.metode === 'BNB'){
+        try {
+          let hash = await this.metamask.enviarTransacioBNB()
+          this.hashTransac = hash!.transactionHash
+          if (this.hashTransac){
+            this.guardarYCrearComanda()
+          }
+          else{
+            console.log('error al pagament')
+          }
+        }
+        catch (e){
+          console.log('erroni')
+        }
+      }
+      else if(this.metode === 'BTC'){
+        try {
+          let hash = await this.metamask.enviarTransacioBTCB()
+          this.hashTransac = hash!.transactionHash
+          if (this.hashTransac){
+            this.guardarYCrearComanda()
+          }
+          else{
+            console.log('error al pagament')
+          }
+        }
+        catch (e){
+          console.log('erroni')
+        }
+      }
+  }
+
+  async actualitzarPreus(){
+    await this.obtenirPreus()
+    if (this.preuPreparat){
+      for (let cotxeactual of this.serveiUsuari.usuari_logat!.cesta){
+        document.getElementById(cotxeactual.coche.name+"-BNB")!.innerText = ""
+        document.getElementById(cotxeactual.coche.name+"-BNB")!.innerText = ((Number(cotxeactual.coche.price) * (1 - cotxeactual.coche.oferta))/this.preus[0]).toLocaleString('es-ES')+" BNB"
+        document.getElementById(cotxeactual.coche.name+"-BTC")!.innerText = ""
+        document.getElementById(cotxeactual.coche.name+"-BTC")!.innerText = ((Number(cotxeactual.coche.price) * (1 - cotxeactual.coche.oferta))/this.preus[1]).toLocaleString('es-ES')+" BTC"
+      }
+    }
   }
 }

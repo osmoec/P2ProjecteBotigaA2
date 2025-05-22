@@ -55,7 +55,7 @@ export class LoginComponent {
       this.datosUsuario();
       this.serveiUsuaris.actualizarEstadoSesion();
       this.metamask.iniciDeSessio()
-      console.log(await this.metamask.preuBUSD())
+      console.log(await this.metamask.preuBTC())
       console.log(await this.metamask.preuBNB())
     } else {
       this.usuari_notrobat = "L'usuari no valid o no comfirmat";

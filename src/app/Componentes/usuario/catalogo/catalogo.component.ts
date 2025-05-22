@@ -37,13 +37,13 @@ export class CatalogoComponent implements OnInit,AfterViewInit {
     this.cochesA = this.listaCoches.coches
   }
   async ngOnInit(): Promise<void> {
-    this.getMarcasDestacadas();
+    await this.getMarcasDestacadas();
     await this.obtenirPreus()
 
-    setInterval(() => {
-      this.obtenirPreus(),
-        61000
-    })
+    setInterval(async () => {
+      await this.actualitzarPreus()
+    },62000)
+
   }
 
   getMarcasDestacadas(): void {
@@ -58,7 +58,6 @@ export class CatalogoComponent implements OnInit,AfterViewInit {
       error: (err) => console.error('Error al obtener marcas destacadas', err)
     });
   }
-
 
 
   getRandomMarcas(marcas: any[], count: number): any[] {
@@ -135,9 +134,9 @@ export class CatalogoComponent implements OnInit,AfterViewInit {
 
   async obtenirPreus() {
     var bnb = await this.metamask.preuBNB()
-    var busd = await this.metamask.preuBUSD()
+    var btc = await this.metamask.preuBTC()
     this.preus[0] = bnb.preu
-    this.preus[1] = busd.preu
+    this.preus[1] = btc.preu
 
     console.log(this.preus)
 
@@ -146,4 +145,17 @@ export class CatalogoComponent implements OnInit,AfterViewInit {
     this.preus = [...this.preus]
 
   }
+
+  async actualitzarPreus(){
+    await this.obtenirPreus()
+    if (this.preuPreparat){
+      for (let cotxeactual of this.cochesA){
+        document.getElementById(cotxeactual.name+"-BNB")!.innerText = ""
+        document.getElementById(cotxeactual.name+"-BNB")!.innerText = ((Number(cotxeactual.price) * (1 - cotxeactual.oferta))/this.preus[0]).toLocaleString('es-ES')+" BNB"
+        document.getElementById(cotxeactual.name+"-BTC")!.innerText = ""
+        document.getElementById(cotxeactual.name+"-BTC")!.innerText = ((Number(cotxeactual.price) * (1 - cotxeactual.oferta))/this.preus[1]).toLocaleString('es-ES')+" BTC"
+      }
+    }
+  }
+
 }

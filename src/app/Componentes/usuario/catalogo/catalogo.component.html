@@ -45,11 +45,11 @@
                 <p *ngIf="coche.oferta && preuPreparat">
                   {{ (coche.price * (1 - coche.oferta)).toLocaleString('es-ES') }} €
                 </p>
-                <p *ngIf="preuPreparat">
+                <p id="{{coche.name}}-BNB" *ngIf="preuPreparat">
                   {{ ((coche.price * (1 - coche.oferta))/this.preus[0]).toLocaleString('es-ES') }} BNB
                 </p>
-                <p *ngIf="preuPreparat">
-                  {{ ((coche.price * (1 - coche.oferta))/this.preus[1]).toLocaleString('es-ES') }} BUSD
+                <p id="{{coche.name}}-BTC" *ngIf="preuPreparat">
+                  {{ ((coche.price * (1 - coche.oferta))/this.preus[1]).toLocaleString('es-ES') }} BTC
                 </p>
 
                 <div class="actions">

@@ -9,7 +9,11 @@
         <th>Client</th>
         <th>Data Creació</th>
         <th>Quantitat</th>
+        <th>Moneda</th>
         <th>Nom Cotxe</th>
+        <th>Hash Transacio</th>
+        <th>Comprador</th>
+        <th>Numero de Blocs</th>
         <th>En Oferta</th>
       </tr>
       </thead>
@@ -19,7 +23,11 @@
         <td>{{ item.CLIENT_NOM }}</td>
         <td>{{ item.DATA_CREACIO | date:'dd/MM/yyyy' }}</td>
         <td>{{ item.QUANTITAT }}</td>
+        <td>{{ item.MONEDA }}</td>
         <td>{{ item.COTXE_NOM }}</td>
+        <td>{{ item.HASH_TRANSACIO }}</td>
+        <td>{{item.dComprador}}</td>
+        <td>{{item.nBlocs}}</td>
         <td>
          <span class="badge" [ngClass]="{'bg-success': item.EN_OFERTA === 'Sí', 'bg-danger': item.EN_OFERTA !== 'Sí'}">
            {{ item.EN_OFERTA === 'Sí' ? 'Sí' : 'No' }}

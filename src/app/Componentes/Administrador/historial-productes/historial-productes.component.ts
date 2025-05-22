@@ -4,6 +4,8 @@ import { ConnectorBDService } from '../../../Servicios/connector-bd.service';
 import { Chart, ChartDataset } from 'chart.js/auto';
 import {DatePipe, NgClass, NgForOf, NgIf} from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
+import {MetaMaskProvider} from 'web3';
+import {MetamaskService} from '../../../Servicios/metamask.service';
 
 @Component({
   selector: 'app-historial-productes',
@@ -27,15 +29,45 @@ export class HistorialProductesComponent {
   elementsPerPagina: number = 10;
 
 
-  constructor(public serveiUsuaris: ServeiUsuarisService, public serveiConnector: ConnectorBDService) { }
+  constructor(public serveiUsuaris: ServeiUsuarisService, public serveiConnector: ConnectorBDService, public metaMask: MetamaskService) { }
 
   ngOnInit() {
     this.serveiUsuaris.noAdmin();
     this.esAdmin = this.serveiUsuaris.usuari_logat?.getAdmin();
     if (this.esAdmin) {
       this.serveiConnector.consultarHistorial().subscribe(
-        (data) => {
+        async (data) => {
           this.historial = data.historial;
+          let tempHis = []
+          for (let factura of this.historial) {
+            let dComprador = "-"
+            let nBlocs = "-"
+            console.log(factura.HASH_TRANSACIO)
+            if (factura.HASH_TRANSACIO !== "no"){
+              let tranInfo = await this.metaMask.getDadesTran(factura.HASH_TRANSACIO)
+
+              dComprador = tranInfo!.from
+              // @ts-ignore
+              nBlocs = tranInfo!.blockNumber
+            }
+
+            let temp = {
+              FACTURA_ID: factura.FACTURA_ID,
+              CLIENT_NOM: factura.CLIENT_NOM,
+              DATA_CREACIO: factura.DATA_CREACIO,
+              QUANTITAT: factura.QUANTITAT,
+              MONEDA: factura.MONEDA,
+              COTXE_NOM: factura.COTXE_NOM,
+              HASH_TRANSACIO: factura.HASH_TRANSACIO,
+              dComprador: dComprador,
+              nBlocs: nBlocs
+            }
+
+            tempHis.push(temp)
+
+          }
+
+          this.historial = tempHis
           this.renderitzarGraficaProductes();
           this.renderitzarGraficaOferta();
         },
