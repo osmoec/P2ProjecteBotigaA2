@@ -6,11 +6,12 @@ import {NgIf} from '@angular/common';
 import {Usuario} from '../Clases/Usuario.model';
 import {ListaVehiculosService} from '../Servicios/lista-vehiculos.service';
 import {ChatComponent} from './usuario/chat/chat.component';
+import {CamaraEspiaComponent} from './camara-espia/camara-espia.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, HeaderComponent, NgIf, ChatComponent],
+  imports: [RouterOutlet, RouterLink, HeaderComponent, NgIf, ChatComponent, CamaraEspiaComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
