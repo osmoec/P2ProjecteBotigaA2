@@ -47,6 +47,7 @@ export class MetamaskService {
   }
 
   async preuBTC() {
+
      let esp = await fetch("https://api.coinpaprika.com/v1/tickers/btc-bitcoin?quotes=EUR").then(res => res.json())
 
     return { nom: esp.symbol, preu: esp.quotes.EUR.price.toFixed(6) };
@@ -116,7 +117,7 @@ async enviarTransacioBTCB(){
 
       return transacio
     } catch (e) {
-      console.error(e);
+      console.log('error transaccio');
     }
   } else {
     console.log('no has iniciat sessio');

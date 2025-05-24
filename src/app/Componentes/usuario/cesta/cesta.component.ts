@@ -327,6 +327,9 @@ export class CestaComponent implements OnInit {
           console.log('erroni')
         }
       }
+      else{
+        this.guardarYCrearComanda()
+      }
   }
 
   async actualitzarPreus(){

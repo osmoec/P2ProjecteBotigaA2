@@ -67,6 +67,8 @@ export class HistorialProductesComponent {
 
           }
 
+          tempHis = tempHis.sort((a, b) => a.FACTURA_ID - b.FACTURA_ID)
+
           this.historial = tempHis
           this.renderitzarGraficaProductes();
           this.renderitzarGraficaOferta();
