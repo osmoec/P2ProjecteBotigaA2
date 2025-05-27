@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import Web3, {MetaMaskProvider} from 'web3';
 import {HttpClient} from '@angular/common/http';
 import BN from 'bn.js';
+import {time} from '@tensorflow/tfjs';
 declare let window: any;
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,11 @@ export class MetamaskService {
   web3: Web3 | null = null;
   compte: any | null = null;
   BN: Web3 | null = null;
+  TM: number = 0
+  TM2: number = 0
+  BNB2: any | null = null;
+  BTCB: any | null = null;
+  primer: any = [true,true]
 
   constructor(public http: HttpClient) {
     if (typeof window.ethereum !== 'undefined') {
@@ -23,6 +29,7 @@ export class MetamaskService {
       }
       this.web3 = new Web3(window.ethereum);
       this.BN = new Web3("https://data-seed-prebsc-1-s1.binance.org:8545");
+      this.TM = Date.now()
     } else {
       console.log('no s ha trobat cap extensio')
     }
@@ -37,22 +44,46 @@ export class MetamaskService {
       // @ts-ignore
       this.compte = comptes[0]
       console.log(this.compte)
+
     }
   }
 
   async preuBNB() {
-    let esp = await fetch("https://api.coinpaprika.com/v1/tickers/bnb-binance-coin?quotes=EUR").then(res => res.json())
+    if(this.primer[0] || Date.now() >= (this.TM+62000)){
+      let esp = await fetch("https://api.coinpaprika.com/v1/tickers/bnb-binance-coin?quotes=EUR").then(res => res.json())
 
-    return { nom: esp.symbol, preu: esp.quotes.EUR.price.toFixed(6) };
+      this.BNB2 = {nom: esp.symbol, preu: esp.quotes.EUR.price.toFixed(6)};
+
+      this.TM = Date.now();
+
+      this.primer[0] = false
+
+      return {nom: esp.symbol, preu: esp.quotes.EUR.price.toFixed(6)};
+
+    }
+
+    return this.BNB2
+
   }
 
   async preuBTC() {
 
-     let esp = await fetch("https://api.coinpaprika.com/v1/tickers/btc-bitcoin?quotes=EUR").then(res => res.json())
+    if(this.primer[1] || Date.now() >= (this.TM2+62000)){
+      let esp = await fetch("https://api.coinpaprika.com/v1/tickers/btc-bitcoin?quotes=EUR").then(res => res.json())
 
-    return { nom: esp.symbol, preu: esp.quotes.EUR.price.toFixed(6) };
+      this.BTCB = {nom: esp.symbol, preu: esp.quotes.EUR.price.toFixed(6)};
+
+      this.TM2 = Date.now();
+
+      this.primer[1] = false
+
+      return {nom: esp.symbol, preu: esp.quotes.EUR.price.toFixed(6)};
+
+    }
+
+    return this.BTCB
+
   }
-
 
   async enviarTransacioBNB() {
     if (this.web3) {
