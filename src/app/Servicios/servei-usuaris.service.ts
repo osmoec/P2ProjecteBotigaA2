@@ -78,7 +78,6 @@ export class ServeiUsuarisService {
         .subscribe(
           (response) => {
             if (response.success && response.user) {
-              console.log('✅ Respuesta del servidor:', response.user);
 
               // Convertir fecha de nacimiento a un objeto Date válido
               let fechaNacimiento: Date | null = null;
